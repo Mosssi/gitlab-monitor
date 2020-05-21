@@ -1,17 +1,15 @@
 #ifndef GITLAB_DESKTOP_MONITOR_NETWORKMANAGER_H
 #define GITLAB_DESKTOP_MONITOR_NETWORKMANAGER_H
 
-#include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QJsonObject>
 
 #include "ResponseStatus.h"
-#include "ServiceMediator.h"
 
 #define SERVICE_ADDRESS "https://gitlab.com/api/v4"
-
-typedef std::function<void(const QJsonObject &, ResponseStatus)> CallbackFunction;
+#define CALLBACK_SIGNATURE const QJsonObject &object, ResponseStatus status
+typedef std::function<void(CALLBACK_SIGNATURE)> CallbackFunction;
 
 class NetworkManager {
 private:

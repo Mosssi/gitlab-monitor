@@ -2,24 +2,30 @@
 
 #include <QApplication>
 #include <QScreen>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QLabel>
 
-#include "../network/NetworkManager.h"
+#include "../network/ServiceMediator.h"
 #include "../utilities/Configuration.h"
+#include "../models/User.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
     setupTrayIcon();
 
-    setWindowFlags(Qt::FramelessWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
 
     Configuration::getInstance().setToken("u-tAYr8T-MyrqhVHVD6G");
 
-    ServiceMediator::getInstance().requestUser();
-    QObject::connect(&ServiceMediator::getInstance(), &ServiceMediator::userReceived, [](const NetworkResponse<User> &response) {
-        qDebug() << response.entity.getJson();
+    ServiceMediator::requestUser([](CALLBACK_SIGNATURE) {
+        if (status == ResponseStatus::SUCCESSFUL) {
+            qDebug() << User(object).getJson();
+        }
     });
 
     setFixedSize(400, 500);
+
+    setupUi();
 }
 
 void ApplicationWidget::setupTrayIcon() {
@@ -30,4 +36,10 @@ void ApplicationWidget::setupTrayIcon() {
         move(point.x() - 200, QApplication::primaryScreen()->availableSize().height() - 500);
         this->setVisible(!this->isVisible());
     });
+}
+
+void ApplicationWidget::setupUi() {
+
+    auto * mainLayout = new QVBoxLayout(this);
+    mainLayout->addWidget(new QLabel("GitLab Desktop Monitor"));
 }

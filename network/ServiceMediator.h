@@ -3,19 +3,11 @@
 
 #include <QtCore/QObject>
 
-#include "../models/User.h"
 #include "NetworkManager.h"
-#include "ResponseStatus.h"
-#include "NetworkResponse.h"
 
-class ServiceMediator : public QObject {
-Q_OBJECT
+class ServiceMediator {
 public:
-    static ServiceMediator &getInstance();
-    void requestUser();
-
-signals:
-    void userReceived(const NetworkResponse<User> &);
+    static void requestUser(const CallbackFunction &callback);
 
 private:
     ServiceMediator() = default;
