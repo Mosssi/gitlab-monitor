@@ -10,6 +10,7 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
 
 add_executable(
         gitlab_desktop_monitor
@@ -17,6 +18,6 @@ add_executable(
         main.cpp
         components/ApplicationWidget.cpp
         components/ApplicationWidget.h
-        components/SystemTrayIcon.cpp components/SystemTrayIcon.h)
+        components/SystemTrayIcon.cpp components/SystemTrayIcon.h network/NetworkManager.cpp network/NetworkManager.h models/User.cpp models/User.h utilities/Configuration.cpp utilities/Configuration.h network/ServiceMediator.cpp network/ServiceMediator.h network/ResponseStatus.h network/NetworkResponse.cpp network/NetworkResponse.h models/BaseModel.cpp models/BaseModel.h)
 
-target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets)
+target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

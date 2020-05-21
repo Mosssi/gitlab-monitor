@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QSystemTrayIcon>
+
 #include "SystemTrayIcon.h"
 
 class ApplicationWidget : public QWidget {
