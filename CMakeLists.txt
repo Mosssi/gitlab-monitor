@@ -18,6 +18,6 @@ add_executable(
         main.cpp
         components/ApplicationWidget.cpp
         components/ApplicationWidget.h
-        components/SystemTrayIcon.cpp components/SystemTrayIcon.h network/NetworkManager.cpp network/NetworkManager.h models/User.cpp models/User.h utilities/Configuration.cpp utilities/Configuration.h network/ServiceMediator.cpp network/ServiceMediator.h network/ResponseStatus.h models/BaseModel.cpp models/BaseModel.h)
+        components/SystemTrayIcon.cpp components/SystemTrayIcon.h network/NetworkManager.cpp network/NetworkManager.h models/User.cpp models/User.h utilities/Configuration.cpp utilities/Configuration.h network/ServiceMediator.cpp network/ServiceMediator.h network/ResponseStatus.h models/BaseModel.cpp models/BaseModel.h models/Project.cpp models/Project.h utilities/DataStore.cpp utilities/DataStore.h utilities/GuiManager.cpp utilities/GuiManager.h components/HeaderWidget.cpp components/HeaderWidget.h components/BodyWidget.cpp components/BodyWidget.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

@@ -1,6 +1,7 @@
 #include "NetworkManager.h"
 
 #include <QtCore/QJsonDocument>
+#include <QJsonArray>
 
 #include "../utilities/Configuration.h"
 
@@ -21,7 +22,7 @@ void NetworkManager::post(const QString &url, const QJsonObject &body, const Cal
         return;
     }
 
-    QNetworkRequest request(getCompleteUrl(url));
+    QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
 
     QJsonDocument jsonDocument(body);
@@ -37,7 +38,7 @@ void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
         return;
     }
 
-    QNetworkRequest request(getCompleteUrl(url));
+    QNetworkRequest request(url);
 
     auto * reply = networkAccessManager->get(request);
     QObject::connect(reply, &QNetworkReply::finished, [reply, callback]() { processReply(reply, callback); });
@@ -46,25 +47,23 @@ void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
 void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction &callback) {
 
     if (reply->error() != QNetworkReply::NetworkError::NoError) {
-//        qDebug() << "Error" << reply->error() << reply->url();
         reply->deleteLater();
         callback({}, ResponseStatus::UNSUCCESSFUL);
         return;
     }
 
-    QJsonObject jsonObject;
+    QJsonValue jsonValue;
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
 
-    if (!doc.isNull() && doc.isObject()) {
-        jsonObject = doc.object();
+    if (!doc.isNull()) {
+        if (doc.isObject()) {
+            jsonValue = doc.object();
+        } else if (doc.isArray()) {
+            jsonValue = doc.array();
+        }
     }
 
-    callback(jsonObject, ResponseStatus::SUCCESSFUL);
+    callback(jsonValue, ResponseStatus::SUCCESSFUL);
 
     reply->deleteLater();
-}
-
-QString NetworkManager::getCompleteUrl(const QString &url) {
-
-    return SERVICE_ADDRESS + url + "?private_token=" + Configuration::getInstance().getToken();
 }

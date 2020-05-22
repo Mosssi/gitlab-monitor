@@ -8,9 +8,11 @@
 class ServiceMediator {
 public:
     static void requestUser(const CallbackFunction &callback);
+    static void requestProjects(const int &userId, bool simple, const CallbackFunction &callback);
 
 private:
     ServiceMediator() = default;
+    static QString getUrl(const QString &url, const QList<QPair<QString, QString>> &queries = {{}});
 };
 
 

@@ -7,8 +7,7 @@
 
 #include "ResponseStatus.h"
 
-#define SERVICE_ADDRESS "https://gitlab.com/api/v4"
-#define CALLBACK_SIGNATURE const QJsonObject &object, ResponseStatus status
+#define CALLBACK_SIGNATURE const QJsonValue &jsonValue, ResponseStatus status
 typedef std::function<void(CALLBACK_SIGNATURE)> CallbackFunction;
 
 class NetworkManager {
@@ -20,7 +19,6 @@ private:
     void post(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
     void get(const QString &url, const CallbackFunction &callback);
     static void processReply(QNetworkReply * reply, const CallbackFunction &callback);
-    static QString getCompleteUrl(const QString &url);
 
     QNetworkAccessManager * networkAccessManager;
 };

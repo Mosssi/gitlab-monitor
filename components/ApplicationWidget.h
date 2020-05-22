@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QSystemTrayIcon>
+#include <QtWidgets/QLabel>
 
 #include "SystemTrayIcon.h"
 
@@ -14,7 +15,7 @@ private:
     void setupTrayIcon();
     void setupUi();
 
-    SystemTrayIcon * systemTrayIcon;
+    SystemTrayIcon * systemTrayIcon = nullptr;
 };
 
 
