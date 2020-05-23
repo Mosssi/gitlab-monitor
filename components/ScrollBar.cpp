@@ -3,11 +3,12 @@
 #include <QPainter>
 
 const int scrollBarWidth = 5;
+const int maxOpacity = 150;
 
 ScrollBar::ScrollBar(int height, QWidget * parent) : QWidget(parent) {
 
     setFixedWidth(scrollBarWidth);
-    setHeight(height);
+    setFixedHeight(height);
 
     showHideTimer = new QTimer(this);
     showHideTimer->setInterval(25);
@@ -20,15 +21,9 @@ void ScrollBar::paintEvent(QPaintEvent * event) {
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
     QPainterPath path;
-    path.addRoundRect(0, 0, scrollBarWidth, height, 100);
+    path.addRoundRect(0, 0, scrollBarWidth, height(), 100);
 
     painter.fillPath(path, QBrush(QColor(100, 100, 100, currentOpacity)));
-}
-
-void ScrollBar::setHeight(int height) {
-
-    this->height = height;
-    this->setFixedHeight(height);
 }
 
 void ScrollBar::setShown() {

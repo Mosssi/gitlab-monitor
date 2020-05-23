@@ -21,6 +21,7 @@ void BodyWidget::setupUi() {
     scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
     scrollLayout->setSpacing(0);
+    scrollLayout->setAlignment(Qt::AlignTop);
 
     mainLayout->addWidget(new ScrollArea(scrollLayout));
 }

@@ -28,16 +28,22 @@ ScrollArea::ScrollArea(QBoxLayout * layout) : QScrollArea() {
 
 void ScrollArea::wheelEvent(QWheelEvent * event) {
 
-    scrollBar->setShown();
 
     QScrollArea::wheelEvent(event);
 
     const int vh = viewport()->height();
     const int wh = widget()->height();
+
+    if (vh >= wh) {
+        return;
+    }
+
+    scrollBar->setShown();
+
     const int sh = vh * (vh - 2 * scrollBarMargin) / wh;
     const int yp = scrollBarMargin + verticalScrollBar()->value() * (vh - sh - 2 * scrollBarMargin) / (wh - vh);
 
-    scrollBar->setHeight(sh);
+    scrollBar->setFixedHeight(sh);
     scrollBar->move(width() - scrollBar->width() - scrollBarMargin, yp);
 
     hideTimer->start();

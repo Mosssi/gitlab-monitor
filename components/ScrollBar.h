@@ -5,12 +5,9 @@
 #include <QTimer>
 #include <QtWidgets/QWidget>
 
-const int maxOpacity = 150;
-
 class ScrollBar : public QWidget {
 public:
     ScrollBar(int height, QWidget * parent);
-    void setHeight(int height);
     void setShown();
     void setHidden();
 
@@ -18,9 +15,8 @@ private:
     void paintEvent(QPaintEvent * event) override;
     void updateOpacity();
 
-    int height = 0;
     bool shown = true;
-    int currentOpacity = maxOpacity;
+    int currentOpacity = 0;
 
     QTimer * showHideTimer = nullptr;
 };
