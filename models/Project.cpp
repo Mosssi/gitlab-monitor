@@ -10,8 +10,8 @@ Project::Project(const QJsonObject &jsonObject) {
 QJsonObject Project::getJson() const {
 
     return QJsonObject{
-            {"id", id},
-            {"name", name},
+            {"id",          id},
+            {"name",        name},
             {"description", description},
     };
 }

@@ -1,6 +1,5 @@
 #include "ScrollArea.h"
 
-#include <QDebug>
 #include <QScrollBar>
 
 const int scrollBarMargin = 3;
@@ -27,7 +26,6 @@ ScrollArea::ScrollArea(QBoxLayout * layout) : QScrollArea() {
 }
 
 void ScrollArea::wheelEvent(QWheelEvent * event) {
-
 
     QScrollArea::wheelEvent(event);
 

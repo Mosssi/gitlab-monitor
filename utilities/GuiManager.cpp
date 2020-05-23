@@ -1,7 +1,7 @@
 #include "GuiManager.h"
 
 QFont GuiManager::applicationFont() {
-    return QFont("Ubuntu", normalFontSize());
+    return QFont("Helvetica", normalFontSize());
 }
 
 QString GuiManager::grayColor(int lightness) {

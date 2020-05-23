@@ -46,6 +46,6 @@ add_executable( gitlab_desktop_monitor
         components/ScrollArea.h
         components/ScrollBar.cpp
         components/ScrollBar.h
-)
+        models/Group.cpp models/Group.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

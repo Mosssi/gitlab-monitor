@@ -50,5 +50,7 @@ void ScrollBar::updateOpacity() {
         showHideTimer->stop();
     }
 
+    setVisible(currentOpacity > 0);
+
     update();
 }

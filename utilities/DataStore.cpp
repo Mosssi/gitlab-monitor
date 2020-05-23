@@ -16,14 +16,15 @@ void DataStore::initialize() {
         if (status == ResponseStatus::SUCCESSFUL) {
             user = User(jsonValue.toObject());
             emit userReceived(user);
-            ServiceMediator::requestProjects(user.id, true, [this](CALLBACK_SIGNATURE) {
+
+            ServiceMediator::requestProjects([this](CALLBACK_SIGNATURE) {
                 if (status == ResponseStatus::SUCCESSFUL) {
                     for (const auto &projectJsonValue: jsonValue.toArray()) {
                         const Project &project = Project(projectJsonValue.toObject());
-                        projects.insert(project.id, project);
+                        projects.append(project);
                     }
-                    emit projectsReceived();
                 }
+                emit projectsReceived();
             });
         }
     });
@@ -36,10 +37,16 @@ User DataStore::getUser() const {
 
 Project DataStore::getProject(int projectId) const {
 
-    return projects.value(projectId);
+    for (const auto &project: projects) {
+        if (project.id == projectId) {
+            return project;
+        }
+    }
+
+    return Project();
 }
 
 QList<Project> DataStore::getProjects() const {
 
-    return projects.values();
+    return projects;
 }

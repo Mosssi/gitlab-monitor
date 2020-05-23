@@ -1,5 +1,7 @@
-#include <QtWidgets/QLabel>
 #include "ProjectWidget.h"
+
+#include <QtWidgets/QLabel>
+
 #include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
 
@@ -14,11 +16,18 @@ void ProjectWidget::setupUi() {
 
     mainLayout = new QHBoxLayout(this);
 
+    auto * projectDetailsLayout = new QVBoxLayout();
+    projectDetailsLayout->setSpacing(0);
+
     setFixedHeight(GuiManager::projectHeight());
     setStyleSheet("background-color: " + (oddRow ? QString("#ffffff") : QString("#f5f5f5")));
 
-    mainLayout->addWidget(new QLabel(project.name));
-    auto * descriptionLabel = new QLabel(project.description);
-    descriptionLabel->setStyleSheet(QString("color: %1; font-size: %2px;").arg(GuiManager::grayColor(10)).arg(GuiManager::smallFontSize()));
-    mainLayout->addWidget(descriptionLabel);
+    projectDetailsLayout->addWidget(new QLabel(project.name));
+    if (!project.description.isEmpty()) {
+        auto * descriptionLabel = new QLabel(project.description);
+        descriptionLabel->setStyleSheet(QString("color: %1; font-size: %2px;").arg(GuiManager::grayColor(10)).arg(GuiManager::smallFontSize()));
+        projectDetailsLayout->addWidget(descriptionLabel);
+    }
+
+    mainLayout->addLayout(projectDetailsLayout);
 }
