@@ -21,6 +21,13 @@ void ServiceMediator::requestProjects(const int &userId, bool simple, const Call
     );
 }
 
+void ServiceMediator::requestGroups(const int &userId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().get(
+            getUrl(QString("/users/%1/groups").arg(userId)),
+            callback
+    );
+}
+
 QString ServiceMediator::getUrl(const QString &url, const QList<QPair<QString, QString>> &queries) {
 
     QUrl qUrl(SERVICE_ADDRESS + url);

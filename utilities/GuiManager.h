@@ -15,6 +15,8 @@ public:
     constexpr static int applicationHeight() { return 400; }
     constexpr static int headerHeight() { return 75; }
 
+    constexpr static int projectHeight() { return 65; }
+
     static QString grayColor(int lightness);
 };
 

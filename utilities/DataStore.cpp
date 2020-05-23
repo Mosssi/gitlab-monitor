@@ -19,7 +19,8 @@ void DataStore::initialize() {
             ServiceMediator::requestProjects(user.id, true, [this](CALLBACK_SIGNATURE) {
                 if (status == ResponseStatus::SUCCESSFUL) {
                     for (const auto &projectJsonValue: jsonValue.toArray()) {
-                        projects.append(Project(projectJsonValue.toObject()));
+                        const Project &project = Project(projectJsonValue.toObject());
+                        projects.insert(project.id, project);
                     }
                     emit projectsReceived();
                 }
@@ -31,4 +32,14 @@ void DataStore::initialize() {
 User DataStore::getUser() const {
 
     return user;
+}
+
+Project DataStore::getProject(int projectId) const {
+
+    return projects.value(projectId);
+}
+
+QList<Project> DataStore::getProjects() const {
+
+    return projects.values();
 }

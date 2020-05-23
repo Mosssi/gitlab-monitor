@@ -3,6 +3,7 @@
 
 
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QVBoxLayout>
 
 class BodyWidget : public QFrame {
 public:
@@ -10,6 +11,10 @@ public:
 
 private:
     void setupUi();
+    void updateUi();
+
+    QVBoxLayout * mainLayout = nullptr;
+    QVBoxLayout * scrollLayout = nullptr;
 };
 
 
