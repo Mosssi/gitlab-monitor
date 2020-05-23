@@ -47,8 +47,9 @@ void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
 void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction &callback) {
 
     if (reply->error() != QNetworkReply::NetworkError::NoError) {
-        reply->deleteLater();
         callback({}, ResponseStatus::UNSUCCESSFUL);
+        qDebug() << reply->error();
+        reply->deleteLater();
         return;
     }
 

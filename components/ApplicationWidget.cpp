@@ -30,7 +30,10 @@ void ApplicationWidget::setupTrayIcon() {
 
     systemTrayIcon = new SystemTrayIcon(this);
     connect(systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
-        move(QCursor::pos().x() - GuiManager::applicationWidth() / 2, QApplication::primaryScreen()->availableSize().height() - GuiManager::applicationHeight());
+        move(
+                QCursor::pos().x() - GuiManager::applicationWidth() / 2,
+                QApplication::primaryScreen()->availableSize().height() - GuiManager::applicationHeight()
+        );
         this->setVisible(!this->isVisible());
     });
 }

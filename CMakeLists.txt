@@ -42,6 +42,10 @@ add_executable( gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
+        components/ScrollArea.cpp
+        components/ScrollArea.h
+        components/ScrollBar.cpp
+        components/ScrollBar.h
 )
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

@@ -1,11 +1,9 @@
 #include "BodyWidget.h"
 
-#include <QtWidgets/QScrollArea>
-#include <QDebug>
-
 #include "../models/Project.h"
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
+#include "ScrollArea.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : QFrame(parent) {
 
@@ -20,15 +18,11 @@ void BodyWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    auto * scrollWidget = new QWidget();
-    scrollLayout = new QVBoxLayout(scrollWidget);
+    scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
     scrollLayout->setSpacing(0);
-    auto * scrollArea = new QScrollArea();
-    scrollArea->setWidget(scrollWidget);
-    scrollArea->setWidgetResizable(true);
 
-    mainLayout->addWidget(scrollArea);
+    mainLayout->addWidget(new ScrollArea(scrollLayout));
 }
 
 void BodyWidget::updateUi() {
