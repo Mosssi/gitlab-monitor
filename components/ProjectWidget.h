@@ -3,7 +3,8 @@
 
 
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 
 #include "../models/Project.h"
 
@@ -13,11 +14,17 @@ public:
 
 private:
     void setupUi();
+    void updateUi();
+    void toggleProjectStar();
+    void enterEvent(QEvent * event) override;
+    void leaveEvent(QEvent * event) override;
 
     int projectId;
     bool oddRow;
 
-    QHBoxLayout * mainLayout = nullptr;
+    QLabel * nameLabel = nullptr;
+    QLabel * descriptionLabel = nullptr;
+    QPushButton * starButton = nullptr;
 };
 
 

@@ -15,6 +15,7 @@ public:
     [[nodiscard]] User getUser() const;
     [[nodiscard]] Project getProject(int projectId) const;
     [[nodiscard]] QList<Project> getProjects() const;
+    void updateProject(const Project &project);
 
 signals:
     void userReceived(const User &user);
@@ -22,7 +23,7 @@ signals:
 
 private:
     User user;
-    QList<Project> projects;
+    QMap<int, Project> projects;
 };
 
 

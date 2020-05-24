@@ -15,9 +15,11 @@ public:
 
 private:
     void wheelEvent(QWheelEvent * event) override;
+    void leaveEvent(QEvent * event) override;
+    void enterEvent(QEvent * event) override;
 
+private:
     ScrollBar * scrollBar = nullptr;
-    QTimer * hideTimer = nullptr;
 };
 
 

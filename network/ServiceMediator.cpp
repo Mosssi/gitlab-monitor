@@ -20,6 +20,7 @@ QString ServiceMediator::getUrl(const QString &url, const QList<QPair<QString, Q
     return qUrl.toString();
 }
 
+// TODO: Consider making required changes on DataStore right here
 void ServiceMediator::requestUser(const CallbackFunction &callback) {
     NetworkManager::getInstance().get(
             getUrl("/user"),
@@ -39,6 +40,22 @@ void ServiceMediator::requestProjects(const CallbackFunction &callback) {
                             {"per_page",   "30"}
                     }
             ),
+            callback
+    );
+}
+
+void ServiceMediator::starProject(int projectId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().post(
+            getUrl(QString("/projects/%1/star").arg(projectId)),
+            {},
+            callback
+    );
+}
+
+void ServiceMediator::unStarProject(int projectId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().post(
+            getUrl(QString("/projects/%1/unstar").arg(projectId)),
+            {},
             callback
     );
 }

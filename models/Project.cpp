@@ -5,6 +5,7 @@ Project::Project(const QJsonObject &jsonObject) {
     id = jsonObject.value("id").toInt();
     name = jsonObject.value("name").toString();
     description = jsonObject.value("description").toString();
+    starred = jsonObject.value("star_count").toInt() > 0;
 }
 
 QJsonObject Project::getJson() const {
@@ -13,5 +14,6 @@ QJsonObject Project::getJson() const {
             {"id",          id},
             {"name",        name},
             {"description", description},
+            {"starred",     starred}
     };
 }

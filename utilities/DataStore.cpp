@@ -21,7 +21,7 @@ void DataStore::initialize() {
                 if (status == ResponseStatus::SUCCESSFUL) {
                     for (const auto &projectJsonValue: jsonValue.toArray()) {
                         const Project &project = Project(projectJsonValue.toObject());
-                        projects.append(project);
+                        projects.insert(project.id, project);
                     }
                 }
                 emit projectsReceived();
@@ -48,5 +48,10 @@ Project DataStore::getProject(int projectId) const {
 
 QList<Project> DataStore::getProjects() const {
 
-    return projects;
+    return projects.values();
+}
+
+void DataStore::updateProject(const Project &project) {
+
+    projects.insert(project.id, project);
 }

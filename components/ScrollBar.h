@@ -14,6 +14,8 @@ public:
 private:
     void paintEvent(QPaintEvent * event) override;
     void updateOpacity();
+    void enterEvent(QEvent * event) override;
+    void leaveEvent(QEvent * event) override;
 
     bool shown = true;
     int currentOpacity = 0;

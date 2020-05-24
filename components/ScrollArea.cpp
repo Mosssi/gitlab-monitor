@@ -18,11 +18,6 @@ ScrollArea::ScrollArea(QBoxLayout * layout) : QScrollArea() {
     setStyleSheet("");
 
     scrollBar = new ScrollBar(0, this);
-
-    hideTimer = new QTimer(this);
-    hideTimer->setSingleShot(true);
-    hideTimer->setInterval(1000);
-    connect(hideTimer, &QTimer::timeout, scrollBar, &ScrollBar::setHidden);
 }
 
 void ScrollArea::wheelEvent(QWheelEvent * event) {
@@ -36,13 +31,21 @@ void ScrollArea::wheelEvent(QWheelEvent * event) {
         return;
     }
 
-    scrollBar->setShown();
-
     const int sh = vh * (vh - 2 * scrollBarMargin) / wh;
     const int yp = scrollBarMargin + verticalScrollBar()->value() * (vh - sh - 2 * scrollBarMargin) / (wh - vh);
 
     scrollBar->setFixedHeight(sh);
     scrollBar->move(width() - scrollBar->width() - scrollBarMargin, yp);
+}
 
-    hideTimer->start();
+void ScrollArea::enterEvent(QEvent * event) {
+
+    QWidget::enterEvent(event);
+    scrollBar->setShown();
+}
+
+void ScrollArea::leaveEvent(QEvent * event) {
+
+    QWidget::leaveEvent(event);
+    scrollBar->setHidden();
 }

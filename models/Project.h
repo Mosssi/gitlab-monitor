@@ -14,6 +14,7 @@ public:
     int id = 0;
     QString name = "";
     QString description = "";
+    bool starred = false;
 };
 
 

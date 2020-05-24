@@ -34,14 +34,16 @@ void ScrollBar::setShown() {
 
 void ScrollBar::setHidden() {
 
-    shown = false;
-    showHideTimer->start();
+    QTimer::singleShot(1000, [this]() {
+        shown = false;
+        showHideTimer->start();
+    });
 }
 
 void ScrollBar::updateOpacity() {
 
     if (shown) {
-        currentOpacity = qMin(maxOpacity, currentOpacity + 60);
+        currentOpacity = qMin(maxOpacity, currentOpacity + 40);
     } else {
         currentOpacity = qMax(0, currentOpacity - 20);
     }
@@ -52,5 +54,17 @@ void ScrollBar::updateOpacity() {
 
     setVisible(currentOpacity > 0);
 
+    update();
+}
+
+void ScrollBar::enterEvent(QEvent * event) {
+
+    currentOpacity = 200;
+    update();
+}
+
+void ScrollBar::leaveEvent(QEvent * event) {
+
+    currentOpacity = maxOpacity;
     update();
 }
