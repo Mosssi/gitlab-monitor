@@ -6,19 +6,24 @@
 
 class GuiManager {
 public:
-    static QFont applicationFont();
-    constexpr static int smallFontSize() { return 10; }
-    constexpr static int normalFontSize() { return 10; }
-    constexpr static int largeFontSize() { return 13; }
+    static QFont applicationFont() { return QFont("Ubuntu", normalFontSize()); }
+    constexpr static int smallFontSize() { return 12; }
+    constexpr static int normalFontSize() { return 15; }
+    constexpr static int largeFontSize() { return 17; }
 
-    constexpr static int applicationWidth() { return 350; }
-    constexpr static int applicationHeight() { return 450; }
-    constexpr static int headerHeight() { return 75; }
+    constexpr static int applicationWidth() { return 300; }
+    constexpr static int applicationHeight() { return 400; }
+    constexpr static int headerHeight() { return 70; }
+    constexpr static int logoHeight() { return 55; }
 
-    constexpr static int projectHeight() { return 65; }
+    constexpr static int projectHeight() { return 55; }
 
     static QString darkGrayColor() { return "#2e2e2e"; }
-    static QString lightColor() { return "#e3e3e3"; }
+    static QString grayColor() { return "#4a4a4a"; }
+    static QString lightGrayColor() { return "#666666"; }
+    static QString lightColor() { return "#f0f0f0"; }
+    static QString darkLightColor() { return "#e5e5e5"; }
+
     static QString lightOrangeColor() { return "#fca121"; }
     static QString orangeColor() { return "#fc6d26"; }
     static QString redOrangeColor() { return "#db3b21"; }

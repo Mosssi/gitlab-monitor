@@ -3,7 +3,8 @@
 
 
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QLabel>
+
+#include "library/Label.h"
 
 class HeaderWidget : public QFrame {
 public:
@@ -12,7 +13,7 @@ public:
 private:
     void setupUi();
 
-    QLabel * userWelcomeLabel = nullptr;
+    Label * userWelcomeLabel = nullptr;
 };
 
 

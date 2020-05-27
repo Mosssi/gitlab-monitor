@@ -5,13 +5,13 @@
 #include <QtWidgets/QScrollArea>
 #include <QtGui/QScrollEvent>
 #include <QTimer>
-#include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QLayout>
 
 #include "ScrollBar.h"
 
 class ScrollArea : public QScrollArea {
 public:
-    explicit ScrollArea(QBoxLayout * layout);
+    explicit ScrollArea(QLayout * layout);
 
 private:
     void wheelEvent(QWheelEvent * event) override;

@@ -10,9 +10,9 @@ ScrollBar::ScrollBar(int height, QWidget * parent) : QWidget(parent) {
     setFixedWidth(scrollBarWidth);
     setFixedHeight(height);
 
-    showHideTimer = new QTimer(this);
-    showHideTimer->setInterval(25);
-    connect(showHideTimer, &QTimer::timeout, this, &ScrollBar::updateOpacity);
+//    showHideTimer = new QTimer(this);
+//    showHideTimer->setInterval(25);
+//    connect(showHideTimer, &QTimer::timeout, this, &ScrollBar::updateOpacity);
 }
 
 void ScrollBar::paintEvent(QPaintEvent * event) {
@@ -23,20 +23,20 @@ void ScrollBar::paintEvent(QPaintEvent * event) {
     QPainterPath path;
     path.addRoundRect(0, 0, scrollBarWidth, height(), 100);
 
-    painter.fillPath(path, QBrush(QColor(100, 100, 100, currentOpacity)));
+    painter.fillPath(path, QBrush(QColor(100, 100, 100, maxOpacity/*currentOpacity*/)));
 }
 
 void ScrollBar::setShown() {
 
     shown = true;
-    showHideTimer->start();
+//    showHideTimer->start();
 }
 
 void ScrollBar::setHidden() {
 
     QTimer::singleShot(1000, [this]() {
         shown = false;
-        showHideTimer->start();
+//        showHideTimer->start();
     });
 }
 

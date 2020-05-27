@@ -1,10 +1,8 @@
 #include "ProjectWidget.h"
 
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QHBoxLayout>
 
 #include "../utilities/DataStore.h"
-#include "../utilities/GuiManager.h"
 #include "../network/ServiceMediator.h"
 
 ProjectWidget::ProjectWidget(int projectId, bool oddRow, QWidget * parent) : QFrame(parent), projectId(projectId), oddRow(oddRow) {
@@ -23,18 +21,19 @@ void ProjectWidget::setupUi() {
     auto * projectDetailsLayout = new QVBoxLayout();
     projectDetailsLayout->setSpacing(0);
 
-    projectDetailsLayout->addWidget(nameLabel = new QLabel());
-//    nameLabel->setStyleSheet("font-weight: bold;");
-    projectDetailsLayout->addWidget(descriptionLabel = new QLabel());
+    projectDetailsLayout->addWidget(nameLabel = new Label());
+//    nameLabel->setBold(true);
+
+    projectDetailsLayout->addWidget(descriptionLabel = new Label());
     descriptionLabel->setVisible(false);
-    descriptionLabel->setStyleSheet(QString("color: %1; font-size: %2px;").arg(GuiManager::darkGrayColor()).arg(GuiManager::smallFontSize()));
+    descriptionLabel->setColor(GuiManager::lightGrayColor());
+    descriptionLabel->setFontSize(GuiManager::smallFontSize());
 
     mainLayout->addLayout(projectDetailsLayout);
 
     mainLayout->addStretch();
 
-    mainLayout->addWidget(starButton = new QPushButton("★"));
-    connect(starButton, &QPushButton::clicked, this, &ProjectWidget::toggleProjectStar);
+    mainLayout->addWidget(openIssuesCountLabel = new Label());
 }
 
 void ProjectWidget::updateUi() {
@@ -47,11 +46,7 @@ void ProjectWidget::updateUi() {
         descriptionLabel->setVisible(true);
     }
 
-    if (project.starred) {
-        starButton->setStyleSheet("color: #bbbb44;");
-    } else {
-        starButton->setStyleSheet("color: #777777;");
-    }
+    openIssuesCountLabel->setText(QString::number(project.openIssuesCount));
 }
 
 void ProjectWidget::toggleProjectStar() {
@@ -74,7 +69,7 @@ void ProjectWidget::toggleProjectStar() {
 
 void ProjectWidget::enterEvent(QEvent * event) {
 
-    setStyleSheet("background-color: #f0f0f0;");
+    setStyleSheet("background-color: #f7f7f7;");
     QWidget::enterEvent(event);
 }
 

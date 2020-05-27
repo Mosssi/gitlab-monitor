@@ -48,7 +48,11 @@ Project DataStore::getProject(int projectId) const {
 
 QList<Project> DataStore::getProjects() const {
 
-    return projects.values();
+    QList<Project> sortedProjects = projects.values();
+    std::sort(sortedProjects.begin(), sortedProjects.end(), [](const Project &first, const Project &second) {
+        return first.id > second.id;
+    });
+    return sortedProjects;
 }
 
 void DataStore::updateProject(const Project &project) {

@@ -33,11 +33,10 @@ void ServiceMediator::requestProjects(const CallbackFunction &callback) {
             getUrl(
                     "/projects",
                     {
-                            {"simple",     "true"},
                             {"order_by",   "last_activity_at"},
                             {"archived",   "false"},
                             {"membership", "true"},
-                            {"per_page",   "30"}
+                            {"starred",    "true"}
                     }
             ),
             callback

@@ -3,11 +3,12 @@
 #include "../models/Project.h"
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
-#include "ScrollArea.h"
+#include "library/ScrollArea.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
+    setStyleSheet("background-color: #ffffff;");
 
     connect(&DataStore::getInstance(), &DataStore::projectsReceived, this, &BodyWidget::updateUi);
 }

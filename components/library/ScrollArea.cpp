@@ -4,18 +4,16 @@
 
 const int scrollBarMargin = 3;
 
-ScrollArea::ScrollArea(QBoxLayout * layout) : QScrollArea() {
+ScrollArea::ScrollArea(QLayout * layout) : QScrollArea() {
 
     auto * widget = new QWidget();
     widget->setLayout(layout);
     setWidget(widget);
     setWidgetResizable(true);
+    setFrameShape(Shape::NoFrame);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    setContentsMargins(0, 0, 0, 0);
-    setStyleSheet("");
 
     scrollBar = new ScrollBar(0, this);
 }

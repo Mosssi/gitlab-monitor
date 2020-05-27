@@ -3,10 +3,10 @@
 
 
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 
 #include "../models/Project.h"
+#include "library/Label.h"
 
 class ProjectWidget : public QFrame {
 public:
@@ -22,9 +22,9 @@ private:
     int projectId;
     bool oddRow;
 
-    QLabel * nameLabel = nullptr;
-    QLabel * descriptionLabel = nullptr;
-    QPushButton * starButton = nullptr;
+    Label * nameLabel = nullptr;
+    Label * descriptionLabel = nullptr;
+    Label * openIssuesCountLabel = nullptr;
 };
 
 

@@ -15,6 +15,7 @@ public:
     QString name = "";
     QString description = "";
     bool starred = false;
+    int openIssuesCount = 0;
 };
 
 

@@ -1,15 +1,15 @@
 #include "HeaderWidget.h"
 
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLabel>
 
-#include "../utilities/GuiManager.h"
 #include "../utilities/DataStore.h"
+#include "library/Label.h"
 
 
 HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
+    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::darkLightColor() + ";}");
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this](const User &user) {
         userWelcomeLabel->setText(QString("Welcome, %1!").arg(user.username));
@@ -19,23 +19,20 @@ HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 void HeaderWidget::setupUi() {
 
     setFixedHeight(GuiManager::headerHeight());
-    setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::purpleColor()).arg(GuiManager::lightColor()));
+    setStyleSheet(QString("background-color: %1;").arg(GuiManager::lightColor()));
 
-    auto * mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(0, 0, 0, 0);
+    auto * mainLayout = new QHBoxLayout(this);
+    mainLayout->setContentsMargins(10, 10, 10, 10);
 
-    auto * topFrame = new QFrame();
-    topFrame->setStyleSheet(QString("background-color: %1; color: %2; font-size: %3px;").arg(GuiManager::lightPurpleColor()).arg(GuiManager::darkGrayColor()).arg(GuiManager::smallFontSize()));
-    topFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
-    auto * topLayout = new QHBoxLayout(topFrame);
-    topLayout->setContentsMargins(10, 5, 10, 5);
-    topLayout->addWidget(userWelcomeLabel = new QLabel(), 0, Qt::AlignRight);
+    userWelcomeLabel = new Label();
+    userWelcomeLabel->setFontSize(GuiManager::smallFontSize());
+    userWelcomeLabel->setColor(GuiManager::lightGrayColor());
 
-    mainLayout->addWidget(topFrame);
+    auto * logoLabel = new Label();
+    const QPixmap pixmap(":/gitlab-logo-gray-rgb.png");
+    logoLabel->setPixmap(pixmap.scaledToHeight(GuiManager::logoHeight(), Qt::SmoothTransformation));
 
-    auto * bottomLayout = new QHBoxLayout();
-    bottomLayout->setContentsMargins(10, 10, 10, 10);
-    bottomLayout->addWidget(new QLabel("GITLAB DESKTOP MONITOR"));
-
-    mainLayout->addLayout(bottomLayout);
+    mainLayout->addWidget(logoLabel);
+    mainLayout->addStretch();
+    mainLayout->addWidget(userWelcomeLabel);
 }
