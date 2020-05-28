@@ -19,13 +19,28 @@ add_executable( gitlab_desktop_monitor
         components/BodyWidget.h
         components/HeaderWidget.cpp
         components/HeaderWidget.h
+        components/IssuesListWidget.cpp
+        components/IssuesListWidget.h
         components/ProjectWidget.cpp
         components/ProjectWidget.h
+        components/IssueWidget.cpp
+        components/IssueWidget.h
+        components/ProjectsListWidget.cpp
+        components/ProjectsListWidget.h
         components/SystemTrayIcon.cpp
         components/SystemTrayIcon.h
+        components/library/Label.cpp
+        components/library/Label.h
+        components/library/ScrollArea.cpp
+        components/library/ScrollArea.h
+        components/library/ScrollBar.cpp
+        components/library/ScrollBar.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
+        models/Group.cpp models/Group.h
+        models/Issue.cpp
+        models/Issue.h
         models/Project.cpp
         models/Project.h
         models/User.cpp
@@ -42,10 +57,6 @@ add_executable( gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
-        components/library/ScrollArea.cpp
-        components/library/ScrollArea.h
-        components/library/ScrollBar.cpp
-        components/library/ScrollBar.h
-        models/Group.cpp models/Group.h components/library/Label.cpp components/library/Label.h)
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

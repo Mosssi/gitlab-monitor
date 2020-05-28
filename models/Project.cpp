@@ -19,3 +19,8 @@ QJsonObject Project::getJson() const {
             {"openIssuesCount", openIssuesCount}
     };
 }
+
+void Project::setOpenIssues(const QList<Issue> &openIssues) {
+
+    this->openIssues = openIssues;
+}

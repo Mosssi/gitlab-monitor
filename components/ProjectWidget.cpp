@@ -5,7 +5,7 @@
 #include "../utilities/DataStore.h"
 #include "../network/ServiceMediator.h"
 
-ProjectWidget::ProjectWidget(int projectId, bool oddRow, QWidget * parent) : QFrame(parent), projectId(projectId), oddRow(oddRow) {
+ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : QFrame(parent), projectId(projectId) {
 
     setupUi();
     updateUi();
@@ -22,7 +22,6 @@ void ProjectWidget::setupUi() {
     projectDetailsLayout->setSpacing(0);
 
     projectDetailsLayout->addWidget(nameLabel = new Label());
-//    nameLabel->setBold(true);
 
     projectDetailsLayout->addWidget(descriptionLabel = new Label());
     descriptionLabel->setVisible(false);
@@ -42,7 +41,7 @@ void ProjectWidget::updateUi() {
 
     nameLabel->setText(project.name);
     if (!project.description.isEmpty()) {
-        descriptionLabel->setText(project.description.mid(0, 20));
+        descriptionLabel->setText(project.description);
         descriptionLabel->setVisible(true);
     }
 
@@ -77,4 +76,9 @@ void ProjectWidget::leaveEvent(QEvent * event) {
 
     setStyleSheet("background-color: #ffffff;");
     QWidget::leaveEvent(event);
+}
+
+void ProjectWidget::mouseReleaseEvent(QMouseEvent * event) {
+
+    emit clicked();
 }

@@ -9,8 +9,12 @@
 #include "library/Label.h"
 
 class ProjectWidget : public QFrame {
+Q_OBJECT
 public:
-    explicit ProjectWidget(int projectId, bool oddRow, QWidget * parent = nullptr);
+    explicit ProjectWidget(int projectId, QWidget * parent = nullptr);
+
+signals:
+    void clicked();
 
 private:
     void setupUi();
@@ -18,9 +22,9 @@ private:
     void toggleProjectStar();
     void enterEvent(QEvent * event) override;
     void leaveEvent(QEvent * event) override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
 
     int projectId;
-    bool oddRow;
 
     Label * nameLabel = nullptr;
     Label * descriptionLabel = nullptr;

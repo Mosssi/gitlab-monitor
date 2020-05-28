@@ -3,11 +3,13 @@
 
 #include <QtCore/QJsonObject>
 #include <QtCore/QObject>
+#include "Issue.h"
 
 class Project {
 public:
     Project() = default;
     explicit Project(const QJsonObject &jsonObject);
+    void setOpenIssues(const QList<Issue> &openIssues);
 
     [[nodiscard]] QJsonObject getJson() const;
 
@@ -16,6 +18,7 @@ public:
     QString description = "";
     bool starred = false;
     int openIssuesCount = 0;
+    QList<Issue> openIssues = {};
 };
 
 

@@ -11,6 +11,7 @@ public:
     static void requestProjects(const CallbackFunction &callback);
     static void starProject(int projectId, const CallbackFunction &callback);
     static void unStarProject(int projectId, const CallbackFunction &callback);
+    static void requestProjectOpenIssues(int projectId, const CallbackFunction &callback);
 
 private:
     ServiceMediator() = default;

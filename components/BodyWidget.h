@@ -4,17 +4,22 @@
 
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QStackedWidget>
 
-class BodyWidget : public QFrame {
+#include "ProjectsListWidget.h"
+#include "IssuesListWidget.h"
+
+class BodyWidget : public QStackedWidget {
 public:
     explicit BodyWidget(QWidget * parent = nullptr);
 
 private:
     void setupUi();
-    void updateUi();
+    void showProjectList();
+    void showIssuesList();
 
-    QVBoxLayout * mainLayout = nullptr;
-    QVBoxLayout * scrollLayout = nullptr;
+    ProjectsListWidget * projectsListWidget = nullptr;
+    IssuesListWidget * issuesListWidget = nullptr;
 };
 
 

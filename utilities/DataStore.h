@@ -16,10 +16,12 @@ public:
     [[nodiscard]] Project getProject(int projectId) const;
     [[nodiscard]] QList<Project> getProjects() const;
     void updateProject(const Project &project);
+    void getProjectOpenIssues(int projectId);
 
 signals:
     void userReceived(const User &user);
     void projectsReceived();
+    void projectOpenIssuesReceived();
 
 private:
     User user;

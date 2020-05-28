@@ -14,9 +14,10 @@ public:
     constexpr static int applicationWidth() { return 300; }
     constexpr static int applicationHeight() { return 400; }
     constexpr static int headerHeight() { return 70; }
-    constexpr static int logoHeight() { return 55; }
+    constexpr static int logoHeight() { return 45; }
 
     constexpr static int projectHeight() { return 55; }
+    constexpr static int issueHeight() { return 55; }
 
     static QString darkGrayColor() { return "#2e2e2e"; }
     static QString grayColor() { return "#4a4a4a"; }

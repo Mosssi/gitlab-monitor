@@ -11,10 +11,10 @@ QString ServiceMediator::getUrl(const QString &url, const QList<QPair<QString, Q
 
     QUrl qUrl(SERVICE_ADDRESS + url);
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("private_token", Configuration::getInstance().getToken());
     for (const auto &pair : queries) {
         urlQuery.addQueryItem(pair.first, pair.second);
     }
+    urlQuery.addQueryItem("private_token", Configuration::getInstance().getToken());
     qUrl.setQuery(urlQuery);
 
     return qUrl.toString();
@@ -55,6 +55,13 @@ void ServiceMediator::unStarProject(int projectId, const CallbackFunction &callb
     NetworkManager::getInstance().post(
             getUrl(QString("/projects/%1/unstar").arg(projectId)),
             {},
+            callback
+    );
+}
+
+void ServiceMediator::requestProjectOpenIssues(int projectId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().get(
+            getUrl(QString("/projects/%1/issues").arg(projectId), {{"state", "opened"}}),
             callback
     );
 }

@@ -11,7 +11,7 @@ void Label::setFontSize(int t_fontSize) {
     updateStyleSheet();
 }
 
-[[maybe_unused]] void Label::setBold(bool bold) {
+void Label::setBold(bool bold) {
 
     this->bold = bold;
     updateStyleSheet();
@@ -23,7 +23,7 @@ void Label::setColor(const QString &color) {
     updateStyleSheet();
 }
 
-[[maybe_unused]] void Label::setGeneralStyle(const QString &generalStyle) {
+void Label::setGeneralStyle(const QString &generalStyle) {
 
     this->generalStyle = generalStyle;
     updateStyleSheet();

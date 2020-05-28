@@ -1,37 +1,36 @@
 #include "BodyWidget.h"
 
-#include "../models/Project.h"
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
 #include "library/ScrollArea.h"
 
-BodyWidget::BodyWidget(QWidget * parent) : QFrame(parent) {
+BodyWidget::BodyWidget(QWidget * parent) : QStackedWidget(parent) {
 
     setupUi();
     setStyleSheet("background-color: #ffffff;");
-
-    connect(&DataStore::getInstance(), &DataStore::projectsReceived, this, &BodyWidget::updateUi);
 }
 
 void BodyWidget::setupUi() {
 
-    mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(0, 0, 0, 0);
-    mainLayout->setSpacing(0);
+    addWidget(projectsListWidget = new ProjectsListWidget());
+    addWidget(issuesListWidget = new IssuesListWidget());
 
-    scrollLayout = new QVBoxLayout();
-    scrollLayout->setContentsMargins(0, 0, 0, 0);
-    scrollLayout->setSpacing(0);
-    scrollLayout->setAlignment(Qt::AlignTop);
+    connect(projectsListWidget, &ProjectsListWidget::projectSelected, [this](int projectId) {
+        issuesListWidget->setProjectId(projectId);
+        showIssuesList();
+    });
 
-    mainLayout->addWidget(new ScrollArea(scrollLayout));
+    connect(issuesListWidget, &IssuesListWidget::backClicked, [this]() {
+        showProjectList();
+    });
 }
 
-void BodyWidget::updateUi() {
+void BodyWidget::showProjectList() {
 
-    const QList<Project> projects = DataStore::getInstance().getProjects();
+    setCurrentWidget(projectsListWidget);
+}
 
-    for (int i = 0; i < projects.length(); i++) {
-        scrollLayout->addWidget(new ProjectWidget(projects.at(i).id, i % 2));
-    }
+void BodyWidget::showIssuesList() {
+
+    setCurrentWidget(issuesListWidget);
 }
