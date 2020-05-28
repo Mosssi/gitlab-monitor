@@ -12,7 +12,7 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 
-add_executable( gitlab_desktop_monitor
+add_executable(gitlab_desktop_monitor
         components/ApplicationWidget.cpp
         components/ApplicationWidget.h
         components/BodyWidget.cpp
@@ -57,6 +57,10 @@ add_executable( gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
+        components/library/PushButton.cpp
+        components/library/PushButton.h
+        components/library/IconType.cpp
+        components/library/IconType.h
 )
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

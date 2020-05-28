@@ -1,10 +1,9 @@
 #include "IssuesListWidget.h"
 
-#include <QtWidgets/QPushButton>
-
 #include "library/ScrollArea.h"
 #include "../utilities/DataStore.h"
 #include "IssueWidget.h"
+#include "library/PushButton.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
@@ -16,12 +15,12 @@ void IssuesListWidget::setupUi() {
 
     auto * mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
 
     auto * headerFrame = new QFrame(); // TOCONSIDER: What about having our own layout with setBackgroundColor functionality?
-    headerFrame->setStyleSheet("background-color: " + GuiManager::lightColor() + ";"); // TODO: fix design
     auto * headerLayout = new QHBoxLayout(headerFrame);
     headerLayout->setContentsMargins(5, 5, 5, 5);
-    auto * backButton = new QPushButton("<");
+    auto * backButton = new PushButton(IconType::BACK);
     connect(backButton, &QPushButton::clicked, this, &IssuesListWidget::backClicked);
     headerLayout->addWidget(backButton);
     headerLayout->addWidget(projectNameLabel = new Label());
@@ -52,13 +51,10 @@ void IssuesListWidget::updateUi() {
 
 void IssuesListWidget::setProjectId(int projectId) {
 
-    bool projectChanged = this->projectId != projectId;
     this->projectId = projectId;
 
-    if (projectChanged) {
-        projectNameLabel->setText("");
-        emptyScrollLayout();
-    }
+    emptyScrollLayout();
+    updateUi(); // Filling UI with old contents
 
     DataStore::getInstance().getProjectOpenIssues(projectId);
 

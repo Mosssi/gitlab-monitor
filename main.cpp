@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <QDebug>
+#include <QtGui/QFontDatabase>
 
 #include "components/ApplicationWidget.h"
 #include "utilities/GuiManager.h"
@@ -7,6 +7,7 @@
 int main(int argc, char ** argv) {
     QApplication application(argc, argv);
     QApplication::setFont(GuiManager::applicationFont());
+    QFontDatabase::addApplicationFont(":/fonts/gitlab-monitoring.ttf");
 
     ApplicationWidget widget;
 

@@ -8,8 +8,9 @@
 
 HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 
-    setupUi();
     setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::darkLightColor() + ";}");
+
+    setupUi();
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this](const User &user) {
         userWelcomeLabel->setText(QString("Welcome, %1!").arg(user.username));
@@ -19,7 +20,6 @@ HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 void HeaderWidget::setupUi() {
 
     setFixedHeight(GuiManager::headerHeight());
-    setStyleSheet(QString("background-color: %1;").arg(GuiManager::lightColor()));
 
     auto * mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(10, 10, 10, 10);
@@ -29,7 +29,7 @@ void HeaderWidget::setupUi() {
     userWelcomeLabel->setColor(GuiManager::lightGrayColor());
 
     auto * logoLabel = new Label();
-    const QPixmap pixmap(":/gitlab-logo-gray-rgb.png");
+    const QPixmap pixmap(":/images/gitlab-logo-gray-rgb.png");
     logoLabel->setPixmap(pixmap.scaledToHeight(GuiManager::logoHeight(), Qt::SmoothTransformation));
 
     mainLayout->addWidget(logoLabel);

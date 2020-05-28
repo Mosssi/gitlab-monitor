@@ -4,6 +4,7 @@
 
 #include "../utilities/DataStore.h"
 #include "../network/ServiceMediator.h"
+#include "library/PushButton.h"
 
 IssueWidget::IssueWidget(const Issue &issue, QWidget * parent) : QFrame(parent), issue(issue) {
 
@@ -26,6 +27,9 @@ void IssueWidget::setupUi() {
     mainLayout->addLayout(projectDetailsLayout);
 
     mainLayout->addStretch();
+
+    mainLayout->addWidget(new PushButton(IconType::DONE));
+    mainLayout->addWidget(new PushButton(IconType::CLOSE));
 }
 
 void IssueWidget::updateUi() {
