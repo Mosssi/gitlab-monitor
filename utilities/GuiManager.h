@@ -8,9 +8,9 @@ class GuiManager {
 public:
     static QFont applicationFont() { return QFont("Ubuntu", normalFontSize()); }
     static QFont iconFont() { return QFont("gitlab-monitoring", normalFontSize()); }
-    constexpr static int smallFontSize() { return 13; }
-    constexpr static int normalFontSize() { return 15; }
-    constexpr static int largeFontSize() { return 17; }
+    constexpr static int smallFontSize() { return 12; }
+    constexpr static int normalFontSize() { return 14; }
+    constexpr static int largeFontSize() { return 15; }
 
     constexpr static int applicationWidth() { return 300; }
     constexpr static int applicationHeight() { return 400; }

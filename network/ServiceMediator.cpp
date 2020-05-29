@@ -65,3 +65,11 @@ void ServiceMediator::requestProjectOpenIssues(int projectId, const CallbackFunc
             callback
     );
 }
+
+void ServiceMediator::closeIssue(int projectId, int issueId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().put(
+            getUrl(QString("/projects/%1/issues/%2").arg(projectId).arg(issueId), {{"state_event", "close"}}),
+            {},
+            callback
+    );
+}

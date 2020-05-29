@@ -17,15 +17,15 @@ void IssuesListWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    auto * headerFrame = new QFrame(); // TOCONSIDER: What about having our own layout with setBackgroundColor functionality?
-    auto * headerLayout = new QHBoxLayout(headerFrame);
-    headerLayout->setContentsMargins(5, 5, 5, 5);
+    auto * headerLayout = new QHBoxLayout();
+    headerLayout->setContentsMargins(10, 10, 10, 10);
+    headerLayout->setSpacing(10);
     auto * backButton = new PushButton(IconType::BACK);
     connect(backButton, &QPushButton::clicked, this, &IssuesListWidget::backClicked);
     headerLayout->addWidget(backButton);
     headerLayout->addWidget(projectNameLabel = new Label());
 
-    mainLayout->addWidget(headerFrame);
+    mainLayout->addLayout(headerLayout);
 
     scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
@@ -44,7 +44,7 @@ void IssuesListWidget::updateUi() {
     projectNameLabel->setText(project.name);
 
     for (const auto &issue: project.openIssues) {
-        auto * issueWidget = new IssueWidget(issue);
+        auto * issueWidget = new IssueWidget(projectId, issue);
         scrollLayout->addWidget(issueWidget);
     }
 }

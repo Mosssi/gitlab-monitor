@@ -8,12 +8,13 @@ PushButton::PushButton(const IconType &icon, QWidget * parent) : QPushButton(get
     setStyleSheet(
             QString(
                     ".QPushButton {background-color: %1; border-radius: %2px; color: %3; font-size: %4px;}"
-                    ".QPushButton::hover {background-color: %5;}"
+                    ".QPushButton::hover {background-color: %5; color: %6;}"
             )
                     .arg("#22000000") // TODO: Find a better way
                     .arg(GuiManager::pushButtonHeight() / 2)
                     .arg(GuiManager::grayColor())
                     .arg(GuiManager::smallFontSize())
                     .arg("#33000000")
+                    .arg(GuiManager::darkGrayColor())
     );
 }

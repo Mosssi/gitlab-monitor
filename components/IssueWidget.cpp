@@ -6,7 +6,7 @@
 #include "../network/ServiceMediator.h"
 #include "library/PushButton.h"
 
-IssueWidget::IssueWidget(const Issue &issue, QWidget * parent) : QFrame(parent), issue(issue) {
+IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : QFrame(parent), issue(issue), projectId(projectId) {
 
     setupUi();
     updateUi();
@@ -28,8 +28,11 @@ void IssueWidget::setupUi() {
 
     mainLayout->addStretch();
 
-    mainLayout->addWidget(new PushButton(IconType::DONE));
-    mainLayout->addWidget(new PushButton(IconType::CLOSE));
+    auto * closeIssueButton = new PushButton(IconType::DONE);
+    connect(closeIssueButton, &PushButton::clicked, [this]() {
+        ServiceMediator::closeIssue(projectId, issue.iid, [](CALLBACK_SIGNATURE) {}); // TODO, TO-CONSIDER, TO-DECIDE!
+    });
+    mainLayout->addWidget(closeIssueButton);
 }
 
 void IssueWidget::updateUi() {
@@ -54,8 +57,3 @@ void IssueWidget::mouseReleaseEvent(QMouseEvent * event) {
     emit clicked();
 }
 
-void IssueWidget::setIssue(const Issue &issue) {
-
-    this->issue = issue;
-    updateUi();
-}

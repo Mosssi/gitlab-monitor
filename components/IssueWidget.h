@@ -11,8 +11,7 @@
 class IssueWidget : public QFrame {
 Q_OBJECT
 public:
-    explicit IssueWidget(const Issue &issue, QWidget * parent = nullptr);
-    void setIssue(const Issue &issue); // TOCONSIDER: what about setModel for all?
+    explicit IssueWidget(int projectId, const Issue &issue, QWidget * parent = nullptr);
 
 signals:
     void clicked();
@@ -25,6 +24,7 @@ private:
     void mouseReleaseEvent(QMouseEvent * event) override;
 
     Issue issue;
+    int projectId;
 
     Label * nameLabel = nullptr;
 };

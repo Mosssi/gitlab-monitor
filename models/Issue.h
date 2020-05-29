@@ -12,6 +12,7 @@ public:
     [[nodiscard]] QJsonObject getJson() const;
 
     int id = 0;
+    int iid = 0;
     QString title = "";
     QString description = "";
 };

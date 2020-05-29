@@ -16,8 +16,9 @@ private:
 
     NetworkManager();
     static NetworkManager &getInstance();
-    void post(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
     void get(const QString &url, const CallbackFunction &callback);
+    void post(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
+    void put(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
     static void processReply(QNetworkReply * reply, const CallbackFunction &callback);
 
     QNetworkAccessManager * networkAccessManager;
