@@ -6,6 +6,7 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include "library/Label.h"
+#include "IssueInputWidget.h"
 
 class IssuesListWidget : public QFrame {
 Q_OBJECT
@@ -23,6 +24,7 @@ private:
 
     int projectId = 0;
 
+    IssueInputWidget * issueInputWidget = nullptr;
     QVBoxLayout * scrollLayout = nullptr;
     Label * projectNameLabel = nullptr;
 };

@@ -4,7 +4,7 @@
 #include "ProjectWidget.h"
 #include "library/ScrollArea.h"
 
-BodyWidget::BodyWidget(QWidget * parent) : QStackedWidget(parent) {
+BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 
     setupUi();
     setStyleSheet("background-color: #ffffff;");
@@ -27,10 +27,10 @@ void BodyWidget::setupUi() {
 
 void BodyWidget::showProjectList() {
 
-    setCurrentWidget(projectsListWidget);
+    slideInIdx(0);
 }
 
 void BodyWidget::showIssuesList() {
 
-    setCurrentWidget(issuesListWidget);
+    slideInIdx(1);
 }

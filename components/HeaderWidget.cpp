@@ -8,7 +8,7 @@
 
 HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 
-    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::darkLightColor() + ";}");
+    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::lightOrangeColor() + ";}");
 
     setupUi();
 

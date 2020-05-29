@@ -4,6 +4,7 @@
 #include <QtCore/QString>
 
 enum class IconType {
+    EMPTY,
     BACK,
     DONE,
     CLOSE,

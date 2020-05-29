@@ -3,6 +3,8 @@
 QString getIconTypeString(const IconType &iconType) {
 
     switch (iconType) {
+        case IconType::EMPTY:
+            return "";
         case IconType::BACK:
             return "a";
         case IconType::DONE:

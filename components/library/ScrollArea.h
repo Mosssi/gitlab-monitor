@@ -17,8 +17,8 @@ private:
     void wheelEvent(QWheelEvent * event) override;
     void leaveEvent(QEvent * event) override;
     void enterEvent(QEvent * event) override;
+    void resizeEvent(QResizeEvent * event) override;
 
-private:
     ScrollBar * scrollBar = nullptr;
 };
 

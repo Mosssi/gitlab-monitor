@@ -22,7 +22,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::lightColor()).arg(GuiManager::darkGrayColor()));
     setupUi();
 
-    Configuration::getInstance().setToken("u-tAYr8T-MyrqhVHVD6G");
+    Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
 
     DataStore::getInstance().initialize();
 }

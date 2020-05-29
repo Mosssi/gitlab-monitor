@@ -18,6 +18,16 @@ void ProjectsListWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
+    auto * topFrame = new QFrame();
+    auto * topLayout = new QHBoxLayout(topFrame);
+    topFrame->setStyleSheet("background-color: " + GuiManager::darkLightColor() + ";");
+    topFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
+    auto * starredIssuesLabel = new Label("STARRED PROJECTS");
+    starredIssuesLabel->setColor(GuiManager::lightGrayColor());
+    topLayout->addWidget(starredIssuesLabel);
+
+    mainLayout->addWidget(topFrame);
+
     scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
     scrollLayout->setSpacing(0);

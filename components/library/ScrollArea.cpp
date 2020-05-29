@@ -26,6 +26,7 @@ void ScrollArea::wheelEvent(QWheelEvent * event) {
     const int wh = widget()->height();
 
     if (vh >= wh) {
+        scrollBar->setFixedHeight(0); // TODO: find a better way
         return;
     }
 
@@ -46,4 +47,17 @@ void ScrollArea::leaveEvent(QEvent * event) {
 
     QWidget::leaveEvent(event);
     scrollBar->setHidden();
+}
+
+void ScrollArea::resizeEvent(QResizeEvent * event) {
+
+    QScrollArea::resizeEvent(event);
+
+    const int vh = viewport()->height();
+    const int wh = widget()->height();
+
+    if (vh >= wh) {
+        scrollBar->setFixedHeight(0); // TODO: find a better way
+        return;
+    }
 }

@@ -7,7 +7,7 @@
 class GuiManager {
 public:
     static QFont applicationFont() { return QFont("Ubuntu", normalFontSize()); }
-    static QFont iconFont() { return QFont("gitlab-monitoring", normalFontSize()); }
+    static QFont iconFont() { return QFont("gitlab-monitoring", smallFontSize()); }
     constexpr static int smallFontSize() { return 12; }
     constexpr static int normalFontSize() { return 14; }
     constexpr static int largeFontSize() { return 15; }
@@ -19,6 +19,7 @@ public:
     constexpr static int projectHeight() { return 55; }
     constexpr static int issueHeight() { return 55; }
     constexpr static int pushButtonHeight() { return 24; }
+    constexpr static int bodyHeaderHeight() { return 40; }
 
     static QString darkGrayColor() { return "#2e2e2e"; }
     static QString grayColor() { return "#4a4a4a"; }

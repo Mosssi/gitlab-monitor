@@ -17,6 +17,7 @@ void ProjectWidget::setupUi() {
     setStyleSheet("background-color: #ffffff;");
 
     auto * mainLayout = new QHBoxLayout(this);
+    mainLayout->setContentsMargins(10, 10, 20, 10);
 
     auto * projectDetailsLayout = new QVBoxLayout();
     projectDetailsLayout->setSpacing(0);
@@ -33,6 +34,7 @@ void ProjectWidget::setupUi() {
     mainLayout->addStretch();
 
     mainLayout->addWidget(openIssuesCountLabel = new Label());
+    openIssuesCountLabel->setColor(GuiManager::grayColor());
 }
 
 void ProjectWidget::updateUi() {

@@ -61,6 +61,6 @@ add_executable(gitlab_desktop_monitor
         components/library/PushButton.h
         components/library/IconType.cpp
         components/library/IconType.h
-)
+        components/library/SlidingStackedWidget.cpp components/library/SlidingStackedWidget.h components/IssueInputWidget.cpp components/IssueInputWidget.h components/library/LineEdit.cpp components/library/LineEdit.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

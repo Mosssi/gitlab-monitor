@@ -73,3 +73,11 @@ void ServiceMediator::closeIssue(int projectId, int issueId, const CallbackFunct
             callback
     );
 }
+
+void ServiceMediator::createIssue(int projectId, const QString &title, const CallbackFunction &callback) {
+    NetworkManager::getInstance().post(
+            getUrl(QString("/projects/%1/issues").arg(projectId), {{"title", title}}),
+            {},
+            callback
+    );
+}

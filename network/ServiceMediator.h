@@ -13,6 +13,7 @@ public:
     static void unStarProject(int projectId, const CallbackFunction &callback);
     static void requestProjectOpenIssues(int projectId, const CallbackFunction &callback);
     static void closeIssue(int projectId, int issueId, const CallbackFunction &callback);
+    static void createIssue(int projectId, const QString &title, const CallbackFunction &callback);
 
 private:
     ServiceMediator() = default;

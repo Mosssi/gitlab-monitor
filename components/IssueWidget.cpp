@@ -28,7 +28,7 @@ void IssueWidget::setupUi() {
 
     mainLayout->addStretch();
 
-    auto * closeIssueButton = new PushButton(IconType::DONE);
+    auto * closeIssueButton = new PushButton(IconType::DONE, true);
     connect(closeIssueButton, &PushButton::clicked, [this]() {
         ServiceMediator::closeIssue(projectId, issue.iid, [](CALLBACK_SIGNATURE) {}); // TODO, TO-CONSIDER, TO-DECIDE!
     });

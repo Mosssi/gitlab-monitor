@@ -4,12 +4,12 @@
 
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QStackedWidget>
 
 #include "ProjectsListWidget.h"
 #include "IssuesListWidget.h"
+#include "library/SlidingStackedWidget.h"
 
-class BodyWidget : public QStackedWidget {
+class BodyWidget : public SlidingStackedWidget {
 public:
     explicit BodyWidget(QWidget * parent = nullptr);
 

@@ -30,6 +30,8 @@ void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
 
 void NetworkManager::post(const QString &url, const QJsonObject &body, const CallbackFunction &callback) {
 
+    qDebug() << url;
+
     if (Configuration::getInstance().getToken().isEmpty()) {
         return;
     }

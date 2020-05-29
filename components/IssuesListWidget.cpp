@@ -17,15 +17,30 @@ void IssuesListWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    auto * headerLayout = new QHBoxLayout();
-    headerLayout->setContentsMargins(10, 10, 10, 10);
-    headerLayout->setSpacing(10);
+    auto * headerFrame = new QFrame();
+    headerFrame->setStyleSheet("background-color: " + GuiManager::darkLightColor() + ";");
+    headerFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
+    auto * headerLayout = new QHBoxLayout(headerFrame);
     auto * backButton = new PushButton(IconType::BACK);
-    connect(backButton, &QPushButton::clicked, this, &IssuesListWidget::backClicked);
+    connect(backButton, &PushButton::clicked, [this]() {
+        issueInputWidget->setVisible(false);
+        emit backClicked();
+    });
     headerLayout->addWidget(backButton);
     headerLayout->addWidget(projectNameLabel = new Label());
+    auto * createIssueButton = new PushButton(IconType::NEW);
+    headerLayout->addStretch();
+    headerLayout->addWidget(createIssueButton);
+    connect(createIssueButton, &PushButton::clicked, [this]() {
+        issueInputWidget->setVisible(true);
+        issueInputWidget->setProjectId(projectId);
+    });
+    projectNameLabel->setColor(GuiManager::lightGrayColor());
 
-    mainLayout->addLayout(headerLayout);
+    mainLayout->addWidget(headerFrame);
+
+    mainLayout->addWidget(issueInputWidget = new IssueInputWidget());
+    issueInputWidget->setVisible(false);
 
     scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
@@ -41,7 +56,7 @@ void IssuesListWidget::updateUi() {
 
     const auto &project = DataStore::getInstance().getProject(projectId);
 
-    projectNameLabel->setText(project.name);
+    projectNameLabel->setText(project.name.toUpper());
 
     for (const auto &issue: project.openIssues) {
         auto * issueWidget = new IssueWidget(projectId, issue);
@@ -63,7 +78,7 @@ void IssuesListWidget::setProjectId(int projectId) {
 
 void IssuesListWidget::emptyScrollLayout() {
 
-    QLayoutItem *child;
+    QLayoutItem * child;
     while ((child = scrollLayout->takeAt(0)) != nullptr) {
         delete child->widget();
         delete child;
