@@ -28,19 +28,9 @@ void IssueInputWidget::setupUi() {
     mainLayout->addWidget(cancelButton);
     mainLayout->addWidget(createButton);
 
-    connect(cancelButton, &PushButton::clicked, [this]() {
-        setVisible(false);
-        issueTitleInput->clear();
-    });
+    connect(cancelButton, &PushButton::clicked, this, &IssueInputWidget::cancelled);
 
-    connect(createButton, &PushButton::clicked, [this]() {
-        ServiceMediator::createIssue(projectId, issueTitleInput->text(), [this](CALLBACK_SIGNATURE) {
-            if (status == ResponseStatus::SUCCESSFUL) {
-                setVisible(false);
-                issueTitleInput->clear();
-            }
-        });
-    });
+    connect(createButton, &PushButton::clicked, [this]() { emit submitted(issueTitleInput->text()); });
 }
 
 void IssueInputWidget::clearInput() {

@@ -7,10 +7,15 @@
 #include "library/LineEdit.h"
 
 class IssueInputWidget : public QFrame {
+Q_OBJECT
 public:
     explicit IssueInputWidget();
     void setProjectId(int projectId);
     void clearInput();
+
+signals:
+    void cancelled();
+    void submitted(const QString &issueTitle);
 
 private:
     void setupUi();

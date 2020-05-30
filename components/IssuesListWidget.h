@@ -21,6 +21,9 @@ private:
     void setupUi();
     void updateUi();
     void emptyScrollLayout();
+    void showIssueInputWidget();
+    void hideIssueInputWidget();
+    void requestIssueCreation(const QString &issueTitle);
 
     int projectId = 0;
 

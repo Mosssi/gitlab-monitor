@@ -15,6 +15,7 @@ public:
 
 signals:
     void clicked();
+    void closed();
 
 private:
     void setupUi();
