@@ -4,15 +4,24 @@
 
 const int scrollBarWidth = 5;
 const int maxOpacity = 150;
+const int hideDelay = 1000;
 
 ScrollBar::ScrollBar(int height, QWidget * parent) : QWidget(parent) {
 
     setFixedWidth(scrollBarWidth);
     setFixedHeight(height);
 
-//    showHideTimer = new QTimer(this);
-//    showHideTimer->setInterval(25);
-//    connect(showHideTimer, &QTimer::timeout, this, &ScrollBar::updateOpacity);
+    showHideTimer = new QTimer(this);
+    showHideTimer->setInterval(25);
+    connect(showHideTimer, &QTimer::timeout, this, &ScrollBar::updateOpacity);
+
+    hideDelayTimer = new QTimer(this);
+    hideDelayTimer->setInterval(hideDelay);
+    hideDelayTimer->setSingleShot(true);
+    connect(hideDelayTimer, &QTimer::timeout, [this]() {
+        shown = false;
+        showHideTimer->start();
+    });
 }
 
 void ScrollBar::paintEvent(QPaintEvent * event) {
@@ -23,21 +32,21 @@ void ScrollBar::paintEvent(QPaintEvent * event) {
     QPainterPath path;
     path.addRoundRect(0, 0, scrollBarWidth, height(), 100);
 
-    painter.fillPath(path, QBrush(QColor(100, 100, 100, maxOpacity/*currentOpacity*/)));
+    painter.fillPath(path, QBrush(QColor(100, 100, 100, currentOpacity)));
 }
 
 void ScrollBar::setShown() {
 
+    hideDelayTimer->stop();
     shown = true;
-//    showHideTimer->start();
+    showHideTimer->start();
 }
 
 void ScrollBar::setHidden() {
 
-    QTimer::singleShot(1000, [this]() {
-        shown = false;
-//        showHideTimer->start();
-    });
+    if (preDragValue == -1) {
+        hideDelayTimer->start();
+    }
 }
 
 void ScrollBar::updateOpacity() {
@@ -68,3 +77,23 @@ void ScrollBar::leaveEvent(QEvent * event) {
     currentOpacity = maxOpacity;
     update();
 }
+
+void ScrollBar::mousePressEvent(QMouseEvent * event) {
+
+    preDragValue = QCursor::pos().y();
+}
+
+void ScrollBar::mouseReleaseEvent(QMouseEvent * event) {
+
+    preDragValue = -1;
+    if (!underMouse()) {
+        hideDelayTimer->start();
+    }
+}
+
+void ScrollBar::mouseMoveEvent(QMouseEvent * event) {
+
+    emit dragged(QCursor::pos().y() - preDragValue);
+    preDragValue = QCursor::pos().y();
+}
+

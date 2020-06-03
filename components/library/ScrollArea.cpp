@@ -16,25 +16,13 @@ ScrollArea::ScrollArea(QLayout * layout) : QScrollArea() {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     scrollBar = new ScrollBar(0, this);
+    connect(scrollBar, &ScrollBar::dragged, this, &ScrollArea::scrollBarDrag);
 }
 
 void ScrollArea::wheelEvent(QWheelEvent * event) {
 
     QScrollArea::wheelEvent(event);
-
-    const int vh = viewport()->height();
-    const int wh = widget()->height();
-
-    if (vh >= wh) {
-        scrollBar->setFixedHeight(0); // TODO: find a better way
-        return;
-    }
-
-    const int sh = vh * (vh - 2 * scrollBarMargin) / wh;
-    const int yp = scrollBarMargin + verticalScrollBar()->value() * (vh - sh - 2 * scrollBarMargin) / (wh - vh);
-
-    scrollBar->setFixedHeight(sh);
-    scrollBar->move(width() - scrollBar->width() - scrollBarMargin, yp);
+    updateScrollBarPosition();
 }
 
 void ScrollArea::enterEvent(QEvent * event) {
@@ -52,12 +40,33 @@ void ScrollArea::leaveEvent(QEvent * event) {
 void ScrollArea::resizeEvent(QResizeEvent * event) {
 
     QScrollArea::resizeEvent(event);
+    updateScrollBarPosition();
+}
+
+void ScrollArea::scrollBarDrag(int diff) {
+
+    const int vh = viewport()->height();
+    const int wh = widget()->height();
+
+    verticalScrollBar()->setValue(
+            verticalScrollBar()->value() + diff * wh / vh
+    );
+    updateScrollBarPosition();
+}
+
+void ScrollArea::updateScrollBarPosition() {
 
     const int vh = viewport()->height();
     const int wh = widget()->height();
 
     if (vh >= wh) {
-        scrollBar->setFixedHeight(0); // TODO: find a better way
+        scrollBar->setFixedHeight(0);
         return;
     }
+
+    const int sh = vh * (vh - 2 * scrollBarMargin) / wh;
+    const int yp = scrollBarMargin + verticalScrollBar()->value() * (vh - sh - 2 * scrollBarMargin) / (wh - vh);
+
+    scrollBar->setFixedHeight(sh);
+    scrollBar->move(width() - scrollBar->width() - scrollBarMargin, yp);
 }

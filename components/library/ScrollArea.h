@@ -18,6 +18,8 @@ private:
     void leaveEvent(QEvent * event) override;
     void enterEvent(QEvent * event) override;
     void resizeEvent(QResizeEvent * event) override;
+    void scrollBarDrag(int diff);
+    void updateScrollBarPosition();
 
     ScrollBar * scrollBar = nullptr;
 };

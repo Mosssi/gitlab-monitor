@@ -19,22 +19,32 @@ add_executable(gitlab_desktop_monitor
         components/BodyWidget.h
         components/HeaderWidget.cpp
         components/HeaderWidget.h
+        components/IssueInputWidget.cpp
+        components/IssueInputWidget.h
+        components/IssueWidget.cpp
+        components/IssueWidget.h
         components/IssuesListWidget.cpp
         components/IssuesListWidget.h
         components/ProjectWidget.cpp
         components/ProjectWidget.h
-        components/IssueWidget.cpp
-        components/IssueWidget.h
         components/ProjectsListWidget.cpp
         components/ProjectsListWidget.h
         components/SystemTrayIcon.cpp
         components/SystemTrayIcon.h
+        components/library/IconType.cpp
+        components/library/IconType.h
         components/library/Label.cpp
         components/library/Label.h
+        components/library/LineEdit.cpp
+        components/library/LineEdit.h
+        components/library/PushButton.cpp
+        components/library/PushButton.h
         components/library/ScrollArea.cpp
         components/library/ScrollArea.h
         components/library/ScrollBar.cpp
         components/library/ScrollBar.h
+        components/library/SlidingStackedWidget.cpp
+        components/library/SlidingStackedWidget.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
@@ -57,10 +67,6 @@ add_executable(gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
-        components/library/PushButton.cpp
-        components/library/PushButton.h
-        components/library/IconType.cpp
-        components/library/IconType.h
-        components/library/SlidingStackedWidget.cpp components/library/SlidingStackedWidget.h components/IssueInputWidget.cpp components/IssueInputWidget.h components/library/LineEdit.cpp components/library/LineEdit.h)
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
