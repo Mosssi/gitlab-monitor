@@ -7,15 +7,20 @@
 
 class ScrollBar : public QWidget {
 Q_OBJECT
-public:
-    ScrollBar(int height, QWidget * parent);
-    void setShown();
-    void setHidden();
-
 signals:
     void dragged(int diff);
 
 private:
+    friend class ScrollArea;
+
+    enum class Orientation {
+        Horizontal,
+        Vertical,
+    };
+
+    ScrollBar(Orientation orientation, int thickness, QWidget * parent);
+    void setShown();
+    void setHidden();
     void paintEvent(QPaintEvent * event) override;
     void updateOpacity();
     void enterEvent(QEvent * event) override;
@@ -27,6 +32,8 @@ private:
     bool shown = true;
     int currentOpacity = 0;
     int preDragValue = -1;
+    int thickness = 0;
+    Orientation orientation;
 
     QTimer * showHideTimer = nullptr;
     QTimer * hideDelayTimer = nullptr;

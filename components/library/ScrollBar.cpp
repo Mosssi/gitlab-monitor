@@ -2,14 +2,16 @@
 
 #include <QPainter>
 
-const int scrollBarWidth = 5;
 const int maxOpacity = 150;
 const int hideDelay = 1000;
 
-ScrollBar::ScrollBar(int height, QWidget * parent) : QWidget(parent) {
+ScrollBar::ScrollBar(Orientation orientation, int thickness, QWidget * parent) : QWidget(parent), orientation(orientation), thickness(thickness) {
 
-    setFixedWidth(scrollBarWidth);
-    setFixedHeight(height);
+    if (orientation == Orientation::Vertical) {
+        setFixedWidth(thickness);
+    } else {
+        setFixedHeight(thickness);
+    }
 
     showHideTimer = new QTimer(this);
     showHideTimer->setInterval(25);
@@ -30,7 +32,11 @@ void ScrollBar::paintEvent(QPaintEvent * event) {
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
     QPainterPath path;
-    path.addRoundRect(0, 0, scrollBarWidth, height(), 100);
+    if (orientation == Orientation::Vertical) {
+        path.addRoundRect(0, 0, thickness, height(), 100);
+    } else {
+        path.addRoundRect(0, 0, width(), thickness, 100);
+    }
 
     painter.fillPath(path, QBrush(QColor(100, 100, 100, currentOpacity)));
 }
@@ -80,7 +86,11 @@ void ScrollBar::leaveEvent(QEvent * event) {
 
 void ScrollBar::mousePressEvent(QMouseEvent * event) {
 
-    preDragValue = QCursor::pos().y();
+    if (orientation == Orientation::Vertical) {
+        preDragValue = QCursor::pos().y();
+    } else {
+        preDragValue = QCursor::pos().x();
+    }
 }
 
 void ScrollBar::mouseReleaseEvent(QMouseEvent * event) {
@@ -93,7 +103,11 @@ void ScrollBar::mouseReleaseEvent(QMouseEvent * event) {
 
 void ScrollBar::mouseMoveEvent(QMouseEvent * event) {
 
-    emit dragged(QCursor::pos().y() - preDragValue);
-    preDragValue = QCursor::pos().y();
+    if (orientation == Orientation::Vertical) {
+        emit dragged(QCursor::pos().y() - preDragValue);
+        preDragValue = QCursor::pos().y();
+    } else {
+        emit dragged(QCursor::pos().x() - preDragValue);
+        preDragValue = QCursor::pos().x();
+    }
 }
-

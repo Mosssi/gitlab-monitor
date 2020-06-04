@@ -3,8 +3,6 @@
 
 
 #include <QtWidgets/QScrollArea>
-#include <QtGui/QScrollEvent>
-#include <QTimer>
 #include <QtWidgets/QLayout>
 
 #include "ScrollBar.h"
@@ -18,10 +16,13 @@ private:
     void leaveEvent(QEvent * event) override;
     void enterEvent(QEvent * event) override;
     void resizeEvent(QResizeEvent * event) override;
-    void scrollBarDrag(int diff);
-    void updateScrollBarPosition();
+    void vScrollBarDrag(int diff);
+    void hScrollBarDrag(int diff);
+    void updateVScrollBarPosition();
+    void updateHScrollBarPosition();
 
-    ScrollBar * scrollBar = nullptr;
+    ScrollBar * vScrollBar = nullptr;
+    ScrollBar * hScrollBar = nullptr;
 };
 
 
