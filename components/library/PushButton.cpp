@@ -1,5 +1,6 @@
 #include "PushButton.h"
 
+#include <QKeyEvent>
 #include <QPainter>
 #include <QTimer>
 
@@ -12,6 +13,7 @@ PushButton::PushButton(const IconType &icon, bool confirmRequired) : QWidget(nul
 
     setFixedSize(GuiManager::pushButtonHeight(), GuiManager::pushButtonHeight());
     setFont(GuiManager::iconFont());
+    setFocusPolicy(Qt::TabFocus);
 }
 
 void PushButton::paintEvent(QPaintEvent * event) {
@@ -87,4 +89,20 @@ void PushButton::leaveEvent(QEvent *) {
 
     hovered = false;
     update();
+}
+
+void PushButton::keyPressEvent(QKeyEvent * event) {
+
+    QWidget::keyPressEvent(event);
+    if (event->key() == Qt::Key_Space) {
+        mousePressEvent(nullptr);
+    }
+}
+
+void PushButton::keyReleaseEvent(QKeyEvent * event) {
+
+    QWidget::keyReleaseEvent(event);
+    if (event->key() == Qt::Key_Space) {
+        mouseReleaseEvent(nullptr);
+    }
 }
