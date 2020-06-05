@@ -15,6 +15,7 @@ IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : 
 void IssueWidget::setupUi() {
 
     setFixedHeight(GuiManager::issueHeight());
+    setFixedWidth(GuiManager::applicationWidth());
     setStyleSheet("background-color: #ffffff;");
 
     auto * mainLayout = new QHBoxLayout(this);
@@ -29,9 +30,7 @@ void IssueWidget::setupUi() {
     mainLayout->addStretch();
 
     auto * closeIssueButton = new PushButton(IconType::DONE, true);
-    connect(closeIssueButton, &PushButton::clicked, [this]() {
-        ServiceMediator::closeIssue(projectId, issue.iid, [](CALLBACK_SIGNATURE) {}); // TODO, TO-CONSIDER, TO-DECIDE!
-    });
+    connect(closeIssueButton, &PushButton::clicked, this, &IssueWidget::closed);
     mainLayout->addWidget(closeIssueButton);
 }
 

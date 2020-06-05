@@ -43,6 +43,13 @@ void ServiceMediator::requestProjects(const CallbackFunction &callback) {
     );
 }
 
+void ServiceMediator::requestProject(int projectId, const CallbackFunction &callback) {
+    NetworkManager::getInstance().get(
+            getUrl(QString("/project/%1").arg(projectId)),
+            callback
+    );
+}
+
 void ServiceMediator::starProject(int projectId, const CallbackFunction &callback) {
     NetworkManager::getInstance().post(
             getUrl(QString("/projects/%1/star").arg(projectId)),

@@ -17,7 +17,7 @@ public:
     [[nodiscard]] Project getProject(int projectId) const;
     [[nodiscard]] QList<Project> getProjects() const;
     void updateProject(const Project &project);
-    void getProjectOpenIssues(int projectId);
+    void refreshProjectOpenIssues(int projectId);
     // TO-CONSIDER: I don't like the difference between ways of calling and using these functions
 
 signals:

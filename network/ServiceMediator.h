@@ -9,6 +9,7 @@ class ServiceMediator {
 public:
     static void requestUser(const CallbackFunction &callback);
     static void requestProjects(const CallbackFunction &callback);
+    static void requestProject(int projectId, const CallbackFunction &callback);
     static void starProject(int projectId, const CallbackFunction &callback);
     static void unStarProject(int projectId, const CallbackFunction &callback);
     static void requestProjectOpenIssues(int projectId, const CallbackFunction &callback);

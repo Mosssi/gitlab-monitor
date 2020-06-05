@@ -60,7 +60,7 @@ void DataStore::updateProject(const Project &project) {
     projects.insert(project.id, project);
 }
 
-void DataStore::getProjectOpenIssues(int projectId) {
+void DataStore::refreshProjectOpenIssues(int projectId) {
 
     ServiceMediator::requestProjectOpenIssues(projectId, [this, projectId](CALLBACK_SIGNATURE) {
         QList<Issue> projectOpenIssues;
