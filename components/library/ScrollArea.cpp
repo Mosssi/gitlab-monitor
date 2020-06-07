@@ -21,6 +21,9 @@ ScrollArea::ScrollArea(QLayout * layout) : QScrollArea() {
 
     hScrollBar = new ScrollBar(ScrollBar::Orientation::Horizontal, scrollBarWidth, this);
     connect(hScrollBar, &ScrollBar::dragged, this, &ScrollArea::hScrollBarDrag);
+
+    connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &ScrollArea::updateVScrollBarPosition);
+    connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &ScrollArea::updateHScrollBarPosition);
 }
 
 void ScrollArea::wheelEvent(QWheelEvent * event) {
