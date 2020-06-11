@@ -3,6 +3,8 @@
 
 #include <QtCore/QJsonObject>
 #include <QtCore/QObject>
+#include <QtCore/QDateTime>
+
 #include "Issue.h"
 
 class Project {
@@ -18,6 +20,7 @@ public:
     QString description = "";
     bool starred = false;
     int openIssuesCount = 0;
+    QDateTime lastActivity = QDateTime::currentDateTime();
     QList<Issue> openIssues = {};
 };
 

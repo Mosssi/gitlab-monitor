@@ -7,6 +7,7 @@ Project::Project(const QJsonObject &jsonObject) {
     description = jsonObject.value("description").toString();
     starred = jsonObject.value("star_count").toInt() > 0;
     openIssuesCount = jsonObject.value("open_issues_count").toInt();
+    lastActivity = QDateTime::fromString(jsonObject.value("last_activity_at").toString(), Qt::ISODate);
 }
 
 QJsonObject Project::getJson() const {
