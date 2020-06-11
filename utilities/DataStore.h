@@ -5,7 +5,6 @@
 
 #include "../models/User.h"
 #include "../models/Project.h"
-#include "../models/Group.h"
 
 class DataStore : public QObject {
 Q_OBJECT

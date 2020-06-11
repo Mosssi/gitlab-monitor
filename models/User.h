@@ -5,14 +5,13 @@
 
 #include "BaseModel.h"
 
-class User {
+class User : public BaseModel {
 public:
     User() = default;
     explicit User(const QJsonObject &jsonObject);
 
-    [[nodiscard]] QJsonObject getJson() const;
+    [[nodiscard]] QJsonObject getJson() const override;
 
-    int id = 0;
     QString username = "";
     QString name = "";
 };

@@ -27,6 +27,7 @@ public:
     static QString lightColor() { return "#f0f0f0"; }
     static QString darkLightColor() { return "#e5e5e5"; }
     static QString darkerLightColor() { return "#d0d0d0"; }
+    static QString evenDarkerLightColor() { return "#a0a0a0"; }
 
     static QString lightOrangeColor() { return "#fca121"; }
     static QString orangeColor() { return "#fc6d26"; }

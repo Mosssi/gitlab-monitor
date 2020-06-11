@@ -1,8 +1,7 @@
 #include "Project.h"
 
-Project::Project(const QJsonObject &jsonObject) {
+Project::Project(const QJsonObject &jsonObject) : BaseModel(jsonObject) {
 
-    id = jsonObject.value("id").toInt();
     name = jsonObject.value("name").toString();
     description = jsonObject.value("description").toString();
     starred = jsonObject.value("star_count").toInt() > 0;
@@ -13,10 +12,10 @@ Project::Project(const QJsonObject &jsonObject) {
 QJsonObject Project::getJson() const {
 
     return QJsonObject{
-            {"id",              id},
-            {"name",            name},
-            {"description",     description},
-            {"starred",         starred},
+            BASE_MODEL_JSON,
+            {"name", name},
+            {"description", description},
+            {"starred", starred},
             {"openIssuesCount", openIssuesCount}
     };
 }

@@ -1,10 +1,7 @@
 #include "Issue.h"
 
-#include <QDebug>
+Issue::Issue(const QJsonObject &jsonObject) : BaseModel(jsonObject) {
 
-Issue::Issue(const QJsonObject &jsonObject) {
-
-    id = jsonObject.value("id").toInt();
     iid = jsonObject.value("iid").toInt();
     title = jsonObject.value("title").toString();
     description = jsonObject.value("description").toString();
@@ -13,9 +10,9 @@ Issue::Issue(const QJsonObject &jsonObject) {
 QJsonObject Issue::getJson() const {
 
     return QJsonObject{
-            {"id",          id},
-            {"iid",         iid},
-            {"title",       title},
+            BASE_MODEL_JSON,
+            {"iid", iid},
+            {"title", title},
             {"description", description}
     };
 }

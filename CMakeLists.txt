@@ -48,7 +48,6 @@ add_executable(gitlab_desktop_monitor
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
-        models/Group.cpp models/Group.h
         models/Issue.cpp
         models/Issue.h
         models/Project.cpp

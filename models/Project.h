@@ -5,17 +5,17 @@
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
 
+#include "BaseModel.h"
 #include "Issue.h"
 
-class Project {
+class Project : public BaseModel {
 public:
     Project() = default;
     explicit Project(const QJsonObject &jsonObject);
     void setOpenIssues(const QList<Issue> &openIssues);
 
-    [[nodiscard]] QJsonObject getJson() const;
+    [[nodiscard]] QJsonObject getJson() const override;
 
-    int id = 0;
     QString name = "";
     QString description = "";
     bool starred = false;

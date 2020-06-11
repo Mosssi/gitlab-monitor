@@ -1,8 +1,7 @@
 #include "User.h"
 
-User::User(const QJsonObject &jsonObject) {
+User::User(const QJsonObject &jsonObject) : BaseModel(jsonObject) {
 
-    id = jsonObject.value("id").toInt();
     username = jsonObject.value("username").toString();
     name = jsonObject.value("name").toString();
 }
@@ -10,7 +9,7 @@ User::User(const QJsonObject &jsonObject) {
 QJsonObject User::getJson() const {
 
     return QJsonObject{
-            {"id",       id},
+            BASE_MODEL_JSON,
             {"username", username},
             {"name",     name}
     };

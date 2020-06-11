@@ -4,14 +4,15 @@
 
 #include <QtCore/QJsonObject>
 
-class Issue {
+#include "BaseModel.h"
+
+class Issue : public BaseModel {
 public:
     Issue() = default;
     explicit Issue(const QJsonObject &jsonObject);
 
-    [[nodiscard]] QJsonObject getJson() const;
+    [[nodiscard]] QJsonObject getJson() const override;
 
-    int id = 0;
     int iid = 0;
     QString title = "";
     QString description = "";

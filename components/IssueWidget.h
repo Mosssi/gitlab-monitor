@@ -28,6 +28,7 @@ private:
     int projectId;
 
     Label * nameLabel = nullptr;
+    Label * iidLabel = nullptr;
 };
 
 
