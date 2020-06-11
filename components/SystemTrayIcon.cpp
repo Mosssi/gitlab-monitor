@@ -1,9 +1,22 @@
 #include "SystemTrayIcon.h"
 
-SystemTrayIcon::SystemTrayIcon(QObject * parent) : QSystemTrayIcon(parent) {
+#define ENABLED_ICON ":/images/icon.png"
+#define DISABLED_ICON ":/images/gray-icon.png"
+
+SystemTrayIcon &SystemTrayIcon::getInstance() {
+
+    static SystemTrayIcon instance;
+    return instance;
+}
+
+SystemTrayIcon::SystemTrayIcon() : QSystemTrayIcon() {
 
     connect(this, &QSystemTrayIcon::activated, this, &SystemTrayIcon::clicked);
-
-    setIcon(QIcon(":/images/icon.png"));
+    setEnabled(true);
     show();
+}
+
+void SystemTrayIcon::setEnabled(bool enabled) {
+
+    setIcon(QIcon(enabled ? ENABLED_ICON : DISABLED_ICON));
 }

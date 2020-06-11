@@ -13,8 +13,6 @@ public:
 private:
     void setupTrayIcon();
     void setupUi();
-
-    SystemTrayIcon * systemTrayIcon = nullptr;
 };
 
 

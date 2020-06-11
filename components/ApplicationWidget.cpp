@@ -1,18 +1,18 @@
 #include "ApplicationWidget.h"
 
 #include <QApplication>
+#include <QJsonArray>
 #include <QScreen>
 #include <QtWidgets/QVBoxLayout>
-#include <QJsonArray>
 
+#include "../models/Project.h"
+#include "../models/User.h"
 #include "../network/ServiceMediator.h"
 #include "../utilities/Configuration.h"
-#include "../models/User.h"
-#include "../models/Project.h"
-#include "../utilities/GuiManager.h"
 #include "../utilities/DataStore.h"
-#include "HeaderWidget.h"
+#include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
+#include "HeaderWidget.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
@@ -29,8 +29,9 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
 void ApplicationWidget::setupTrayIcon() {
 
-    systemTrayIcon = new SystemTrayIcon(this);
-    connect(systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
+    auto &systemTrayIcon = SystemTrayIcon::getInstance();
+    systemTrayIcon.setParent(this);
+    connect(&systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
         move(
                 QCursor::pos().x() - GuiManager::applicationWidth() / 2,
                 QApplication::primaryScreen()->availableSize().height() - GuiManager::applicationHeight()

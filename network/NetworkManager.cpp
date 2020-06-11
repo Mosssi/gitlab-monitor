@@ -4,6 +4,7 @@
 #include <QJsonArray>
 
 #include "../utilities/Configuration.h"
+#include "../components/SystemTrayIcon.h"
 
 NetworkManager::NetworkManager() {
 
@@ -65,8 +66,11 @@ void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction 
     if (reply->error() != QNetworkReply::NetworkError::NoError) {
         callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);
         reply->deleteLater();
+        SystemTrayIcon::getInstance().setEnabled(false);
         return;
     }
+
+    SystemTrayIcon::getInstance().setEnabled(true);
 
     QJsonValue jsonValue;
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
