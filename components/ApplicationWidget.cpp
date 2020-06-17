@@ -32,10 +32,17 @@ void ApplicationWidget::setupTrayIcon() {
     auto &systemTrayIcon = SystemTrayIcon::getInstance();
     systemTrayIcon.setParent(this);
     connect(&systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
-        move(
-                QCursor::pos().x() - GuiManager::applicationWidth() / 2,
-                QApplication::primaryScreen()->availableSize().height() - GuiManager::applicationHeight()
+        const QPoint &cursorPosition = QCursor::pos();
+        const QRect &screenGeometry = QApplication::primaryScreen()->availableGeometry();
+        int x = qMin(
+                cursorPosition.x() - GuiManager::applicationWidth() / 2,
+                screenGeometry.width() - GuiManager::applicationWidth()
         );
+        int y = screenGeometry.y();
+        if (cursorPosition.y() > screenGeometry.height() / 2) {
+            y = screenGeometry.height() - GuiManager::applicationHeight();
+        }
+        move(x, y);
         this->setVisible(!this->isVisible());
     });
 }
