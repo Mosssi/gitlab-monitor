@@ -9,6 +9,8 @@ ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : QFrame(parent), 
 
     setupUi();
     updateUi();
+
+    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &ProjectWidget::updateUi);
 }
 
 void ProjectWidget::setupUi() {
