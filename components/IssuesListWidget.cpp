@@ -61,7 +61,9 @@ void IssuesListWidget::updateUi() {
     for (const auto &issue: project.openIssues) {
         auto * issueWidget = new IssueWidget(projectId, issue);
         connect(issueWidget, &IssueWidget::closed, [this, issue]() {
-            ServiceMediator::closeIssue(projectId, issue.iid, [](CALLBACK_SIGNATURE) {});
+            ServiceMediator::closeIssue(projectId, issue.iid, [this](CALLBACK_SIGNATURE) {
+                DataStore::getInstance().refreshProjectOpenIssues(projectId);
+            });
         });
         scrollLayout->addWidget(issueWidget);
     }
@@ -76,6 +78,7 @@ void IssuesListWidget::setProjectId(int projectId) {
 
     DataStore::getInstance().refreshProjectOpenIssues(projectId);
 
+    // TODO: This is not a good place for this connection, is it?!
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
 }
 

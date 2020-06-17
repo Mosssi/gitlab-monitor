@@ -3,6 +3,7 @@
 
 
 #include <QtWidgets/QWidget>
+#include <QTimer>
 
 #include "IconType.h"
 
@@ -10,6 +11,7 @@ class PushButton : public QWidget {
 Q_OBJECT
 public:
     explicit PushButton(const IconType &icon, bool confirmRequired = false);
+    ~PushButton() override;
 
 signals:
     void clicked();
@@ -29,6 +31,8 @@ private:
     bool hovered = false;
     bool pressed = false;
     bool confirming = false;
+
+    QTimer * confirmTimer = nullptr;
 };
 
 

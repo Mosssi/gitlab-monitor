@@ -2,7 +2,6 @@
 
 #include <QKeyEvent>
 #include <QPainter>
-#include <QTimer>
 
 #include "../../utilities/GuiManager.h"
 
@@ -14,6 +13,18 @@ PushButton::PushButton(const IconType &icon, bool confirmRequired) : QWidget(nul
     setFixedSize(GuiManager::pushButtonHeight(), GuiManager::pushButtonHeight());
     setFont(GuiManager::iconFont());
     setFocusPolicy(Qt::TabFocus);
+
+    confirmTimer = new QTimer(this);
+    confirmTimer->setSingleShot(true);
+    confirmTimer->setInterval(CONFIRM_DURATION);
+    connect(confirmTimer, &QTimer::timeout, [this]() {
+        confirming = false;
+        update();
+    });
+}
+
+PushButton::~PushButton() {
+
 }
 
 void PushButton::paintEvent(QPaintEvent * event) {
@@ -68,10 +79,7 @@ void PushButton::mouseReleaseEvent(QMouseEvent *) {
         }
         confirming = !confirming;
         if (confirming) {
-            QTimer::singleShot(CONFIRM_DURATION, [this]() {
-                confirming = false;
-                update();
-            });
+            confirmTimer->start();
         }
     } else {
         emit clicked();
