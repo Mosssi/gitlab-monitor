@@ -52,24 +52,6 @@ void ProjectWidget::updateUi() {
     openIssuesCountLabel->setText(QString::number(project.openIssuesCount));
 }
 
-void ProjectWidget::toggleProjectStar() {
-
-    const Project &project = DataStore::getInstance().getProject(projectId);
-
-    const auto updateContent = [this](CALLBACK_SIGNATURE) {
-        if (status == ResponseStatus::SUCCESSFUL) {
-            DataStore::getInstance().updateProject(Project(jsonValue.toObject()));
-            updateUi();
-        }
-    };
-
-    if (project.starred) {
-        ServiceMediator::starProject(projectId, updateContent);
-    } else {
-        ServiceMediator::unStarProject(projectId, updateContent);
-    }
-}
-
 void ProjectWidget::enterEvent(QEvent * event) {
 
     setStyleSheet("background-color: #f7f7f7;");

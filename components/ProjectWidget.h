@@ -19,7 +19,6 @@ signals:
 private:
     void setupUi();
     void updateUi();
-    void toggleProjectStar();
     void enterEvent(QEvent * event) override;
     void leaveEvent(QEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;

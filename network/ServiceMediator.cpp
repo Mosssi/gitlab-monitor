@@ -50,22 +50,6 @@ void ServiceMediator::requestProject(int projectId, const CallbackFunction &call
     );
 }
 
-void ServiceMediator::starProject(int projectId, const CallbackFunction &callback) {
-    NetworkManager::getInstance().post(
-            getUrl(QString("/projects/%1/star").arg(projectId)),
-            {},
-            callback
-    );
-}
-
-void ServiceMediator::unStarProject(int projectId, const CallbackFunction &callback) {
-    NetworkManager::getInstance().post(
-            getUrl(QString("/projects/%1/unstar").arg(projectId)),
-            {},
-            callback
-    );
-}
-
 void ServiceMediator::requestProjectOpenIssues(int projectId, const CallbackFunction &callback) {
     NetworkManager::getInstance().get(
             getUrl(QString("/projects/%1/issues").arg(projectId), {{"state", "opened"}}),
