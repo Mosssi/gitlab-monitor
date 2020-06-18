@@ -8,10 +8,12 @@ QString getIconTypeString(const IconType &iconType) {
         case IconType::BACK:
             return "a";
         case IconType::DONE:
-            return "j";
+            return "d";
         case IconType::CLOSE:
-            return "h";
+            return "b";
         case IconType::NEW:
-            return "i";
+            return "c";
+        case IconType::QUESTION_MARK:
+            return "f";
     }
 }

@@ -4,14 +4,18 @@
 
 #include <QtWidgets/QWidget>
 #include <QTimer>
+#include <QtCore/QPropertyAnimation>
 
 #include "IconType.h"
 
 class PushButton : public QWidget {
 Q_OBJECT
+Q_PROPERTY(double confirmingValue READ getConfirmingValue WRITE setConfirmingValue)
 public:
     explicit PushButton(const IconType &icon, bool confirmRequired = false);
     ~PushButton() override;
+    void setConfirmingValue(double value) { confirmingValue = value; update(); }
+    double getConfirmingValue() { return confirmingValue; }
 
 signals:
     void clicked();
@@ -30,9 +34,12 @@ private:
 
     bool hovered = false;
     bool pressed = false;
-    bool confirming = false;
+    double confirmingValue = 0;
 
     QTimer * confirmTimer = nullptr;
+
+    QPropertyAnimation * confirmAnimation = nullptr;
+    QPropertyAnimation * unConfirmAnimation = nullptr;
 };
 
 

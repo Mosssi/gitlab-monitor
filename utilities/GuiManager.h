@@ -10,7 +10,7 @@ public:
     static QFont iconFont() { return QFont("gitlab-monitoring", smallFontSize()); }
     constexpr static int smallFontSize() { return 12; }
     constexpr static int normalFontSize() { return 14; }
-    constexpr static int largeFontSize() { return 15; }
+    constexpr static int largeFontSize() { return 16; }
 
     constexpr static int applicationWidth() { return 300; }
     constexpr static int applicationHeight() { return 400; }

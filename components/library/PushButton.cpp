@@ -4,22 +4,34 @@
 #include <QPainter>
 
 #include "../../utilities/GuiManager.h"
+#include "../../network/NetworkManager.h"
 
 
 const int CONFIRM_DURATION = 3000;
+const int CONFIRM_ANIMATION_DURATION = 150;
 
-PushButton::PushButton(const IconType &icon, bool confirmRequired) : QWidget(nullptr), iconType(icon), confirmRequired(confirmRequired) {
+PushButton::PushButton(const IconType &icon, bool confirmRequired) :
+        QWidget(nullptr), iconType(icon), confirmRequired(confirmRequired) {
 
     setFixedSize(GuiManager::pushButtonHeight(), GuiManager::pushButtonHeight());
     setFont(GuiManager::iconFont());
     setFocusPolicy(Qt::TabFocus);
 
+    confirmAnimation = new QPropertyAnimation(this, "confirmingValue");
+    confirmAnimation->setStartValue(0);
+    confirmAnimation->setEndValue(1);
+    confirmAnimation->setDuration(CONFIRM_ANIMATION_DURATION);
+
+    unConfirmAnimation = new QPropertyAnimation(this, "confirmingValue");
+    unConfirmAnimation->setStartValue(1);
+    unConfirmAnimation->setEndValue(0);
+    unConfirmAnimation->setDuration(CONFIRM_ANIMATION_DURATION);
+
     confirmTimer = new QTimer(this);
     confirmTimer->setSingleShot(true);
     confirmTimer->setInterval(CONFIRM_DURATION);
     connect(confirmTimer, &QTimer::timeout, [this]() {
-        confirming = false;
-        update();
+        unConfirmAnimation->start();
     });
 }
 
@@ -36,32 +48,43 @@ void PushButton::paintEvent(QPaintEvent * event) {
     circlePath.addEllipse(this->rect());
 
     QString fillColor;
-    if (confirming) {
-        if (pressed) {
-            fillColor = GuiManager::lightPurpleColor();
-        } else if (hovered) {
-            fillColor = GuiManager::purpleColor();
-        } else {
-            fillColor = GuiManager::lightPurpleColor();
-        }
+    if (pressed) {
+        fillColor = GuiManager::lightColor();
+    } else if (hovered || confirmingValue > 0) {
+        fillColor = GuiManager::darkerLightColor();
     } else {
-        if (pressed) {
-            fillColor = GuiManager::lightColor();
-        } else if (hovered) {
-            fillColor = GuiManager::darkerLightColor();
-        } else {
-            fillColor = GuiManager::darkLightColor();
-        }
+        fillColor = GuiManager::darkLightColor();
     }
 
     QString textColor = GuiManager::grayColor();
-    if (confirming) {
-        textColor = GuiManager::lightColor();
-    }
 
     painter.fillPath(circlePath, QBrush(QColor(fillColor)));
-    painter.setPen(QPen(QColor(textColor)));
-    painter.drawText(this->rect(), Qt::AlignCenter, confirming ? "?" : getIconTypeString(iconType));
+
+    if (confirmingValue != 0) {
+        auto color = QColor(textColor);
+        color.setAlphaF(confirmingValue);
+        painter.setPen(color);
+        int pixelSize = (int) ((2 - confirmingValue) * GuiManager::largeFontSize());
+        if (pixelSize > 0) {
+            auto font = painter.font();
+            font.setPixelSize(pixelSize);
+            painter.setFont(font);
+        }
+        painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(IconType::QUESTION_MARK));
+    }
+
+    if (confirmingValue != 1) {
+        auto color = QColor(textColor);
+        color.setAlphaF(1.0 - confirmingValue);
+        painter.setPen(color);
+        int pixelSize = (int) ((1 - confirmingValue) * GuiManager::largeFontSize());
+        if (pixelSize > 0) {
+            auto font = painter.font();
+            font.setPixelSize(pixelSize);
+            painter.setFont(font);
+        }
+        painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(iconType));
+    }
 }
 
 void PushButton::mousePressEvent(QMouseEvent *) {
@@ -74,11 +97,12 @@ void PushButton::mouseReleaseEvent(QMouseEvent *) {
 
     pressed = false;
     if (confirmRequired) {
-        if (confirming) {
+        if (confirmingValue > 0) {
             emit clicked();
-        }
-        confirming = !confirming;
-        if (confirming) {
+            unConfirmAnimation->start();
+            confirmTimer->stop();
+        } else {
+            confirmAnimation->start();
             confirmTimer->start();
         }
     } else {
