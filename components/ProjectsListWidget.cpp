@@ -3,6 +3,7 @@
 #include "../utilities/DataStore.h"
 #include "library/ScrollArea.h"
 #include "ProjectWidget.h"
+#include "LoadingIndicator.h"
 
 ProjectsListWidget::ProjectsListWidget(QWidget * parent) : QFrame(parent) {
 
@@ -43,6 +44,7 @@ void ProjectsListWidget::updateUi() {
     for (const auto &project : projects) {
         auto * projectWidget = new ProjectWidget(project.id);
         connect(projectWidget, &ProjectWidget::clicked, [this, project]() {
+            LoadingIndicator::getInstance().startLoading();
             emit projectSelected(project.id);
         });
         scrollLayout->addWidget(projectWidget);

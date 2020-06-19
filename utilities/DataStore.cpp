@@ -4,6 +4,7 @@
 #include <QtCore/QTimer>
 
 #include "../network/ServiceMediator.h"
+#include "../components/LoadingIndicator.h"
 
 DataStore &DataStore::getInstance() {
 
@@ -17,6 +18,7 @@ void DataStore::initialize() {
     // whenever necessary?  A refresh button?  A notification like Telegram which shows we are trying to
     // get data but cannot?
 
+    LoadingIndicator::getInstance().startLoading();
     ServiceMediator::requestUser([this](CALLBACK_SIGNATURE) {
         if (status == ResponseStatus::SUCCESSFUL) {
             user = User(jsonValue.toObject());
@@ -29,6 +31,7 @@ void DataStore::initialize() {
                         projects.insert(project.id, project);
                     }
                 }
+                LoadingIndicator::getInstance().stopLoading();
                 emit projectsReceived();
             });
         } else {

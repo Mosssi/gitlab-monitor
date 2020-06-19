@@ -20,10 +20,14 @@ public:
     constexpr static int issueHeight() { return 55; }
     constexpr static int pushButtonHeight() { return 24; }
     constexpr static int bodyHeaderHeight() { return 40; }
+    constexpr static int loadingWidgetHeight() { return 28; }
+    constexpr static int loadingIndicatorWidth() { return 70; }
+    constexpr static int loadingIndicatorHeight() { return 60; }
 
     static QString darkGrayColor() { return "#2e2e2e"; }
     static QString grayColor() { return "#4a4a4a"; }
     static QString lightGrayColor() { return "#666666"; }
+    static QString lighterGrayColor() { return "#888888"; }
     static QString lightColor() { return "#f0f0f0"; }
     static QString darkLightColor() { return "#e5e5e5"; }
     static QString darkerLightColor() { return "#d0d0d0"; }

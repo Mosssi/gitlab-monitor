@@ -1,15 +1,21 @@
 #include "IssuesListWidget.h"
 
-#include "library/ScrollArea.h"
+#include "../network/ServiceMediator.h"
 #include "../utilities/DataStore.h"
 #include "IssueWidget.h"
 #include "library/PushButton.h"
-#include "../network/ServiceMediator.h"
+#include "library/ScrollArea.h"
+#include "LoadingIndicator.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
+
+    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, [this]() {
+        updateUi();
+        LoadingIndicator::getInstance().stopLoading();
+    });
 }
 
 void IssuesListWidget::setupUi() {
@@ -77,9 +83,6 @@ void IssuesListWidget::setProjectId(int projectId) {
     updateUi();
 
     DataStore::getInstance().refreshProjectOpenIssues(projectId);
-
-    // TODO: This is not a good place for this connection, is it?!
-    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
 }
 
 void IssuesListWidget::emptyScrollLayout() {

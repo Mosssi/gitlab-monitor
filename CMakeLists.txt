@@ -37,6 +37,10 @@ add_executable(gitlab_desktop_monitor
         components/library/Label.h
         components/library/LineEdit.cpp
         components/library/LineEdit.h
+        components/LoadingIndicator.cpp
+        components/LoadingIndicator.h
+        components/library/LoadingWidget.cpp
+        components/library/LoadingWidget.h
         components/library/PushButton.cpp
         components/library/PushButton.h
         components/library/ScrollArea.cpp

@@ -4,6 +4,7 @@
 
 #include "../utilities/DataStore.h"
 #include "../network/ServiceMediator.h"
+#include "library/LoadingWidget.h"
 
 ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : QFrame(parent), projectId(projectId) {
 
@@ -16,7 +17,7 @@ ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : QFrame(parent), 
 void ProjectWidget::setupUi() {
 
     setFixedHeight(GuiManager::projectHeight());
-    setStyleSheet("background-color: #ffffff;");
+    setStyleSheet("background-color: #ffffff;"); // TODO: use GuiManager
 
     auto * mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(10, 10, 20, 10);
