@@ -28,6 +28,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     DataStore::getInstance().initialize();
 
     auto &loadingIndicator = LoadingIndicator::getInstance();
+    loadingIndicator.hide();
     loadingIndicator.setParent(this);
 }
 
