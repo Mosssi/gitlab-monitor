@@ -13,7 +13,11 @@ HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
     setupUi();
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this]() {
-        userWelcomeLabel->setText(QString("Welcome, %1!").arg(DataStore::getInstance().getUser().username));
+        QString username = DataStore::getInstance().getUser().username;
+        QStringList specialNames = {"Bayati", "bayati"};
+        userWelcomeLabel->setText(QString("Welcome, %1%2!")
+                                          .arg(specialNames.contains(username) ? "Agha " : "")
+                                          .arg(username));
     });
 }
 
