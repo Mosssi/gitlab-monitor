@@ -5,17 +5,13 @@
 #include "IssueWidget.h"
 #include "library/PushButton.h"
 #include "library/ScrollArea.h"
-#include "LoadingIndicator.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
 
-    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, [this]() {
-        updateUi();
-        LoadingIndicator::getInstance().stopLoading();
-    });
+    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
 }
 
 void IssuesListWidget::setupUi() {
@@ -79,7 +75,6 @@ void IssuesListWidget::setProjectId(int projectId) {
 
     this->projectId = projectId;
 
-    emptyScrollLayout();
     updateUi();
 
     DataStore::getInstance().refreshProjectOpenIssues(projectId);

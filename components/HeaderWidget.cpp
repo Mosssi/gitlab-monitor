@@ -12,8 +12,8 @@ HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
 
-    connect(&DataStore::getInstance(), &DataStore::userReceived, [this](const User &user) {
-        userWelcomeLabel->setText(QString("Welcome, %1!").arg(user.username));
+    connect(&DataStore::getInstance(), &DataStore::userReceived, [this]() {
+        userWelcomeLabel->setText(QString("Welcome, %1!").arg(DataStore::getInstance().getUser().username));
     });
 }
 

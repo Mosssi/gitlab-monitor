@@ -16,13 +16,18 @@ public:
     [[nodiscard]] Project getProject(int projectId) const;
     [[nodiscard]] QList<Project> getProjects() const;
     void updateProject(const Project &project);
+    void refreshUser();
+    void refreshProjects();
     void refreshProjectOpenIssues(int projectId);
     // TO-CONSIDER: I don't like the difference between ways of calling and using these functions
 
 signals:
-    void userReceived(const User &user);
+    void userReceived();
+    void userReceiveFailed();
     void projectsReceived();
+    void projectsReceiveFailed();
     void projectOpenIssuesReceived();
+    void projectOpenIssuesReceiveFailed();
 
 private:
     User user;

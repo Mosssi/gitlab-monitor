@@ -13,7 +13,6 @@
 #include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
-#include "LoadingIndicator.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
@@ -26,10 +25,6 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
 
     DataStore::getInstance().initialize();
-
-    auto &loadingIndicator = LoadingIndicator::getInstance();
-    loadingIndicator.hide();
-    loadingIndicator.setParent(this);
 }
 
 void ApplicationWidget::setupTrayIcon() {

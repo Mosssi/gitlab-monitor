@@ -4,7 +4,6 @@
 #include <QtCore/QTimer>
 
 #include "../network/ServiceMediator.h"
-#include "../components/LoadingIndicator.h"
 
 DataStore &DataStore::getInstance() {
 
@@ -18,26 +17,7 @@ void DataStore::initialize() {
     // whenever necessary?  A refresh button?  A notification like Telegram which shows we are trying to
     // get data but cannot?
 
-    LoadingIndicator::getInstance().startLoading();
-    ServiceMediator::requestUser([this](CALLBACK_SIGNATURE) {
-        if (status == ResponseStatus::SUCCESSFUL) {
-            user = User(jsonValue.toObject());
-            emit userReceived(user);
-
-            ServiceMediator::requestProjects([this](CALLBACK_SIGNATURE) {
-                if (status == ResponseStatus::SUCCESSFUL) {
-                    for (const auto &projectJsonValue: jsonValue.toArray()) {
-                        const Project &project = Project(projectJsonValue.toObject());
-                        projects.insert(project.id, project);
-                    }
-                }
-                LoadingIndicator::getInstance().stopLoading();
-                emit projectsReceived();
-            });
-        } else {
-            QTimer::singleShot(2000, [this]() { initialize(); });
-        }
-    });
+    refreshUser();
 }
 
 User DataStore::getUser() const {
@@ -73,14 +53,47 @@ void DataStore::updateProject(const Project &project) {
 void DataStore::refreshProjectOpenIssues(int projectId) {
 
     ServiceMediator::requestProjectOpenIssues(projectId, [this, projectId](CALLBACK_SIGNATURE) {
-        QList<Issue> projectOpenIssues;
-        for (const auto &issueJsonValue: jsonValue.toArray()) {
-            projectOpenIssues.append(Issue(issueJsonValue.toObject()));
-        }
-        Project project = getProject(projectId);
-        project.setOpenIssues(projectOpenIssues);
-        updateProject(project);
+        if (status == ResponseStatus::SUCCESSFUL) {
+            QList<Issue> projectOpenIssues;
+            for (const auto &issueJsonValue: jsonValue.toArray()) {
+                projectOpenIssues.append(Issue(issueJsonValue.toObject()));
+            }
+            Project project = getProject(projectId);
+            project.setOpenIssues(projectOpenIssues);
+            updateProject(project);
 
-        emit projectOpenIssuesReceived();
+            emit projectOpenIssuesReceived();
+        } else {
+            emit projectOpenIssuesReceiveFailed();
+        }
+    });
+}
+
+void DataStore::refreshProjects() {
+
+    ServiceMediator::requestProjects([this](CALLBACK_SIGNATURE) {
+        if (status == ResponseStatus::SUCCESSFUL) {
+            for (const auto &projectJsonValue: jsonValue.toArray()) {
+                const Project &project = Project(projectJsonValue.toObject());
+                projects.insert(project.id, project);
+            }
+            emit projectsReceived();
+        } else {
+            emit projectsReceiveFailed();
+        }
+    });
+}
+
+void DataStore::refreshUser() {
+
+    ServiceMediator::requestUser([this](CALLBACK_SIGNATURE) {
+        if (status == ResponseStatus::SUCCESSFUL) {
+            user = User(jsonValue.toObject());
+            refreshProjects();
+            emit userReceived();
+        } else {
+            QTimer::singleShot(2000, [this]() { initialize(); });
+            emit userReceiveFailed();
+        }
     });
 }

@@ -5,6 +5,8 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QVBoxLayout>
 
+#include "LoadableContentWidget.h"
+
 
 class ProjectsListWidget : public QFrame {
 Q_OBJECT
@@ -18,7 +20,9 @@ private:
     void setupUi();
     void updateUi();
 
+    // TODO: Better names?!
     QVBoxLayout * scrollLayout = nullptr;
+    LoadableContentWidget * contentWidget = nullptr;
 };
 
 

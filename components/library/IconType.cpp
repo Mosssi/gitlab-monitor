@@ -15,5 +15,7 @@ QString getIconTypeString(const IconType &iconType) {
             return "c";
         case IconType::QUESTION_MARK:
             return "f";
+        case IconType::RELOAD:
+            return "e";
     }
 }

@@ -10,6 +10,7 @@ enum class IconType {
     CLOSE,
     NEW,
     QUESTION_MARK,
+    RELOAD,
 };
 
 QString getIconTypeString(const IconType &iconType);
