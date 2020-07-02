@@ -4,6 +4,7 @@
 #include <QJsonArray>
 #include <QScreen>
 #include <QtWidgets/QVBoxLayout>
+#include <QDesktopWidget>
 
 #include "../models/Project.h"
 #include "../models/User.h"
@@ -33,14 +34,15 @@ void ApplicationWidget::setupTrayIcon() {
     systemTrayIcon.setParent(this);
     connect(&systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
         const QPoint &cursorPosition = QCursor::pos();
-        const QRect &screenGeometry = QApplication::primaryScreen()->availableGeometry();
+        const int availableHeight = QApplication::primaryScreen()->availableGeometry().height();
+        const int availableWidth = QApplication::desktop()->size().width();
         int x = qMin(
                 cursorPosition.x() - GuiManager::applicationWidth() / 2,
-                screenGeometry.width() - GuiManager::applicationWidth()
+                availableWidth - GuiManager::applicationWidth()
         );
-        int y = screenGeometry.y();
-        if (cursorPosition.y() > screenGeometry.height() / 2) {
-            y = screenGeometry.height() - GuiManager::applicationHeight();
+        int y = QApplication::primaryScreen()->availableGeometry().y();
+        if (cursorPosition.y() > availableHeight / 2) {
+            y = availableHeight - GuiManager::applicationHeight();
         }
         move(x, y);
         this->setVisible(!this->isVisible());
