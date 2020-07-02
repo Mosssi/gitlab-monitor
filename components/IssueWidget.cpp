@@ -28,6 +28,7 @@ void IssueWidget::setupUi() {
     iidLabel->setFontSize(GuiManager::smallFontSize());
     iidLabel->setColor(GuiManager::evenDarkerLightColor());
     projectDetailsLayout->addWidget(nameLabel = new Label());
+    nameLabel->setColor(GuiManager::darkGrayColor());
 
     mainLayout->addLayout(projectDetailsLayout);
 

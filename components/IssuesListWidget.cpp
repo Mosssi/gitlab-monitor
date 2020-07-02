@@ -10,8 +10,12 @@
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
 
     setupUi();
+    setStyleSheet("background-color: #ffffff;");
 
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
+    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceiveFailed, [this]() {
+        contentWidget->setState(LoadableContentState::ERROR);
+    });
 }
 
 void IssuesListWidget::setupUi() {
@@ -49,33 +53,42 @@ void IssuesListWidget::setupUi() {
     scrollLayout->setSpacing(0);
     scrollLayout->setAlignment(Qt::AlignTop);
 
-    mainLayout->addWidget(new ScrollArea(scrollLayout));
+    mainLayout->addWidget(contentWidget = new LoadableContentWidget(scrollLayout));
 }
 
 void IssuesListWidget::updateUi() {
-
-    emptyScrollLayout();
 
     const auto &project = DataStore::getInstance().getProject(projectId);
 
     projectNameLabel->setText(project.name.toUpper());
 
-    for (const auto &issue: project.openIssues) {
-        auto * issueWidget = new IssueWidget(projectId, issue);
-        connect(issueWidget, &IssueWidget::closed, [this, issue]() {
-            ServiceMediator::closeIssue(projectId, issue.iid, [this](CALLBACK_SIGNATURE) {
-                DataStore::getInstance().refreshProjectOpenIssues(projectId);
+    if (project.openIssues.isEmpty()) {
+        // TODO: create no content page, perhaps in LoadableContentWidget
+    } else {
+        emptyScrollLayout();
+        for (const auto &issue: project.openIssues) {
+            auto * issueWidget = new IssueWidget(projectId, issue);
+            connect(issueWidget, &IssueWidget::closed, [this, issue]() {
+                ServiceMediator::closeIssue(projectId, issue.iid, [this](CALLBACK_SIGNATURE) {
+                    DataStore::getInstance().refreshProjectOpenIssues(projectId);
+                });
             });
-        });
-        scrollLayout->addWidget(issueWidget);
+            scrollLayout->addWidget(issueWidget);
+        }
     }
+
+    contentWidget->setState(LoadableContentState::CONTENT);
 }
 
 void IssuesListWidget::setProjectId(int projectId) {
 
     this->projectId = projectId;
 
-    updateUi();
+    if (DataStore::getInstance().getProject(projectId).openIssues.isEmpty()) {
+        contentWidget->setState(LoadableContentState::LOADING);
+    } else {
+        updateUi();
+    }
 
     DataStore::getInstance().refreshProjectOpenIssues(projectId);
 }
@@ -93,7 +106,6 @@ void IssuesListWidget::showIssueInputWidget() {
 
     issueInputWidget->setVisible(true);
     issueInputWidget->clearInput();
-    issueInputWidget->setProjectId(projectId);
 }
 
 void IssuesListWidget::hideIssueInputWidget() {

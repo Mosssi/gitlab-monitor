@@ -26,6 +26,7 @@ void ProjectWidget::setupUi() {
     projectDetailsLayout->setSpacing(0);
 
     projectDetailsLayout->addWidget(nameLabel = new Label());
+    nameLabel->setColor(GuiManager::darkGrayColor());
 
     projectDetailsLayout->addWidget(descriptionLabel = new Label());
     descriptionLabel->setVisible(false);

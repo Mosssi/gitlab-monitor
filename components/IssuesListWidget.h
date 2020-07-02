@@ -7,6 +7,7 @@
 
 #include "library/Label.h"
 #include "IssueInputWidget.h"
+#include "LoadableContentWidget.h"
 
 class IssuesListWidget : public QFrame {
 Q_OBJECT
@@ -30,6 +31,7 @@ private:
     IssueInputWidget * issueInputWidget = nullptr;
     QVBoxLayout * scrollLayout = nullptr;
     Label * projectNameLabel = nullptr;
+    LoadableContentWidget * contentWidget = nullptr;
 };
 
 

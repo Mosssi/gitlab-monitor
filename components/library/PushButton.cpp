@@ -56,7 +56,7 @@ void PushButton::paintEvent(QPaintEvent * event) {
         fillColor = GuiManager::darkLightColor();
     }
 
-    QString textColor = GuiManager::grayColor();
+    QString textColor = GuiManager::lightGrayColor();
 
     painter.fillPath(circlePath, QBrush(QColor(fillColor)));
 

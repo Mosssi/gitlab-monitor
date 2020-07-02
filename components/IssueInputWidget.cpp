@@ -10,11 +10,6 @@ IssueInputWidget::IssueInputWidget() : QFrame(nullptr) {
     setupUi();
 }
 
-void IssueInputWidget::setProjectId(int projectId) {
-
-    this->projectId = projectId;
-}
-
 void IssueInputWidget::setupUi() {
 
     auto * mainLayout = new QHBoxLayout(this);

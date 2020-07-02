@@ -10,7 +10,6 @@ class IssueInputWidget : public QFrame {
 Q_OBJECT
 public:
     explicit IssueInputWidget();
-    void setProjectId(int projectId);
     void clearInput();
 
 signals:
@@ -19,8 +18,6 @@ signals:
 
 private:
     void setupUi();
-
-    int projectId = 0;
 
     LineEdit * issueTitleInput = nullptr;
 };
