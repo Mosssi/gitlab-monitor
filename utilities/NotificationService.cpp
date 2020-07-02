@@ -1,11 +1,14 @@
 #include "NotificationService.h"
-#include "GuiManager.h"
 
 #include <QGuiApplication>
 #include <QWindow>
+#include <QTimer>
 
-int const margin = 30;
-int const spacing = 10;
+#include "GuiManager.h"
+
+int const margin = 20;
+int const spacing = 5;
+int const interval = 5000;
 
 NotificationService &NotificationService::getInstance() {
 
@@ -15,28 +18,39 @@ NotificationService &NotificationService::getInstance() {
 
 void NotificationService::info(const QString &message) {
 
-    NotificationService::getInstance().notificationWidgets.append(new NotificationWidget(message, NotificationStatus::INFO, GuiManager::getApplicationWindow());
-    NotificationService::getInstance().refreshPositions();
+    NotificationService::getInstance().addNotification(message, NotificationStatus::INFO);
 }
 
 void NotificationService::warning(const QString &message) {
 
-    NotificationService::getInstance().NotificationService::notificationWidgets.append(new NotificationWidget(message, NotificationStatus::WARNING, QApplication::desktop()));
-    NotificationService::getInstance().refreshPositions();
+    NotificationService::getInstance().addNotification(message, NotificationStatus::WARNING);
 }
 
 void NotificationService::error(const QString &message) {
 
-    NotificationService::getInstance().NotificationService::notificationWidgets.append(new NotificationWidget(message, NotificationStatus::ERROR, QApplication::desktop()));
-    NotificationService::getInstance().refreshPositions();
+    NotificationService::getInstance().addNotification(message, NotificationStatus::ERROR);
 }
 
 void NotificationService::refreshPositions() {
 
-    int currentHeight = GuiManager::applicationHeight() - margin;
+    int currentHeight = GuiManager::applicationHeight() - margin + spacing;
     for (const auto &notificationWidget : NotificationService::notificationWidgets) {
+        currentHeight -= spacing + notificationWidget->height();
         notificationWidget->move(margin, currentHeight);
         notificationWidget->show();
-        currentHeight -= spacing + notificationWidget->height();
     }
+}
+
+void NotificationService::addNotification(const QString &message, NotificationStatus status) {
+
+    auto * notificationWidget = new NotificationWidget(message, status, GuiManager::getApplicationWindow());
+    QTimer::singleShot(interval, [this, notificationWidget]() {
+        notificationWidget->hide();
+        notificationWidget->deleteLater();
+        notificationWidgets.removeOne(notificationWidget);
+        refreshPositions();
+    });
+
+    NotificationService::getInstance().NotificationService::notificationWidgets.append(notificationWidget);
+    NotificationService::getInstance().refreshPositions();
 }

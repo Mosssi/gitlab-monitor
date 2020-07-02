@@ -32,10 +32,11 @@ void Label::setGeneralStyle(const QString &generalStyle) {
 void Label::updateStyleSheet() {
 
     this->setStyleSheet(
-            QString("font-size: %1px; font-weight: %2; color: %3; %4")
+            QString("font-size: %1px; font-weight: %2; color: %3; background-color: %4; %5")
                     .arg(this->fontSize)
                     .arg(this->bold ? "bold" : "normal")
                     .arg(this->color)
+                    .arg(this->backgroundColor)
                     .arg(generalStyle)
     );
 }
@@ -43,4 +44,10 @@ void Label::updateStyleSheet() {
 void Label::setStyleSheet(const QString &styleSheet) {
 
     QWidget::setStyleSheet(styleSheet);
+}
+
+void Label::setBackgroundColor(const QString &backgroundColor) {
+
+    this->backgroundColor = backgroundColor;
+    updateStyleSheet();
 }

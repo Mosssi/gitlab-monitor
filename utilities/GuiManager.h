@@ -3,6 +3,7 @@
 
 
 #include <QtGui/QFont>
+
 #include "../components/ApplicationWidget.h"
 
 class GuiManager {
@@ -44,7 +45,9 @@ public:
     static QWidget * getApplicationWindow();
 
 private:
-    static QWidget * applicationWindow;
+    static GuiManager &getInstance();
+
+    QWidget * applicationWindow;
 };
 
 

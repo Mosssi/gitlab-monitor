@@ -12,6 +12,7 @@ public:
     void setFontSize(int fontSize);
     void setBold(bool bold);
     void setColor(const QString &color);
+    void setBackgroundColor(const QString &backgroundColor);
     void setGeneralStyle(const QString &generalStyle);
 
 private:
@@ -21,6 +22,7 @@ private:
     int fontSize = GuiManager::normalFontSize();
     bool bold = false;
     QString color = GuiManager::darkGrayColor();
+    QString backgroundColor = "none";
     QString generalStyle = "";
 };
 

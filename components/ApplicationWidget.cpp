@@ -29,8 +29,6 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     DataStore::getInstance().initialize();
 
     GuiManager::setApplicationWindow(this);
-
-    NotificationService::info("Hello World!");
 }
 
 void ApplicationWidget::setupTrayIcon() {

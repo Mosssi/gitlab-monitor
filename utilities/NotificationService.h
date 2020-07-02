@@ -14,6 +14,7 @@ public:
 private:
     static NotificationService &getInstance();
     void refreshPositions();
+    void addNotification(const QString &message, NotificationStatus status);
 
     QList<NotificationWidget *> notificationWidgets;
 };

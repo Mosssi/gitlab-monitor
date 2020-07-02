@@ -2,10 +2,16 @@
 
 void GuiManager::setApplicationWindow(QWidget * widget) {
 
-    GuiManager::applicationWindow = widget;
+    GuiManager::getInstance().applicationWindow = widget;
 }
 
 QWidget * GuiManager::getApplicationWindow() {
 
-    return GuiManager::applicationWindow;
+    return GuiManager::getInstance().applicationWindow;
+}
+
+GuiManager &GuiManager::getInstance() {
+
+    static GuiManager instance;
+    return instance;
 }
