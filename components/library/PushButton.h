@@ -13,9 +13,9 @@ Q_OBJECT
 Q_PROPERTY(double confirmingValue READ getConfirmingValue WRITE setConfirmingValue)
 public:
     explicit PushButton(const IconType &icon, bool confirmRequired = false);
-    ~PushButton() override;
+    ~PushButton() override = default;
     void setConfirmingValue(double value) { confirmingValue = value; update(); }
-    double getConfirmingValue() { return confirmingValue; }
+    [[nodiscard]] double getConfirmingValue() const { return confirmingValue; }
 
 signals:
     void clicked();

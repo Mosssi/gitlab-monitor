@@ -14,6 +14,7 @@
 #include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
+#include "../utilities/NotificationService.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
@@ -26,6 +27,10 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
 
     DataStore::getInstance().initialize();
+
+    GuiManager::setApplicationWindow(this);
+
+    NotificationService::info("Hello World!");
 }
 
 void ApplicationWidget::setupTrayIcon() {

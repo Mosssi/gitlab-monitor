@@ -35,10 +35,6 @@ PushButton::PushButton(const IconType &icon, bool confirmRequired) :
     });
 }
 
-PushButton::~PushButton() {
-
-}
-
 void PushButton::paintEvent(QPaintEvent * event) {
 
     QPainter painter(this);

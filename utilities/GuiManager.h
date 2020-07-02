@@ -3,6 +3,7 @@
 
 
 #include <QtGui/QFont>
+#include "../components/ApplicationWidget.h"
 
 class GuiManager {
 public:
@@ -38,6 +39,12 @@ public:
     static QString redOrangeColor() { return "#db3b21"; }
     static QString lightPurpleColor() { return "#6e49cb"; }
     static QString purpleColor() { return "#380d75"; }
+
+    static void setApplicationWindow(QWidget * widget);
+    static QWidget * getApplicationWindow();
+
+private:
+    static QWidget * applicationWindow;
 };
 
 
