@@ -57,7 +57,7 @@ void ProjectsListWidget::updateUi() {
     for (const auto &project : projects) {
         auto * projectWidget = new ProjectWidget(project.id);
         connect(projectWidget, &ProjectWidget::clicked, [this, project]() {
-            emit projectSelected(project.id);
+            emit projectSelected(project.id, project.name);
         });
         scrollLayout->addWidget(projectWidget);
     }

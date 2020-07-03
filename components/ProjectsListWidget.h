@@ -14,7 +14,7 @@ public:
     explicit ProjectsListWidget(QWidget * parent = nullptr);
 
 signals:
-    void projectSelected(int projectId);
+    void projectSelected(int projectId, QString projectName);
 
 private:
     void setupUi();

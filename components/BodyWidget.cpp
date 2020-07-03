@@ -14,8 +14,9 @@ void BodyWidget::setupUi() {
     addWidget(projectsListWidget = new ProjectsListWidget());
     addWidget(issuesListWidget = new IssuesListWidget());
 
-    connect(projectsListWidget, &ProjectsListWidget::projectSelected, [this](int projectId) {
+    connect(projectsListWidget, &ProjectsListWidget::projectSelected, [this](int projectId, QString projectName) {
         issuesListWidget->setProjectId(projectId);
+        issuesListWidget->setProjectName(projectName);
         showIssuesList();
     });
 

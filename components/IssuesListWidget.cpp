@@ -92,6 +92,11 @@ void IssuesListWidget::setProjectId(int projectId) {
     DataStore::getInstance().refreshProjectOpenIssues(projectId);
 }
 
+void IssuesListWidget::setProjectName(const QString &projectName) {
+
+    projectNameLabel->setText(projectName.toUpper());
+}
+
 void IssuesListWidget::emptyScrollLayout() {
 
     QLayoutItem * child;

@@ -14,6 +14,7 @@ Q_OBJECT
 public:
     explicit IssuesListWidget(QWidget * parent = nullptr);
     void setProjectId(int projectId);
+    void setProjectName(const QString &projectName);
 
 signals:
     void backClicked(); // TOCONSIDER: What about a universal template for naming signals?!
