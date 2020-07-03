@@ -1,7 +1,6 @@
 #include "ApplicationWidget.h"
 
 #include <QApplication>
-#include <QJsonArray>
 #include <QScreen>
 #include <QtWidgets/QVBoxLayout>
 #include <QDesktopWidget>
@@ -14,7 +13,7 @@
 #include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
-#include "../utilities/NotificationService.h"
+#include "SystemTrayIcon.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 

@@ -5,10 +5,14 @@
 
 #include "NotificationWidget.h"
 
-class NotificationService {
+int const margin = 15;
+int const spacing = 1;
+
+class NotificationService : public QObject {
+Q_OBJECT
+Q_PROPERTY(int baseHeight READ getBaseHeight WRITE setBaseHeight)
 public:
     static void info(const QString &message);
-    static void warning(const QString &message);
     static void error(const QString &message);
 
 private:
@@ -16,7 +20,11 @@ private:
     void refreshPositions();
     void addNotification(const QString &message, NotificationStatus status);
 
+    void setBaseHeight(int baseHeight) { this->baseHeight = baseHeight; refreshPositions(); }
+    int getBaseHeight() { return this->baseHeight; }
+
     QList<NotificationWidget *> notificationWidgets;
+    int baseHeight = GuiManager::applicationHeight() - margin + spacing;
 };
 
 

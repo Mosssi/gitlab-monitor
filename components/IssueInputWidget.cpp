@@ -3,7 +3,6 @@
 #include <QtWidgets/QHBoxLayout>
 
 #include "library/PushButton.h"
-#include "../network/ServiceMediator.h"
 
 IssueInputWidget::IssueInputWidget() : QFrame(nullptr) {
 

@@ -2,7 +2,6 @@
 #define GITLAB_DESKTOP_MONITOR_SYSTEMTRAYICON_H
 
 #include <QSystemTrayIcon>
-#include <QEvent>
 
 class SystemTrayIcon : public QSystemTrayIcon {
 Q_OBJECT

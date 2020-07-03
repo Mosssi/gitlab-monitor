@@ -2,9 +2,6 @@
 #define GITLAB_DESKTOP_MONITOR_APPLICATIONWIDGET_H
 
 #include <QWidget>
-#include <QSystemTrayIcon>
-
-#include "SystemTrayIcon.h"
 
 class ApplicationWidget : public QWidget {
 public:

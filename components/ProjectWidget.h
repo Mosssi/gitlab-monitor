@@ -3,7 +3,6 @@
 
 
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QPushButton>
 
 #include "../models/Project.h"
 #include "library/Label.h"

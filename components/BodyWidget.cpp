@@ -2,7 +2,6 @@
 
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
-#include "library/ScrollArea.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 

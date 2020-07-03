@@ -1,10 +1,10 @@
 #include "ProjectsListWidget.h"
 
 #include "../utilities/DataStore.h"
+#include "../utilities/NotificationService.h"
 #include "ProjectWidget.h"
 #include "library/LoadingWidget.h"
 #include "library/PushButton.h"
-#include "../utilities/NotificationService.h"
 
 ProjectsListWidget::ProjectsListWidget(QWidget * parent) : QFrame(parent) {
 

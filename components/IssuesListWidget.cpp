@@ -4,7 +4,6 @@
 #include "../utilities/DataStore.h"
 #include "IssueWidget.h"
 #include "library/PushButton.h"
-#include "library/ScrollArea.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {

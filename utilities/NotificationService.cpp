@@ -1,13 +1,10 @@
 #include "NotificationService.h"
 
-#include <QGuiApplication>
-#include <QWindow>
+#include <QtCore/QPropertyAnimation>
 #include <QTimer>
 
 #include "GuiManager.h"
 
-int const margin = 15;
-int const spacing = 1;
 int const interval = 5000;
 
 NotificationService &NotificationService::getInstance() {
@@ -21,11 +18,6 @@ void NotificationService::info(const QString &message) {
     NotificationService::getInstance().addNotification(message, NotificationStatus::INFO);
 }
 
-void NotificationService::warning(const QString &message) {
-
-    NotificationService::getInstance().addNotification(message, NotificationStatus::WARNING);
-}
-
 void NotificationService::error(const QString &message) {
 
     NotificationService::getInstance().addNotification(message, NotificationStatus::ERROR);
@@ -33,7 +25,7 @@ void NotificationService::error(const QString &message) {
 
 void NotificationService::refreshPositions() {
 
-    int currentHeight = GuiManager::applicationHeight() - margin + spacing;
+    int currentHeight = baseHeight;
     for (const auto &notificationWidget : NotificationService::notificationWidgets) {
         currentHeight -= spacing + notificationWidget->height();
         notificationWidget->move(margin, currentHeight);
@@ -51,7 +43,13 @@ void NotificationService::addNotification(const QString &message, NotificationSt
     QObject::connect(notificationWidget, &NotificationWidget::gotHidden, [notificationWidget, this]() {
         notificationWidget->deleteLater();
         notificationWidgets.removeOne(notificationWidget);
-        refreshPositions();
+
+        auto * baseHeightAnimation = new QPropertyAnimation(this, "baseHeight");
+        baseHeightAnimation->setStartValue(baseHeight - notificationWidget->height());
+        baseHeightAnimation->setEndValue(GuiManager::applicationHeight() - margin + spacing);
+        baseHeightAnimation->setDuration(500);
+        baseHeightAnimation->setEasingCurve(QEasingCurve::OutExpo);
+        baseHeightAnimation->start();
     });
 
     NotificationService::getInstance().NotificationService::notificationWidgets.append(notificationWidget);

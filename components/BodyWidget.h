@@ -2,11 +2,8 @@
 #define GITLAB_DESKTOP_MONITOR_BODYWIDGET_H
 
 
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QVBoxLayout>
-
-#include "ProjectsListWidget.h"
 #include "IssuesListWidget.h"
+#include "ProjectsListWidget.h"
 #include "library/SlidingStackedWidget.h"
 
 class BodyWidget : public SlidingStackedWidget {

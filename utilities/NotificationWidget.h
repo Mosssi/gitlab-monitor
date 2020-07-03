@@ -5,7 +5,6 @@
 
 enum class NotificationStatus {
     INFO,
-    WARNING,
     ERROR,
 };
 

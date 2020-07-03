@@ -9,14 +9,22 @@ NotificationWidget::NotificationWidget(const QString &text, NotificationStatus s
         : Label(text, parent), text(text), status(status), availableWidth(availableWidth) {
 
     setColor(GuiManager::lightColor());
-    setBackgroundColor(GuiManager::grayColor());
     setFontSize(GuiManager::smallFontSize());
+    switch (status) {
+        case NotificationStatus::INFO:
+            setBackgroundColor(GuiManager::grayColor());
+            break;
+        case NotificationStatus::ERROR:
+            setBackgroundColor(GuiManager::redOrangeColor());
+            break;
+    }
 
     setFixedHeight(GuiManager::smallFontSize() + 2 * padding);
 
     QFont font;
     font.setPixelSize(GuiManager::smallFontSize());
     QFontMetrics fontMetrics(font);
+
     maxWidth = fontMetrics.width(text) + 2 * padding;
     if (maxWidth > availableWidth) {
         QString elidedText;
