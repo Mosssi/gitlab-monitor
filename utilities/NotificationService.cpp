@@ -6,8 +6,8 @@
 
 #include "GuiManager.h"
 
-int const margin = 20;
-int const spacing = 5;
+int const margin = 15;
+int const spacing = 1;
 int const interval = 5000;
 
 NotificationService &NotificationService::getInstance() {
@@ -37,15 +37,18 @@ void NotificationService::refreshPositions() {
     for (const auto &notificationWidget : NotificationService::notificationWidgets) {
         currentHeight -= spacing + notificationWidget->height();
         notificationWidget->move(margin, currentHeight);
-        notificationWidget->show();
     }
 }
 
 void NotificationService::addNotification(const QString &message, NotificationStatus status) {
 
-    auto * notificationWidget = new NotificationWidget(message, status, GuiManager::getApplicationWindow());
+    auto * notificationWidget = new NotificationWidget(message, status, GuiManager::applicationWidth() - 2 * margin, GuiManager::getApplicationWindow());
     QTimer::singleShot(interval, [this, notificationWidget]() {
         notificationWidget->hide();
+        refreshPositions();
+    });
+
+    QObject::connect(notificationWidget, &NotificationWidget::gotHidden, [notificationWidget, this]() {
         notificationWidget->deleteLater();
         notificationWidgets.removeOne(notificationWidget);
         refreshPositions();
