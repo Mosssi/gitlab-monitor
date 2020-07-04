@@ -6,14 +6,12 @@
 class SystemTrayIcon : public QSystemTrayIcon {
 Q_OBJECT
 public:
-    static SystemTrayIcon &getInstance();
+    explicit SystemTrayIcon();
     void setEnabled(bool enabled);
 
 signals:
     void clicked();
-
-private:
-    explicit SystemTrayIcon();
+    void rightClicked();
 };
 
 

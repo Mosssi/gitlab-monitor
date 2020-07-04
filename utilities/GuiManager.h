@@ -23,8 +23,9 @@ public:
     constexpr static int pushButtonHeight() { return 24; }
     constexpr static int bodyHeaderHeight() { return 40; }
     constexpr static int loadingWidgetHeight() { return 28; }
-    constexpr static int loadingIndicatorWidth() { return 70; }
-    constexpr static int loadingIndicatorHeight() { return 60; }
+    constexpr static int contextMenuButtonWidth() { return 160; }
+    constexpr static int contextMenuButtonHeight() { return 32; }
+
 
     static QString darkGrayColor() { return "#2e2e2e"; }
     static QString grayColor() { return "#4a4a4a"; }

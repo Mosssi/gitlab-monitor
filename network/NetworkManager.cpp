@@ -66,11 +66,11 @@ void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction 
     if (reply->error() != QNetworkReply::NetworkError::NoError) {
         callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);
         reply->deleteLater();
-        SystemTrayIcon::getInstance().setEnabled(false);
+        emit getInstance().networkError();
         return;
     }
 
-    SystemTrayIcon::getInstance().setEnabled(true);
+    emit getInstance().networkOk();
 
     QJsonValue jsonValue;
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());

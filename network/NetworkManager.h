@@ -10,7 +10,8 @@
 #define CALLBACK_SIGNATURE const QJsonValue &jsonValue, ResponseStatus status
 typedef std::function<void(CALLBACK_SIGNATURE)> CallbackFunction;
 
-class NetworkManager {
+class NetworkManager : public QObject {
+Q_OBJECT
 private:
     friend class ServiceMediator;
 
@@ -22,6 +23,10 @@ private:
     static void processReply(QNetworkReply * reply, const CallbackFunction &callback);
 
     QNetworkAccessManager * networkAccessManager;
+
+signals:
+    void networkError();
+    void networkOk();
 };
 
 

@@ -13,7 +13,11 @@ ProjectsListWidget::ProjectsListWidget(QWidget * parent) : QFrame(parent) {
 
     connect(&DataStore::getInstance(), &DataStore::projectsReceived, this, &ProjectsListWidget::updateUi);
     connect(&DataStore::getInstance(), &DataStore::projectsReceiveFailed, [this]() {
-        contentWidget->setState(LoadableContentState::ERROR);
+        if (DataStore::getInstance().getProjects().isEmpty()) {
+            contentWidget->setState(LoadableContentState::ERROR);
+        } else {
+            NotificationService::error("Error in updating list of projects");
+        }
     });
 }
 

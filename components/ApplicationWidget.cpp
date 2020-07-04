@@ -18,7 +18,7 @@
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
     setupTrayIcon();
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+//    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
     setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::lightColor()).arg(GuiManager::darkGrayColor()));
     setupUi();
@@ -28,26 +28,54 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     DataStore::getInstance().initialize();
 
     GuiManager::setApplicationWindow(this);
+
+    contextMenu = new ContextMenu();
+    contextMenu->setVisible(false);
+
+    connect(contextMenu, &ContextMenu::openClicked, [this]() {
+        contextMenu->setVisible(false);
+        showApplication();
+    });
+
+    connect(contextMenu, &ContextMenu::exitClicked, [this]() {
+        QApplication::exit(0);
+    });
 }
 
 void ApplicationWidget::setupTrayIcon() {
 
-    auto &systemTrayIcon = SystemTrayIcon::getInstance();
-    systemTrayIcon.setParent(this);
-    connect(&systemTrayIcon, &SystemTrayIcon::clicked, [this]() {
+    systemTrayIcon = new SystemTrayIcon();
+    systemTrayIcon->setParent(this);
+
+    auto calculateShowPoint = [this](int width, int height, bool middle) -> QPoint {
         const QPoint &cursorPosition = QCursor::pos();
         const int availableHeight = QApplication::primaryScreen()->availableGeometry().height();
         const int availableWidth = QApplication::desktop()->size().width();
-        int x = qMin(
-                cursorPosition.x() - GuiManager::applicationWidth() / 2,
-                availableWidth - GuiManager::applicationWidth()
-        );
+        int x = qMin(cursorPosition.x() - (middle ? width / 2 : 0), availableWidth - width);
         int y = QApplication::primaryScreen()->availableGeometry().y();
         if (cursorPosition.y() > availableHeight / 2) {
-            y = availableHeight - GuiManager::applicationHeight();
+            y = availableHeight - height;
         }
-        move(x, y);
-        this->setVisible(!this->isVisible());
+        return QPoint(x, y);
+    };
+
+    showApplication = [this, calculateShowPoint]() {
+        move(calculateShowPoint(GuiManager::applicationWidth(), GuiManager::applicationHeight(), true));
+        if (contextMenu->isVisible()) {
+            contextMenu->setVisible(false);
+        } else {
+            this->setVisible(!this->isVisible());
+        }
+    };
+
+    connect(systemTrayIcon, &SystemTrayIcon::clicked, showApplication);
+
+    connect(systemTrayIcon, &SystemTrayIcon::rightClicked, [this, calculateShowPoint]() {
+        contextMenu->move(calculateShowPoint(GuiManager::contextMenuButtonWidth(), GuiManager::contextMenuButtonHeight() * 2, false)); // TODO: Fix number 2
+        if (isVisible()) {
+            setVisible(false);
+        }
+        contextMenu->setVisible(!contextMenu->isVisible());
     });
 }
 

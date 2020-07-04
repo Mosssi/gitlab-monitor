@@ -4,6 +4,7 @@
 #include "../utilities/DataStore.h"
 #include "IssueWidget.h"
 #include "library/PushButton.h"
+#include "../utilities/NotificationService.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
@@ -13,7 +14,11 @@ IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
 
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceiveFailed, [this]() {
-        contentWidget->setState(LoadableContentState::ERROR);
+        if (DataStore::getInstance().getProject(projectId).openIssues.isEmpty()) {
+            contentWidget->setState(LoadableContentState::ERROR);
+        } else {
+            NotificationService::error("Error in updating list of open issues");
+        }
     });
 }
 
@@ -124,6 +129,8 @@ void IssuesListWidget::requestIssueCreation(const QString &issueTitle) {
             hideIssueInputWidget();
             DataStore::getInstance().refreshProjectOpenIssues(projectId);
             updateUi();
+        } else {
+            NotificationService::error("An error occurred in creating issue");
         }
     });
 }

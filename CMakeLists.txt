@@ -70,6 +70,6 @@ add_executable(gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
-        utilities/NotificationService.cpp utilities/NotificationService.h utilities/NotificationWidget.cpp utilities/NotificationWidget.h)
+        utilities/NotificationService.cpp utilities/NotificationService.h utilities/NotificationWidget.cpp utilities/NotificationWidget.h components/ContextMenu.cpp components/ContextMenu.h components/ContextMenuButton.cpp components/ContextMenuButton.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
