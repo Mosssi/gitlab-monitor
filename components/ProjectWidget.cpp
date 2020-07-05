@@ -56,13 +56,13 @@ void ProjectWidget::updateUi() {
 
 void ProjectWidget::enterEvent(QEvent * event) {
 
-    setStyleSheet("background-color: #f7f7f7;");
+    setStyleSheet("background-color: #f7f7f7;"); // TODO
     QWidget::enterEvent(event);
 }
 
 void ProjectWidget::leaveEvent(QEvent * event) {
 
-    setStyleSheet("background-color: #ffffff;");
+    setStyleSheet("background-color: #ffffff;"); // TODO
     QWidget::leaveEvent(event);
 }
 

@@ -14,6 +14,8 @@ signals:
 
 private:
     void mouseReleaseEvent(QMouseEvent *) override;
+    void enterEvent(QEvent * event) override;
+    void leaveEvent(QEvent * event) override;
 
     QString text;
 };

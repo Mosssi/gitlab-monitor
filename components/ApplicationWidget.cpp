@@ -18,7 +18,7 @@
 ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
     setupTrayIcon();
-//    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
     setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::lightColor()).arg(GuiManager::darkGrayColor()));
     setupUi();

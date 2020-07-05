@@ -4,7 +4,8 @@
 
 ContextMenu::ContextMenu() : QWidget(nullptr) {
 
-//    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+    setStyleSheet("background-color: " + GuiManager::lightColor() + ";");
     setupUi();
 }
 
@@ -15,8 +16,8 @@ void ContextMenu::setupUi() {
     auto * exitButton = new ContextMenuButton("Exit");
     mainLayout->addWidget(openButton);
     mainLayout->addWidget(exitButton);
-    mainLayout->setSpacing(2);
-    mainLayout->setContentsMargins(4, 4, 4, 4);
+    mainLayout->setSpacing(1);
+    mainLayout->setContentsMargins(3, 3, 3, 3);
 
     connect(openButton, &ContextMenuButton::clicked, [this]() { emit openClicked(); });
     connect(exitButton, &ContextMenuButton::clicked, [this]() { emit exitClicked(); });
