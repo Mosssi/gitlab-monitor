@@ -1,26 +1,21 @@
 #include "ContextMenuButton.h"
 
-ContextMenuButton::ContextMenuButton(const QString &text, QWidget * parent) : Label(text, parent) {
+#include <QtWidgets/QHBoxLayout>
 
-    setFontSize(GuiManager::smallFontSize());
-    setBackgroundColor(GuiManager::lightColor());
-    setFixedSize(GuiManager::contextMenuButtonWidth(), GuiManager::contextMenuButtonHeight());
-    setGeneralStyle("padding: 5px;");
+#include "../utilities/GuiManager.h"
+#include "library/Label.h"
+
+ContextMenuButton::ContextMenuButton(const QString &text, QWidget * parent) : HoverClickFrame(parent), text(text) {
+
+    setFixedWidth(GuiManager::contextMenuButtonWidth());
+    setupUi();
 }
 
-void ContextMenuButton::mouseReleaseEvent(QMouseEvent *) {
+void ContextMenuButton::setupUi() {
 
-    emit clicked();
-}
+    auto * mainLayout = new QHBoxLayout(this);
+    auto * label = new Label(text);
+    label->setFontSize(GuiManager::smallFontSize());
 
-void ContextMenuButton::enterEvent(QEvent * event) {
-
-    setBackgroundColor(GuiManager::darkLightColor());
-    QWidget::enterEvent(event);
-}
-
-void ContextMenuButton::leaveEvent(QEvent * event) {
-
-    setBackgroundColor(GuiManager::lightColor());
-    QWidget::leaveEvent(event);
+    mainLayout->addWidget(label);
 }

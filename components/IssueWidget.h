@@ -2,26 +2,21 @@
 #define GITLAB_DESKTOP_MONITOR_ISSUEWIDGET_H
 
 
-#include <QtWidgets/QFrame>
-
-#include "library/Label.h"
 #include "../models/Issue.h"
+#include "library/HoverClickFrame.h"
+#include "library/Label.h"
 
-class IssueWidget : public QFrame {
+class IssueWidget : public HoverClickFrame {
 Q_OBJECT
 public:
     explicit IssueWidget(int projectId, const Issue &issue, QWidget * parent = nullptr);
 
 signals:
-    void clicked();
     void closed();
 
 private:
     void setupUi();
     void updateUi();
-    void enterEvent(QEvent * event) override;
-    void leaveEvent(QEvent * event) override;
-    void mouseReleaseEvent(QMouseEvent * event) override;
 
     Issue issue;
     int projectId;

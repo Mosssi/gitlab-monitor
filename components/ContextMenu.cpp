@@ -1,11 +1,13 @@
-#include <QtWidgets/QVBoxLayout>
 #include "ContextMenu.h"
+
+#include <QtWidgets/QVBoxLayout>
+
 #include "ContextMenuButton.h"
 
 ContextMenu::ContextMenu() : QWidget(nullptr) {
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
-    setStyleSheet("background-color: " + GuiManager::lightColor() + ";");
+    setStyleSheet("background-color: " + GuiManager::whiteColor() + ";");
     setupUi();
 }
 

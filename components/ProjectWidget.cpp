@@ -6,7 +6,7 @@
 #include "../network/ServiceMediator.h"
 #include "library/LoadingWidget.h"
 
-ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : QFrame(parent), projectId(projectId) {
+ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : HoverClickFrame(parent), projectId(projectId) {
 
     setupUi();
     updateUi();
@@ -52,21 +52,4 @@ void ProjectWidget::updateUi() {
     }
 
     openIssuesCountLabel->setText(QString::number(project.openIssuesCount));
-}
-
-void ProjectWidget::enterEvent(QEvent * event) {
-
-    setStyleSheet("background-color: #f7f7f7;"); // TODO
-    QWidget::enterEvent(event);
-}
-
-void ProjectWidget::leaveEvent(QEvent * event) {
-
-    setStyleSheet("background-color: #ffffff;"); // TODO
-    QWidget::leaveEvent(event);
-}
-
-void ProjectWidget::mouseReleaseEvent(QMouseEvent * event) {
-
-    emit clicked();
 }

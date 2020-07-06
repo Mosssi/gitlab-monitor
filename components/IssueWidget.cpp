@@ -6,7 +6,7 @@
 #include "../utilities/DataStore.h"
 #include "library/PushButton.h"
 
-IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : QFrame(parent), issue(issue), projectId(projectId) {
+IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : HoverClickFrame(parent, false), issue(issue), projectId(projectId) {
 
     setupUi();
     updateUi();
@@ -44,21 +44,3 @@ void IssueWidget::updateUi() {
     nameLabel->setText(issue.title);
     iidLabel->setText(QString("#%1").arg(issue.iid));
 }
-
-void IssueWidget::enterEvent(QEvent * event) {
-
-    setStyleSheet("background-color: #f7f7f7;");
-    QWidget::enterEvent(event);
-}
-
-void IssueWidget::leaveEvent(QEvent * event) {
-
-    setStyleSheet("background-color: #ffffff;");
-    QWidget::leaveEvent(event);
-}
-
-void IssueWidget::mouseReleaseEvent(QMouseEvent * event) {
-
-    emit clicked();
-}
-

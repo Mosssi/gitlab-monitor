@@ -31,6 +31,8 @@ public:
     static QString grayColor() { return "#4a4a4a"; }
     static QString lightGrayColor() { return "#666666"; }
     static QString lighterGrayColor() { return "#888888"; }
+    static QString whiteColor() { return "#ffffff"; }
+    static QString lighterColor() { return "#f7f7f7"; }
     static QString lightColor() { return "#f0f0f0"; }
     static QString darkLightColor() { return "#e5e5e5"; }
     static QString darkerLightColor() { return "#d0d0d0"; }

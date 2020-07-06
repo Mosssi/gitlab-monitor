@@ -2,25 +2,18 @@
 #define GITLAB_DESKTOP_MONITOR_PROJECTWIDGET_H
 
 
-#include <QtWidgets/QFrame>
-
 #include "../models/Project.h"
 #include "library/Label.h"
+#include "library/HoverClickFrame.h"
 
-class ProjectWidget : public QFrame {
+class ProjectWidget : public HoverClickFrame {
 Q_OBJECT
 public:
     explicit ProjectWidget(int projectId, QWidget * parent = nullptr);
 
-signals:
-    void clicked();
-
 private:
     void setupUi();
     void updateUi();
-    void enterEvent(QEvent * event) override;
-    void leaveEvent(QEvent * event) override;
-    void mouseReleaseEvent(QMouseEvent * event) override;
 
     int projectId;
 

@@ -17,6 +17,10 @@ add_executable(gitlab_desktop_monitor
         components/ApplicationWidget.h
         components/BodyWidget.cpp
         components/BodyWidget.h
+        components/ContextMenu.cpp
+        components/ContextMenu.h
+        components/ContextMenuButton.cpp
+        components/ContextMenuButton.h
         components/HeaderWidget.cpp
         components/HeaderWidget.h
         components/IssueInputWidget.cpp
@@ -33,6 +37,10 @@ add_executable(gitlab_desktop_monitor
         components/ProjectsListWidget.h
         components/SystemTrayIcon.cpp
         components/SystemTrayIcon.h
+        components/library/Frame.cpp
+        components/library/Frame.h
+        components/library/HoverClickFrame.cpp
+        components/library/HoverClickFrame.h
         components/library/IconType.cpp
         components/library/IconType.h
         components/library/Label.cpp
@@ -70,6 +78,10 @@ add_executable(gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
-        utilities/NotificationService.cpp utilities/NotificationService.h utilities/NotificationWidget.cpp utilities/NotificationWidget.h components/ContextMenu.cpp components/ContextMenu.h components/ContextMenuButton.cpp components/ContextMenuButton.h)
+        utilities/NotificationService.cpp
+        utilities/NotificationService.h
+        utilities/NotificationWidget.cpp
+        utilities/NotificationWidget.h
+        )
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

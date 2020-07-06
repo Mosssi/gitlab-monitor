@@ -2,21 +2,15 @@
 #define GITLAB_DESKTOP_MONITOR_CONTEXTMENUBUTTON_H
 
 
-#include "library/Label.h"
+#include "library/HoverClickFrame.h"
 
-class ContextMenuButton : public Label {
+class ContextMenuButton : public HoverClickFrame {
 Q_OBJECT
 public:
     explicit ContextMenuButton(const QString &text, QWidget * parent = nullptr);
 
-signals:
-    void clicked();
-
 private:
-    void mouseReleaseEvent(QMouseEvent *) override;
-    void enterEvent(QEvent * event) override;
-    void leaveEvent(QEvent * event) override;
-
+    void setupUi();
     QString text;
 };
 
