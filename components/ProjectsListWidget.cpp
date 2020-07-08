@@ -58,13 +58,27 @@ void ProjectsListWidget::updateUi() {
 
     const QList<Project> projects = DataStore::getInstance().getProjects();
 
-    for (const auto &project : projects) {
-        auto * projectWidget = new ProjectWidget(project.id);
-        connect(projectWidget, &ProjectWidget::clicked, [this, project]() {
-            emit projectSelected(project.id, project.name);
-        });
-        scrollLayout->addWidget(projectWidget);
+    if (projects.isEmpty()) {
+        // TODO: Show no contents page
+    } else {
+        emptyScrollLayout();
+        for (const auto &project : projects) {
+            auto * projectWidget = new ProjectWidget(project.id);
+            connect(projectWidget, &ProjectWidget::clicked, [this, project]() {
+                emit projectSelected(project.id, project.name);
+            });
+            scrollLayout->addWidget(projectWidget);
+        }
     }
 
     contentWidget->setState(LoadableContentState::CONTENT);
+}
+
+void ProjectsListWidget::emptyScrollLayout() {
+
+    QLayoutItem * child;
+    while ((child = scrollLayout->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
+    }
 }

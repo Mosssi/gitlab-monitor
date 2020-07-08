@@ -10,13 +10,12 @@ ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : HoverClickFrame(
 
     setupUi();
     updateUi();
-
-    connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &ProjectWidget::updateUi);
 }
 
 void ProjectWidget::setupUi() {
 
     setFixedHeight(GuiManager::projectHeight());
+    setFixedWidth(GuiManager::applicationWidth());
     setStyleSheet("background-color: #ffffff;"); // TODO: use GuiManager
 
     auto * mainLayout = new QHBoxLayout(this);
@@ -52,4 +51,8 @@ void ProjectWidget::updateUi() {
     }
 
     openIssuesCountLabel->setText(QString::number(project.openIssuesCount));
+}
+
+void ProjectWidget::mousePressEvent(QMouseEvent * event) {
+    HoverClickFrame::mousePressEvent(event);
 }

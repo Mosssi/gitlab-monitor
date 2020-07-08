@@ -14,7 +14,9 @@ public:
 private:
     void setupUi();
     void updateUi();
-
+protected:
+    void mousePressEvent(QMouseEvent * event) override;
+private:
     int projectId;
 
     Label * nameLabel = nullptr;

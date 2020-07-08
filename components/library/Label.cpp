@@ -1,5 +1,7 @@
 #include "Label.h"
 
+#include <QResizeEvent>
+
 Label::Label(const QString &text, QWidget * parent) : QLabel(text, parent) {
 
     updateStyleSheet();
@@ -23,7 +25,7 @@ void Label::setColor(const QString &color) {
     updateStyleSheet();
 }
 
-void Label::setGeneralStyle(const QString &generalStyle) {
+[[maybe_unused]] void Label::setGeneralStyle(const QString &generalStyle) {
 
     this->generalStyle = generalStyle;
     updateStyleSheet();
@@ -50,4 +52,24 @@ void Label::setBackgroundColor(const QString &backgroundColor) {
 
     this->backgroundColor = backgroundColor;
     updateStyleSheet();
+}
+
+void Label::resizeEvent(QResizeEvent * event) {
+
+    QWidget::resizeEvent(event);
+    elideText(event->size().width());
+}
+
+void Label::elideText(int availableWidth) {
+
+    QFontMetrics fontMetrics(font());
+    if (fontMetrics.width(text()) > availableWidth) {
+        QString elidedText;
+        QString labelText = text();
+        int lengthReduction = 4;
+        do {
+            elidedText = labelText.mid(0, labelText.length() - lengthReduction++);
+        } while (fontMetrics.width(elidedText + "...") > availableWidth);
+        setText(elidedText + "...");
+    }
 }

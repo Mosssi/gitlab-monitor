@@ -73,6 +73,7 @@ void DataStore::refreshProjects() {
 
     ServiceMediator::requestProjects([this](CALLBACK_SIGNATURE) {
         if (status == ResponseStatus::SUCCESSFUL) {
+            projects.clear();
             for (const auto &projectJsonValue: jsonValue.toArray()) {
                 const Project &project = Project(projectJsonValue.toObject());
                 projects.insert(project.id, project);

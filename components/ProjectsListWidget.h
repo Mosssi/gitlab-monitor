@@ -19,6 +19,7 @@ signals:
 private:
     void setupUi();
     void updateUi();
+    void emptyScrollLayout();
 
     // TODO: Better names?!
     QVBoxLayout * scrollLayout = nullptr;

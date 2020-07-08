@@ -13,12 +13,13 @@ public:
 signals:
     void clicked();
 
-private:
+protected:
     void mousePressEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
     void enterEvent(QEvent * event) override;
     void leaveEvent(QEvent * event) override;
 
+private:
     const QString normalColor = GuiManager::whiteColor();
     const QString hoverColor = GuiManager::lighterColor();
     const QString pressColor = GuiManager::lightColor();
