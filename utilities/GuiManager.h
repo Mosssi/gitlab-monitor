@@ -25,8 +25,8 @@ public:
     constexpr static int loadingWidgetHeight() { return 28; }
     constexpr static int contextMenuButtonWidth() { return 160; }
     constexpr static int contextMenuButtonHeight() { return 30; }
-    constexpr static int ConfigurationWindowWidth() { return applicationWidth() / 2; }
-    constexpr static int ConfigurationWindowHeight() { return 100; }
+    constexpr static int configurationWindowWidth() { return 200; }
+    constexpr static int configurationWindowHeight() { return 150; }
 
 
     static QString darkGrayColor() { return "#2e2e2e"; }
@@ -46,13 +46,13 @@ public:
     static QString lightPurpleColor() { return "#6e49cb"; }
     static QString purpleColor() { return "#380d75"; }
 
-    static void setApplicationWindow(QWidget * widget);
-    static QWidget * getApplicationWindow();
+    static void setApplicationWindow(ApplicationWidget * widget);
+    static ApplicationWidget * getApplicationWindow();
 
 private:
     static GuiManager &getInstance();
 
-    QWidget * applicationWindow;
+    ApplicationWidget * applicationWindow;
 };
 
 

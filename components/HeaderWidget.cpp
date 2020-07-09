@@ -4,6 +4,8 @@
 
 #include "../utilities/DataStore.h"
 #include "library/Label.h"
+#include "library/PushButton.h"
+#include "../network/NetworkManager.h"
 
 
 HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
@@ -39,4 +41,9 @@ void HeaderWidget::setupUi() {
     mainLayout->addWidget(logoLabel);
     mainLayout->addStretch();
     mainLayout->addWidget(userWelcomeLabel);
+    auto * configurationButton = new PushButton(IconType::EMPTY);
+    mainLayout->addWidget(configurationButton);
+    connect(configurationButton, &PushButton::clicked, [this]() {
+        GuiManager::getApplicationWindow()->showConfiguration();
+    });
 }

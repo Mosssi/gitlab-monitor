@@ -10,7 +10,6 @@
 #include "../network/ServiceMediator.h"
 #include "../utilities/Configuration.h"
 #include "../utilities/DataStore.h"
-#include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
 #include "SystemTrayIcon.h"
@@ -40,6 +39,13 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     connect(contextMenu, &ContextMenu::exitClicked, [this]() {
         QApplication::exit(0);
     });
+
+    configurationWindow = new ConfigurationWindow(this);
+    configurationWindow->hide();
+    configurationWindow->move(
+            (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
+            (GuiManager::applicationHeight() - GuiManager::configurationWindowHeight()) / 2
+    );
 }
 
 void ApplicationWidget::setupTrayIcon() {
@@ -87,4 +93,14 @@ void ApplicationWidget::setupUi() {
 
     mainLayout->addWidget(new HeaderWidget());
     mainLayout->addWidget(new BodyWidget());
+}
+
+void ApplicationWidget::showConfiguration() {
+
+    configurationWindow->show();
+}
+
+void ApplicationWidget::hideConfiguration() {
+
+    configurationWindow->hide();
 }

@@ -1,11 +1,11 @@
 #include "GuiManager.h"
 
-void GuiManager::setApplicationWindow(QWidget * widget) {
+void GuiManager::setApplicationWindow(ApplicationWidget * widget) {
 
     GuiManager::getInstance().applicationWindow = widget;
 }
 
-QWidget * GuiManager::getApplicationWindow() {
+ApplicationWidget * GuiManager::getApplicationWindow() {
 
     return GuiManager::getInstance().applicationWindow;
 }

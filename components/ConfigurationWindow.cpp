@@ -5,11 +5,13 @@
 
 #include "../utilities/GuiManager.h"
 #include "library/Label.h"
+#include "library/PushButton.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Frame(parent) {
 
-    setBackgroundColor(GuiManager::darkLightColor());
-    setFixedSize(GuiManager::ConfigurationWindowWidth(), GuiManager::ConfigurationWindowHeight());
+    setBackgroundColor(GuiManager::lightColor());
+    setFixedSize(GuiManager::configurationWindowWidth(), GuiManager::configurationWindowHeight());
+    setGeneralStyle("border-radius: 5px;");
     setupUi();
 }
 
@@ -30,4 +32,10 @@ void ConfigurationWindow::setupUi() {
 
     mainLayout->addLayout(themeLayout);
     mainLayout->addLayout(issuesLayout);
+
+    auto * doneButton = new PushButton(IconType::DONE);
+    connect(doneButton, &PushButton::clicked, [this]() {
+        GuiManager::getApplicationWindow()->hideConfiguration();
+    });
+    mainLayout->addWidget(doneButton, 0, Qt::AlignCenter);
 }

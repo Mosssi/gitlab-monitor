@@ -6,10 +6,13 @@
 
 #include "ContextMenu.h"
 #include "SystemTrayIcon.h"
+#include "ConfigurationWindow.h"
 
 class ApplicationWidget : public QWidget {
 public:
     explicit ApplicationWidget(QWidget * parent = nullptr);
+    void showConfiguration();
+    void hideConfiguration();
 
 private:
     void setupTrayIcon();
@@ -19,6 +22,7 @@ private:
 
     ContextMenu * contextMenu = nullptr;
     SystemTrayIcon * systemTrayIcon = nullptr;
+    ConfigurationWindow * configurationWindow = nullptr;
 };
 
 
