@@ -51,6 +51,8 @@ add_executable(gitlab_desktop_monitor
         components/library/LoadingWidget.h
         components/library/PushButton.cpp
         components/library/PushButton.h
+        components/library/ResizeAwareWidget.cpp
+        components/library/ResizeAwareWidget.h
         components/library/ScrollArea.cpp
         components/library/ScrollArea.h
         components/library/ScrollBar.cpp
@@ -82,6 +84,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationService.h
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
-        )
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

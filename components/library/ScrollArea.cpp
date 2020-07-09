@@ -1,4 +1,5 @@
 #include "ScrollArea.h"
+#include "ResizeAwareWidget.h"
 
 #include <QScrollBar>
 
@@ -7,11 +8,16 @@ const int scrollBarWidth = 5;
 
 ScrollArea::ScrollArea(QLayout * layout) : QScrollArea() {
 
-    auto * widget = new QWidget();
+    auto * widget = new ResizeAwareWidget();
     widget->setLayout(layout);
     setWidget(widget);
     setWidgetResizable(true);
     setFrameShape(Shape::NoFrame);
+
+    connect(widget, &ResizeAwareWidget::resized, [this]() {
+        updateVScrollBarPosition();
+        updateHScrollBarPosition();
+    });
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
