@@ -25,6 +25,8 @@ public:
     constexpr static int loadingWidgetHeight() { return 28; }
     constexpr static int contextMenuButtonWidth() { return 160; }
     constexpr static int contextMenuButtonHeight() { return 30; }
+    constexpr static int ConfigurationWindowWidth() { return applicationWidth() / 2; }
+    constexpr static int ConfigurationWindowHeight() { return 100; }
 
 
     static QString darkGrayColor() { return "#2e2e2e"; }
