@@ -6,29 +6,33 @@
 #include "../utilities/GuiManager.h"
 #include "library/Label.h"
 #include "library/PushButton.h"
+#include "../utilities/Configuration.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Frame(parent) {
 
-    setBackgroundColor(GuiManager::lightColor());
-    setFixedSize(GuiManager::configurationWindowWidth(), GuiManager::configurationWindowHeight());
-    setGeneralStyle("border-radius: 5px;");
+    setBackgroundColor("#44000000");
+    setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
     setupUi();
 }
 
 void ConfigurationWindow::setupUi() {
 
-    auto * mainLayout = new QVBoxLayout(this);
+    auto * mainWidget = new QWidget(this);
+    auto * mainLayout = new QVBoxLayout(mainWidget);
     mainLayout->addWidget(new Label("Configuration"));
 
     auto * themeLayout = new QHBoxLayout();
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
-    themeLayout->addWidget(new QCheckBox());
+    auto * darkThemeCheckbox = new QCheckBox();
+    themeLayout->addWidget(darkThemeCheckbox);
+    connect(darkThemeCheckbox, &QCheckBox::toggled, &Configuration::getInstance(), &Configuration::setDarkTheme);
 
     auto * issuesLayout = new QHBoxLayout();
     issuesLayout->addWidget(new Label("Assigned To Me"));
     issuesLayout->addStretch();
-    issuesLayout->addWidget(new QCheckBox());
+    auto * assignedToMeCheckbox = new QCheckBox();
+    issuesLayout->addWidget(assignedToMeCheckbox);
 
     mainLayout->addLayout(themeLayout);
     mainLayout->addLayout(issuesLayout);
@@ -38,4 +42,11 @@ void ConfigurationWindow::setupUi() {
         GuiManager::getApplicationWindow()->hideConfiguration();
     });
     mainLayout->addWidget(doneButton, 0, Qt::AlignCenter);
+
+    mainWidget->setFixedSize(GuiManager::configurationWindowWidth(), GuiManager::configurationWindowHeight());
+    mainWidget->setStyleSheet("border-radius: 6px;");
+    mainWidget->move(
+            (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
+            (GuiManager::applicationHeight() - GuiManager::configurationWindowHeight()) / 2
+    );
 }

@@ -10,7 +10,7 @@
 
 HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
 
-    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::lightOrangeColor() + ";}");
+    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::lightOrangeColor() + ";}"); // TODO: fix it
 
     setupUi();
 

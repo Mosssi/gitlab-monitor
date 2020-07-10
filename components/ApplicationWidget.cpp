@@ -42,10 +42,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
 
     configurationWindow = new ConfigurationWindow(this);
     configurationWindow->hide();
-    configurationWindow->move(
-            (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
-            (GuiManager::applicationHeight() - GuiManager::configurationWindowHeight()) / 2
-    );
+    configurationWindow->move(0, 0);
 }
 
 void ApplicationWidget::setupTrayIcon() {
