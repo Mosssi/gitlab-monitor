@@ -1,7 +1,6 @@
 #include "Frame.h"
-#include "../../utilities/Configuration.h"
 
-#include <QDebug>
+#include "../../utilities/Configuration.h"
 
 Frame::Frame(QWidget * parent) : QFrame(parent), StyledWidget() {
 
@@ -26,6 +25,4 @@ void Frame::updateStyleSheet() {
                     .arg(backgroundColor)
                     .arg(generalStyle)
     );
-
-    qDebug() << "here we are" << Configuration::getInstance().getDarkTheme();
 }

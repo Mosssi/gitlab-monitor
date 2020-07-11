@@ -1,5 +1,9 @@
 #include "Configuration.h"
 
+Configuration::Configuration() : QObject(nullptr) {
+
+}
+
 Configuration &Configuration::getInstance() {
 
     static Configuration instance;
@@ -38,6 +42,13 @@ bool Configuration::getAssignedToMe() const {
     return assignedToMe;
 }
 
-Configuration::Configuration() : QObject(nullptr) {
+void Configuration::setServerAddress(const QString &serverAddress) {
 
+    // TODO: parse serverAddress and act more flexible
+    this->serverAddress = serverAddress + "/api/v4";
+}
+
+QString Configuration::getServerAddress() const {
+
+    return serverAddress;
 }

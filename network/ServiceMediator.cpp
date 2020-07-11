@@ -4,12 +4,11 @@
 #include <QUrlQuery>
 
 #include "../utilities/Configuration.h"
-
-#define SERVICE_ADDRESS "https://gitlab.com/api/v4"
+#include "../utilities/DataStore.h"
 
 QString ServiceMediator::getUrl(const QString &url, const QList<QPair<QString, QString>> &queries) {
 
-    QUrl qUrl(SERVICE_ADDRESS + url);
+    QUrl qUrl(Configuration::getInstance().getServerAddress() + url);
     QUrlQuery urlQuery;
     for (const auto &pair : queries) {
         urlQuery.addQueryItem(pair.first, pair.second);
@@ -51,8 +50,14 @@ void ServiceMediator::requestProject(int projectId, const CallbackFunction &call
 }
 
 void ServiceMediator::requestProjectOpenIssues(int projectId, const CallbackFunction &callback) {
+
+    QList<QPair<QString, QString>> body = {{"state", "opened"}};
+    if (Configuration::getInstance().getAssignedToMe()) {
+        body.append({{"assignee_id", QString::number(DataStore::getInstance().getUser().id)}});
+    }
+
     NetworkManager::getInstance().get(
-            getUrl(QString("/projects/%1/issues").arg(projectId), {{"state", "opened"}}),
+            getUrl(QString("/projects/%1/issues").arg(projectId), body),
             callback
     );
 }

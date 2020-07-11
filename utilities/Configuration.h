@@ -8,6 +8,8 @@ class Configuration : public QObject {
 Q_OBJECT
 public:
     static Configuration &getInstance();
+    void setServerAddress(const QString &serverAddress);
+    [[nodiscard]] QString getServerAddress() const;
     void setToken(const QString &token);
     [[nodiscard]] QString getToken() const;
     void setDarkTheme(bool darkTheme);
@@ -22,6 +24,7 @@ signals:
 private:
     explicit Configuration();
 
+    QString serverAddress = "";
     QString token = "";
     bool darkTheme = false;
     bool assignedToMe = false;

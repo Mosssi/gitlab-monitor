@@ -33,6 +33,7 @@ void ConfigurationWindow::setupUi() {
     issuesLayout->addStretch();
     auto * assignedToMeCheckbox = new QCheckBox();
     issuesLayout->addWidget(assignedToMeCheckbox);
+    connect(assignedToMeCheckbox, &QCheckBox::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
 
     mainLayout->addLayout(themeLayout);
     mainLayout->addLayout(issuesLayout);

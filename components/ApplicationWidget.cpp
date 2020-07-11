@@ -22,6 +22,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
     setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::lightColor()).arg(GuiManager::darkGrayColor()));
     setupUi();
 
+    Configuration::getInstance().setServerAddress("https://gitlab.com");
     Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
 
     DataStore::getInstance().initialize();

@@ -66,10 +66,10 @@ void IssuesListWidget::updateUi() {
 
     projectNameLabel->setText(project.name.toUpper());
 
+    emptyScrollLayout();
     if (project.openIssues.isEmpty()) {
         // TODO: create no content page, perhaps in LoadableContentWidget
     } else {
-        emptyScrollLayout();
         for (const auto &issue: project.openIssues) {
             auto * issueWidget = new IssueWidget(projectId, issue);
             connect(issueWidget, &IssueWidget::closed, [this, issue]() {
@@ -87,14 +87,7 @@ void IssuesListWidget::updateUi() {
 void IssuesListWidget::setProjectId(int projectId) {
 
     this->projectId = projectId;
-
-    if (DataStore::getInstance().getProject(projectId).openIssues.isEmpty()) {
-        contentWidget->setState(LoadableContentState::LOADING);
-    } else {
-        updateUi();
-    }
-
-    DataStore::getInstance().refreshProjectOpenIssues(projectId);
+    refreshList();
 }
 
 void IssuesListWidget::setProjectName(const QString &projectName) {
@@ -133,4 +126,15 @@ void IssuesListWidget::requestIssueCreation(const QString &issueTitle) {
             NotificationService::error("An error occurred in creating issue");
         }
     });
+}
+
+void IssuesListWidget::refreshList(bool forceLoading) {
+
+    if (DataStore::getInstance().getProject(projectId).openIssues.isEmpty() || forceLoading) {
+        contentWidget->setState(LoadableContentState::LOADING);
+    } else {
+        updateUi();
+    }
+
+    DataStore::getInstance().refreshProjectOpenIssues(projectId);
 }

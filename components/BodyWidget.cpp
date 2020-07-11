@@ -1,5 +1,6 @@
 #include "BodyWidget.h"
 
+#include "../utilities/Configuration.h"
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
 
@@ -22,6 +23,12 @@ void BodyWidget::setupUi() {
 
     connect(issuesListWidget, &IssuesListWidget::backClicked, [this]() {
         showProjectList();
+    });
+
+    connect(&Configuration::getInstance(), &Configuration::assignedToMeChanged, [this]() {
+        if (currentWidget() == issuesListWidget) {
+            issuesListWidget->refreshList(true);
+        }
     });
 }
 
