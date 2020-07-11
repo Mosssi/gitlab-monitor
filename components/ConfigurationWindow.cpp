@@ -1,12 +1,12 @@
 #include "ConfigurationWindow.h"
 
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QCheckBox>
 
+#include "../utilities/Configuration.h"
 #include "../utilities/GuiManager.h"
 #include "library/Label.h"
 #include "library/PushButton.h"
-#include "../utilities/Configuration.h"
+#include "library/ToggleSwitch.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Frame(parent) {
 
@@ -19,21 +19,34 @@ void ConfigurationWindow::setupUi() {
 
     auto * mainWidget = new QWidget(this);
     auto * mainLayout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(new Label("Configuration"));
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+
+    auto * titleFrame = new Frame();
+    auto * titleLayout = new QHBoxLayout(titleFrame);
+    titleFrame->setBackgroundColor(GuiManager::darkLightColor());
+    titleFrame->setGeneralStyle("border-bottom-left-radius: 0; border-bottom-right-radius: 0;");
+    titleFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
+    auto titleLabel = new Label("CONFIGURATION");
+    titleLabel->setColor(GuiManager::lightGrayColor());
+    titleLayout->addWidget(titleLabel, 0, Qt::AlignVCenter | Qt::AlignLeft);
+
+    mainLayout->addWidget(titleFrame);
 
     auto * themeLayout = new QHBoxLayout();
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
-    auto * darkThemeCheckbox = new QCheckBox();
-    themeLayout->addWidget(darkThemeCheckbox);
-    connect(darkThemeCheckbox, &QCheckBox::toggled, &Configuration::getInstance(), &Configuration::setDarkTheme);
+    auto * darkThemeSwitch = new ToggleSwitch();
+    darkThemeSwitch->setChecked(Configuration::getInstance().getDarkTheme());
+    themeLayout->addWidget(darkThemeSwitch);
+    connect(darkThemeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setDarkTheme);
 
     auto * issuesLayout = new QHBoxLayout();
     issuesLayout->addWidget(new Label("Assigned To Me"));
     issuesLayout->addStretch();
-    auto * assignedToMeCheckbox = new QCheckBox();
-    issuesLayout->addWidget(assignedToMeCheckbox);
-    connect(assignedToMeCheckbox, &QCheckBox::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
+    auto * assignedToMeSwitch = new ToggleSwitch();
+    assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());
+    issuesLayout->addWidget(assignedToMeSwitch);
+    connect(assignedToMeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
 
     mainLayout->addLayout(themeLayout);
     mainLayout->addLayout(issuesLayout);

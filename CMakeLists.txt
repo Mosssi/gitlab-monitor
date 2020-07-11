@@ -17,6 +17,8 @@ add_executable(gitlab_desktop_monitor
         components/ApplicationWidget.h
         components/BodyWidget.cpp
         components/BodyWidget.h
+        components/ConfigurationWindow.cpp
+        components/ConfigurationWindow.h
         components/ContextMenu.cpp
         components/ContextMenu.h
         components/ContextMenuButton.cpp
@@ -59,6 +61,10 @@ add_executable(gitlab_desktop_monitor
         components/library/ScrollBar.h
         components/library/SlidingStackedWidget.cpp
         components/library/SlidingStackedWidget.h
+        components/library/StyledWidget.cpp
+        components/library/StyledWidget.h
+        components/library/ToggleSwitch.cpp
+        components/library/ToggleSwitch.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
@@ -84,6 +90,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationService.h
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
-        components/ConfigurationWindow.cpp components/ConfigurationWindow.h components/library/StyledWidget.cpp components/library/StyledWidget.h)
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

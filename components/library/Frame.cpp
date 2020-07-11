@@ -1,5 +1,7 @@
 #include "Frame.h"
 
+#include <QDebug>
+
 #include "../../utilities/Configuration.h"
 
 Frame::Frame(QWidget * parent) : QFrame(parent), StyledWidget() {
