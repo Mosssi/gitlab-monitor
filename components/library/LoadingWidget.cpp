@@ -40,7 +40,7 @@ void LoadingWidget::paintEvent(QPaintEvent * event) {
     painter.setPen(pen);
     painter.drawEllipse(arcRect);
 
-    pen.setColor(GuiManager::lightGrayColor());
+    pen.setColor(GuiManager::secondaryTextColor()); // TODO: Better to define separate color
     painter.setPen(pen);
     painter.drawArc(arcRect, arcPosition * 16, arcLength * 16);
 }

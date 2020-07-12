@@ -55,3 +55,8 @@ void NotificationService::addNotification(const QString &message, NotificationSt
     NotificationService::getInstance().NotificationService::notificationWidgets.append(notificationWidget);
     NotificationService::getInstance().refreshPositions();
 }
+
+NotificationService::NotificationService() {
+
+    baseHeight = GuiManager::applicationHeight() - margin + spacing;
+}

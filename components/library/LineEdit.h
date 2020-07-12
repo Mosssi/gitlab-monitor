@@ -4,9 +4,14 @@
 
 #include <QtWidgets/QLineEdit>
 
-class LineEdit : public QLineEdit {
+#include "StyledWidget.h"
+
+class LineEdit : public QLineEdit, StyledWidget {
 public:
     explicit LineEdit(QWidget * parent = nullptr);
+
+private:
+    void updateStyleSheet() override;
 };
 
 

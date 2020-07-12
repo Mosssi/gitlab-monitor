@@ -1,43 +1,46 @@
 #include "Label.h"
 
 #include <QResizeEvent>
+#include <QDebug>
 
-Label::Label(const QString &text, QWidget * parent) : QLabel(text, parent) {
+#include "../../utilities/GuiManager.h"
 
-    updateStyleSheet();
+Label::Label(const QString &text, QWidget * parent) : QLabel(text, parent), StyledWidget(), fontSize(GuiManager::normalFontSize()) {
+
+    Label::updateStyleSheet();
 }
 
 void Label::setFontSize(int t_fontSize) {
 
     this->fontSize = t_fontSize;
-    updateStyleSheet();
+    Label::updateStyleSheet();
 }
 
 void Label::setBold(bool bold) {
 
     this->bold = bold;
-    updateStyleSheet();
+    Label::updateStyleSheet();
 }
 
 void Label::setColor(const QString &color) {
 
     this->color = color;
-    updateStyleSheet();
+    Label::updateStyleSheet();
 }
 
-[[maybe_unused]] void Label::setGeneralStyle(const QString &generalStyle) {
+void Label::setGeneralStyle(const QString &generalStyle) {
 
     this->generalStyle = generalStyle;
-    updateStyleSheet();
+    Label::updateStyleSheet();
 }
 
 void Label::updateStyleSheet() {
 
-    this->setStyleSheet(
+    setStyleSheet(
             QString("font-size: %1px; font-weight: %2; color: %3; background-color: %4; %5")
                     .arg(this->fontSize)
                     .arg(this->bold ? "bold" : "normal")
-                    .arg(this->color)
+                    .arg(GuiManager::textColor())
                     .arg(this->backgroundColor)
                     .arg(generalStyle)
     );
@@ -51,7 +54,7 @@ void Label::setStyleSheet(const QString &styleSheet) {
 void Label::setBackgroundColor(const QString &backgroundColor) {
 
     this->backgroundColor = backgroundColor;
-    updateStyleSheet();
+    Label::updateStyleSheet();
 }
 
 void Label::resizeEvent(QResizeEvent * event) {

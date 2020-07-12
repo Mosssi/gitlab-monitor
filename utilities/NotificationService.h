@@ -16,6 +16,7 @@ public:
     static void error(const QString &message);
 
 private:
+    explicit NotificationService();
     static NotificationService &getInstance();
     void refreshPositions();
     void addNotification(const QString &message, NotificationStatus status);
@@ -24,7 +25,7 @@ private:
     int getBaseHeight() { return this->baseHeight; }
 
     QList<NotificationWidget *> notificationWidgets;
-    int baseHeight = GuiManager::applicationHeight() - margin + spacing;
+    int baseHeight;
 };
 
 

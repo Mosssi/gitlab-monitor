@@ -2,17 +2,17 @@
 
 #include <QtWidgets/QVBoxLayout>
 
+#include "../network/NetworkManager.h"
 #include "../utilities/DataStore.h"
+#include "../utilities/GuiManager.h"
 #include "library/Label.h"
 #include "library/PushButton.h"
-#include "../network/NetworkManager.h"
 
 
-HeaderWidget::HeaderWidget(QWidget * parent) : QFrame(parent) {
-
-    setStyleSheet(".QFrame {border-bottom: 2px solid " + GuiManager::lightOrangeColor() + ";}"); // TODO: fix it
+HeaderWidget::HeaderWidget(QWidget * parent) : Frame(parent) {
 
     setupUi();
+    HeaderWidget::updateStyleSheet();
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this]() {
         QString username = DataStore::getInstance().getUser().username;
@@ -32,7 +32,6 @@ void HeaderWidget::setupUi() {
 
     userWelcomeLabel = new Label();
     userWelcomeLabel->setFontSize(GuiManager::smallFontSize());
-    userWelcomeLabel->setColor(GuiManager::lightGrayColor());
 
     auto * logoLabel = new Label();
     const QPixmap pixmap(":/images/gitlab-logo-gray-rgb.png");
@@ -46,4 +45,11 @@ void HeaderWidget::setupUi() {
     connect(configurationButton, &PushButton::clicked, [this]() {
         GuiManager::getApplicationWindow()->showConfiguration();
     });
+}
+
+void HeaderWidget::updateStyleSheet() {
+
+    setBackgroundColor(GuiManager::backgroundColor());
+    setGeneralStyle(QString("border-bottom: 2px solid %1").arg(GuiManager::lightOrangeColor()));
+    userWelcomeLabel->setColor(GuiManager::secondaryTextColor());
 }

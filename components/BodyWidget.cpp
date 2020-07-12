@@ -1,13 +1,12 @@
 #include "BodyWidget.h"
 
-#include "../utilities/Configuration.h"
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 
     setupUi();
-    setStyleSheet("background-color: #ffffff;");
+    BodyWidget::updateStyleSheet();
 }
 
 void BodyWidget::setupUi() {
@@ -40,4 +39,9 @@ void BodyWidget::showProjectList() {
 void BodyWidget::showIssuesList() {
 
     slideInIdx(1);
+}
+
+void BodyWidget::updateStyleSheet() {
+
+    setStyleSheet(QString("background-color: %1;").arg(GuiManager::backgroundColor()));
 }

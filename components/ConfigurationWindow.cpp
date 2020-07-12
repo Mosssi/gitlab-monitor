@@ -38,5 +38,6 @@ void ConfigurationWindow::setupUi() {
     connect(doneButton, &PushButton::clicked, [this]() {
         GuiManager::getApplicationWindow()->hideConfiguration();
     });
+    mainLayout->addSpacing(10);
     mainLayout->addWidget(doneButton, 0, Qt::AlignCenter);
 }

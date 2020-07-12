@@ -7,10 +7,10 @@
 #include "../utilities/NotificationService.h"
 
 
-IssuesListWidget::IssuesListWidget(QWidget * parent) : QFrame(parent) {
+IssuesListWidget::IssuesListWidget(QWidget * parent) : Frame(parent) {
 
     setupUi();
-    setStyleSheet("background-color: #ffffff;");
+    IssuesListWidget::updateStyleSheet();
 
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceived, this, &IssuesListWidget::updateUi);
     connect(&DataStore::getInstance(), &DataStore::projectOpenIssuesReceiveFailed, [this]() {
@@ -28,8 +28,7 @@ void IssuesListWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    auto * headerFrame = new QFrame();
-    headerFrame->setStyleSheet("background-color: " + GuiManager::darkLightColor() + ";");
+    headerFrame = new Frame();
     headerFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
     auto * headerLayout = new QHBoxLayout(headerFrame);
     auto * backButton = new PushButton(IconType::BACK);
@@ -43,7 +42,6 @@ void IssuesListWidget::setupUi() {
     headerLayout->addStretch();
     headerLayout->addWidget(createIssueButton);
     connect(createIssueButton, &PushButton::clicked, this, &IssuesListWidget::showIssueInputWidget);
-    projectNameLabel->setColor(GuiManager::lightGrayColor());
 
     mainLayout->addWidget(headerFrame);
 
@@ -137,4 +135,10 @@ void IssuesListWidget::refreshList(bool forceLoading) {
     }
 
     DataStore::getInstance().refreshProjectOpenIssues(projectId);
+}
+
+void IssuesListWidget::updateStyleSheet() {
+
+    headerFrame->setBackgroundColor(GuiManager::headerColor());
+    projectNameLabel->setColor(GuiManager::titleColor());
 }

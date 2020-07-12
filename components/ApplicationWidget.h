@@ -8,7 +8,7 @@
 #include "SystemTrayIcon.h"
 #include "ConfigurationWindow.h"
 
-class ApplicationWidget : public QWidget {
+class ApplicationWidget : public Frame {
 public:
     explicit ApplicationWidget(QWidget * parent = nullptr);
     void showConfiguration();
@@ -17,6 +17,7 @@ public:
 private:
     void setupTrayIcon();
     void setupUi();
+    void updateStyleSheet() override;
 
     std::function<void()> showApplication;
 

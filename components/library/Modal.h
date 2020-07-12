@@ -5,6 +5,7 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include "Frame.h"
+#include "Label.h"
 
 class Modal : public Frame {
 public:
@@ -15,8 +16,12 @@ protected:
 
 private:
     void setupUi();
+    void updateStyleSheet() override;
 
     QString title;
+    Frame * mainWidget = nullptr;
+    Frame * titleFrame = nullptr;
+    Label * titleLabel = nullptr;
 };
 
 

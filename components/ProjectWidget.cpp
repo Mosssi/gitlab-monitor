@@ -9,6 +9,7 @@
 ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : HoverClickFrame(parent), projectId(projectId) {
 
     setupUi();
+    ProjectWidget::updateStyleSheet();
     updateUi();
 }
 
@@ -16,7 +17,6 @@ void ProjectWidget::setupUi() {
 
     setFixedHeight(GuiManager::projectHeight());
     setFixedWidth(GuiManager::applicationWidth());
-    setStyleSheet("background-color: #ffffff;"); // TODO: use GuiManager
 
     auto * mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(10, 10, 20, 10);
@@ -25,11 +25,9 @@ void ProjectWidget::setupUi() {
     projectDetailsLayout->setSpacing(0);
 
     projectDetailsLayout->addWidget(nameLabel = new Label());
-    nameLabel->setColor(GuiManager::darkGrayColor());
 
     projectDetailsLayout->addWidget(descriptionLabel = new Label());
     descriptionLabel->setVisible(false);
-    descriptionLabel->setColor(GuiManager::lightGrayColor());
     descriptionLabel->setFontSize(GuiManager::smallFontSize());
 
     mainLayout->addLayout(projectDetailsLayout);
@@ -37,7 +35,6 @@ void ProjectWidget::setupUi() {
     mainLayout->addStretch();
 
     mainLayout->addWidget(openIssuesCountLabel = new Label());
-    openIssuesCountLabel->setColor(GuiManager::grayColor());
 }
 
 void ProjectWidget::updateUi() {
@@ -53,6 +50,9 @@ void ProjectWidget::updateUi() {
     openIssuesCountLabel->setText(QString::number(project.openIssuesCount));
 }
 
-void ProjectWidget::mousePressEvent(QMouseEvent * event) {
-    HoverClickFrame::mousePressEvent(event);
+void ProjectWidget::updateStyleSheet() {
+
+    nameLabel->setColor(GuiManager::textColor());
+    descriptionLabel->setColor(GuiManager::secondaryTextColor());
+    openIssuesCountLabel->setColor(GuiManager::textColor());
 }

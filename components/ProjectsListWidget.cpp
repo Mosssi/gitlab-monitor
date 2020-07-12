@@ -1,15 +1,17 @@
 #include "ProjectsListWidget.h"
 
+#include <QDebug>
+
 #include "../utilities/DataStore.h"
 #include "../utilities/NotificationService.h"
 #include "ProjectWidget.h"
 #include "library/LoadingWidget.h"
 #include "library/PushButton.h"
 
-ProjectsListWidget::ProjectsListWidget(QWidget * parent) : QFrame(parent) {
+ProjectsListWidget::ProjectsListWidget(QWidget * parent) : Frame(parent) {
 
     setupUi();
-    setStyleSheet("background-color: #ffffff;");
+    ProjectsListWidget::updateStyleSheet();
 
     connect(&DataStore::getInstance(), &DataStore::projectsReceived, this, &ProjectsListWidget::updateUi);
     connect(&DataStore::getInstance(), &DataStore::projectsReceiveFailed, [this]() {
@@ -27,12 +29,10 @@ void ProjectsListWidget::setupUi() {
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    auto * topFrame = new QFrame();
+    topFrame = new Frame();
     auto * topLayout = new QHBoxLayout(topFrame);
-    topFrame->setStyleSheet("background-color: " + GuiManager::darkLightColor() + ";");
     topFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
-    auto * starredIssuesLabel = new Label("STARRED PROJECTS");
-    starredIssuesLabel->setColor(GuiManager::lightGrayColor());
+    starredIssuesLabel = new Label("STARRED PROJECTS");
     topLayout->addWidget(starredIssuesLabel);
     topLayout->addStretch();
     auto * refreshButton = new PushButton(IconType::RELOAD);
@@ -81,4 +81,11 @@ void ProjectsListWidget::emptyScrollLayout() {
         delete child->widget();
         delete child;
     }
+}
+
+void ProjectsListWidget::updateStyleSheet() {
+
+    setBackgroundColor(GuiManager::backgroundColor());
+    topFrame->setBackgroundColor(GuiManager::headerColor());
+    starredIssuesLabel->setColor(GuiManager::titleColor());
 }

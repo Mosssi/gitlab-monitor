@@ -1,20 +1,18 @@
 #include "Modal.h"
 
 #include "../../utilities/GuiManager.h"
-#include "Label.h"
 
 Modal::Modal(const QString &title, QWidget * parent) : Frame(parent), title(title) {
 
-    setBackgroundColor("#44000000");
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
     setupUi();
+    Modal::updateStyleSheet();
 }
 
 void Modal::setupUi() {
 
-    auto * mainWidget = new Frame(this);
-    mainWidget->setFixedSize(GuiManager::configurationWindowWidth(), GuiManager::configurationWindowHeight());
-    mainWidget->setBackgroundColor(GuiManager::whiteColor());
+    mainWidget = new Frame(this);
+    mainWidget->setFixedWidth(GuiManager::configurationWindowWidth());
     mainWidget->setGeneralStyle("border-radius: 6px;");
     mainWidget->move(
             (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
@@ -24,18 +22,25 @@ void Modal::setupUi() {
     auto * layout = new QVBoxLayout(mainWidget);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    auto * titleFrame = new Frame();
+    titleFrame = new Frame();
     auto * titleLayout = new QHBoxLayout(titleFrame);
-    titleFrame->setBackgroundColor(GuiManager::darkLightColor());
     titleFrame->setGeneralStyle("border-bottom-left-radius: 0; border-bottom-right-radius: 0;");
     titleFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
-    auto titleLabel = new Label(title);
-    titleLabel->setColor(GuiManager::lightGrayColor());
+    titleLabel = new Label(title);
     titleLayout->addWidget(titleLabel, 0, Qt::AlignVCenter | Qt::AlignLeft);
 
     layout->addWidget(titleFrame);
 
     mainLayout = new QVBoxLayout();
-    mainLayout->setContentsMargins(5, 5, 5, 5);
+    mainLayout->setContentsMargins(10, 10, 10, 10);
+    mainLayout->setSpacing(10);
     layout->addLayout(mainLayout);
+}
+
+void Modal::updateStyleSheet() {
+
+    setBackgroundColor("#44000000");
+    mainWidget->setBackgroundColor(GuiManager::backgroundColor());
+    titleFrame->setBackgroundColor(GuiManager::headerColor());
+    titleLabel->setColor(GuiManager::titleColor());
 }

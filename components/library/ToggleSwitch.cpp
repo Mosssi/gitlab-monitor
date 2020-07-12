@@ -22,11 +22,11 @@ void ToggleSwitch::paintEvent(QPaintEvent *) {
 
     QPainterPath rail;
     rail.addRoundRect(p, p, w - 2 * p, h - 2 * p, 100);
-    painter.fillPath(rail, QBrush(QColor(checked ? GuiManager::orangeColor() : GuiManager::darkerLightColor())));
+    painter.fillPath(rail, QBrush(QColor(checked ? GuiManager::orangeColor() : GuiManager::pressColor())));
 
     QPainterPath circle;
     circle.addEllipse(QPointF(h / 2 + switchPosition * (w - h), h / 2), h / 2 - pressureValue, h / 2 - pressureValue);
-    painter.fillPath(circle, QBrush(QColor(checked ? GuiManager::lightGrayColor() : GuiManager::lighterGrayColor())));
+    painter.fillPath(circle, QBrush(QColor(checked ? GuiManager::secondaryTextColor() : GuiManager::tertiaryTextColor())));
 }
 
 void ToggleSwitch::mousePressEvent(QMouseEvent * event) {

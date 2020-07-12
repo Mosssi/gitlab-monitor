@@ -2,17 +2,19 @@
 
 #include <QtCore/QPropertyAnimation>
 
+#include "GuiManager.h"
+
 const int animationDuration = 500;
 const int padding = 5;
 
 NotificationWidget::NotificationWidget(const QString &text, NotificationStatus status, int availableWidth, QWidget * parent)
         : Label(text, parent), text(text), status(status), availableWidth(availableWidth) {
 
-    setColor(GuiManager::lightColor());
+    setColor(GuiManager::backgroundColor()); // TODO: Define color
     setFontSize(GuiManager::smallFontSize());
     switch (status) {
         case NotificationStatus::INFO:
-            setBackgroundColor(GuiManager::grayColor());
+            setBackgroundColor(GuiManager::textColor()); // TODO: Define color
             break;
         case NotificationStatus::ERROR:
             setBackgroundColor(GuiManager::redOrangeColor());

@@ -4,9 +4,9 @@
 
 #include <QtWidgets/QLabel>
 
-#include "../../utilities/GuiManager.h"
+#include "StyledWidget.h"
 
-class Label : public QLabel {
+class Label : public QLabel, StyledWidget {
 public:
     explicit Label(const QString &text = "", QWidget * parent = nullptr);
     [[maybe_unused]] void setFontSize(int fontSize);
@@ -19,13 +19,13 @@ protected:
     void resizeEvent(QResizeEvent * event) override;
 
 private:
-    void updateStyleSheet();
+    void updateStyleSheet() override;
     void setStyleSheet(const QString &styleSheet);
     void elideText(int availableWidth);
 
-    int fontSize = GuiManager::normalFontSize();
+    int fontSize;
     bool bold = false;
-    QString color = GuiManager::darkGrayColor();
+    QString color;
     QString backgroundColor = "none";
     QString generalStyle = "";
 };

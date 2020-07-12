@@ -2,14 +2,14 @@
 #define GITLAB_DESKTOP_MONITOR_ISSUESLISTWIDGET_H
 
 
-#include <QFrame>
 #include <QtWidgets/QVBoxLayout>
 
-#include "library/Label.h"
 #include "IssueInputWidget.h"
 #include "LoadableContentWidget.h"
+#include "library/Frame.h"
+#include "library/Label.h"
 
-class IssuesListWidget : public QFrame {
+class IssuesListWidget : public Frame {
 Q_OBJECT
 public:
     explicit IssuesListWidget(QWidget * parent = nullptr);
@@ -27,6 +27,7 @@ private:
     void showIssueInputWidget();
     void hideIssueInputWidget();
     void requestIssueCreation(const QString &issueTitle);
+    void updateStyleSheet() override;
 
     int projectId = 0;
 
@@ -34,6 +35,7 @@ private:
     QVBoxLayout * scrollLayout = nullptr;
     Label * projectNameLabel = nullptr;
     LoadableContentWidget * contentWidget = nullptr;
+    Frame * headerFrame = nullptr;
 };
 
 

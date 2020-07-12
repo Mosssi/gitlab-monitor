@@ -3,8 +3,12 @@
 
 StyledWidget::StyledWidget() {
 
-    QObject::connect(
+    connection = QObject::connect(
             &Configuration::getInstance(), &Configuration::darkThemeChanged,
             [this]() { updateStyleSheet(); }
     );
+}
+
+StyledWidget::~StyledWidget() {
+    QObject::disconnect(connection);
 }

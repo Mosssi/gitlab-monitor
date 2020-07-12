@@ -2,14 +2,14 @@
 
 HoverClickFrame::HoverClickFrame(QWidget * parent, bool pressEnabled) : Frame(parent), pressEnabled(pressEnabled) {
 
-    setBackgroundColor(normalColor);
 }
 
 void HoverClickFrame::mousePressEvent(QMouseEvent * event) {
 
     QWidget::mousePressEvent(event);
     if (pressEnabled) {
-        setBackgroundColor(pressColor);
+        pressed = true;
+        updateStyleSheet();
     }
 }
 
@@ -17,19 +17,33 @@ void HoverClickFrame::mouseReleaseEvent(QMouseEvent * event) {
 
     QWidget::mouseReleaseEvent(event);
     if (pressEnabled) {
-        setBackgroundColor(hoverColor);
+        pressed = false;
         emit clicked();
+        updateStyleSheet();
     }
 }
 
 void HoverClickFrame::enterEvent(QEvent * event) {
 
     QWidget::enterEvent(event);
-    setBackgroundColor(hoverColor);
+    hovered = true;
+    updateStyleSheet();
 }
 
 void HoverClickFrame::leaveEvent(QEvent * event) {
 
     QWidget::leaveEvent(event);
-    setBackgroundColor(normalColor);
+    hovered = false;
+    updateStyleSheet();
+}
+
+void HoverClickFrame::updateStyleSheet() {
+
+    if (pressed) {
+        setBackgroundColor(pressColor);
+    } else if (hovered) {
+        setBackgroundColor(hoverColor);
+    } else {
+        setBackgroundColor(normalColor);
+    }
 }

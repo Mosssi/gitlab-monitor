@@ -20,9 +20,13 @@ protected:
     void leaveEvent(QEvent * event) override;
 
 private:
-    const QString normalColor = GuiManager::whiteColor();
-    const QString hoverColor = GuiManager::lighterColor();
-    const QString pressColor = GuiManager::lightColor();
+    const QString normalColor = GuiManager::backgroundColor();
+    const QString hoverColor = GuiManager::hoverColor();
+    const QString pressColor = GuiManager::pressColor();
+    void updateStyleSheet() override;
+
+    bool hovered = false;
+    bool pressed = false;
 
     bool pressEnabled;
 };

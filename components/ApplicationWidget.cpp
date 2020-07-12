@@ -1,25 +1,26 @@
 #include "ApplicationWidget.h"
 
 #include <QApplication>
+#include <QDesktopWidget>
 #include <QScreen>
 #include <QtWidgets/QVBoxLayout>
-#include <QDesktopWidget>
 
 #include "../models/Project.h"
 #include "../models/User.h"
 #include "../network/ServiceMediator.h"
 #include "../utilities/Configuration.h"
 #include "../utilities/DataStore.h"
+#include "../utilities/GuiManager.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
 #include "SystemTrayIcon.h"
 
-ApplicationWidget::ApplicationWidget(QWidget * parent) : QWidget(parent) {
+ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
     setupTrayIcon();
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+//    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
-    setStyleSheet(QString("background-color: %1; color: %2;").arg(GuiManager::lightColor()).arg(GuiManager::darkGrayColor()));
+    ApplicationWidget::updateStyleSheet();
     setupUi();
 
     Configuration::getInstance().setServerAddress("https://gitlab.com");
@@ -101,4 +102,9 @@ void ApplicationWidget::showConfiguration() {
 void ApplicationWidget::hideConfiguration() {
 
     configurationWindow->hide();
+}
+
+void ApplicationWidget::updateStyleSheet() {
+
+    setBackgroundColor(GuiManager::backgroundColor());
 }

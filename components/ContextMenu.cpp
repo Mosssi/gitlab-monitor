@@ -7,7 +7,7 @@
 ContextMenu::ContextMenu() : QWidget(nullptr) {
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
-    setStyleSheet("background-color: " + GuiManager::whiteColor() + ";");
+    setStyleSheet("background-color: " + GuiManager::backgroundColor() + ";");
     setupUi();
 }
 

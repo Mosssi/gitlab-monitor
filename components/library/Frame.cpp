@@ -6,18 +6,19 @@
 
 Frame::Frame(QWidget * parent) : QFrame(parent), StyledWidget() {
 
+    Frame::updateStyleSheet();
 }
 
 void Frame::setBackgroundColor(const QString &backgroundColor) {
 
     this->backgroundColor = backgroundColor;
-    updateStyleSheet();
+    Frame::updateStyleSheet();
 }
 
 void Frame::setGeneralStyle(const QString &generalStyle) {
 
     this->generalStyle = generalStyle;
-    updateStyleSheet();
+    Frame::updateStyleSheet();
 }
 
 void Frame::updateStyleSheet() {

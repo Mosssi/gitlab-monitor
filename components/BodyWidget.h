@@ -6,7 +6,7 @@
 #include "ProjectsListWidget.h"
 #include "library/SlidingStackedWidget.h"
 
-class BodyWidget : public SlidingStackedWidget {
+class BodyWidget : public SlidingStackedWidget, StyledWidget {
 public:
     explicit BodyWidget(QWidget * parent = nullptr);
 
@@ -14,6 +14,7 @@ private:
     void setupUi();
     void showProjectList();
     void showIssuesList();
+    void updateStyleSheet() override;
 
     ProjectsListWidget * projectsListWidget = nullptr;
     IssuesListWidget * issuesListWidget = nullptr;
