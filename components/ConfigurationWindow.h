@@ -2,9 +2,9 @@
 #define GITLAB_DESKTOP_MONITOR_CONFIGURATIONWINDOW_H
 
 
-#include "library/Frame.h"
+#include "library/Modal.h"
 
-class ConfigurationWindow : public Frame {
+class ConfigurationWindow : public Modal {
 public:
     explicit ConfigurationWindow(QWidget * parent = nullptr);
 

@@ -15,7 +15,7 @@ public:
     constexpr static int largeFontSize() { return 16; }
 
     constexpr static int applicationWidth() { return 300; }
-    constexpr static int applicationHeight() { return 350; }
+    constexpr static int applicationHeight() { return 400; }
     constexpr static int headerHeight() { return 70; }
     constexpr static int logoHeight() { return 45; }
     constexpr static int projectHeight() { return 55; }

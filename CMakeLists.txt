@@ -90,6 +90,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationService.h
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
-)
+        components/library/Modal.cpp components/library/Modal.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
