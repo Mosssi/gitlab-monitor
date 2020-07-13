@@ -39,11 +39,11 @@ public:
     static inline QString purpleColor() { return "#380d75"; }
 
     static QString textColor() { return Configuration::getInstance().getDarkTheme() ? lightColor() : darkGrayColor(); }
-    static QString secondaryTextColor() { return Configuration::getInstance().getDarkTheme() ? darkLightColor() : grayColor(); }
-    static QString tertiaryTextColor() { return Configuration::getInstance().getDarkTheme() ? darkerLightColor() : lightGrayColor(); }
+    static QString secondaryTextColor() { return Configuration::getInstance().getDarkTheme() ? darkerLightColor() : grayColor(); }
+    static QString tertiaryTextColor() { return Configuration::getInstance().getDarkTheme() ? evenDarkerLightColor() : lighterGrayColor(); }
     static QString titleColor() { return Configuration::getInstance().getDarkTheme() ? darkerLightColor() : lightGrayColor(); } // TODO: fix name
 
-    static QString mainHeaderColor() { return Configuration::getInstance().getDarkTheme() ? grayColor() : lighterColor(); }
+    static QString mainHeaderColor() { return Configuration::getInstance().getDarkTheme() ? darkGrayColor() : lightColor(); }
     static QString headerColor() { return Configuration::getInstance().getDarkTheme() ? lightGrayColor() : darkLightColor(); }
     static QString backgroundColor() { return Configuration::getInstance().getDarkTheme() ? darkGrayColor() : whiteColor(); }
     static QString hoverColor() { return Configuration::getInstance().getDarkTheme() ? grayColor() : lighterColor(); }

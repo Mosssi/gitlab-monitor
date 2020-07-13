@@ -9,9 +9,10 @@ public:
     explicit StyledWidget();
     ~StyledWidget();
 
-private:
+protected:
     virtual void updateStyleSheet() = 0;
 
+private:
     QMetaObject::Connection connection;
 };
 

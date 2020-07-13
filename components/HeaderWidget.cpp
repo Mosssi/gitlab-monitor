@@ -49,7 +49,7 @@ void HeaderWidget::setupUi() {
 
 void HeaderWidget::updateStyleSheet() {
 
-    setBackgroundColor(GuiManager::backgroundColor());
+    setBackgroundColor(GuiManager::mainHeaderColor());
     setGeneralStyle(QString("border-bottom: 2px solid %1").arg(GuiManager::lightOrangeColor()));
     userWelcomeLabel->setColor(GuiManager::secondaryTextColor());
 }

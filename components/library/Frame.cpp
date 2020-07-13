@@ -24,7 +24,7 @@ void Frame::setGeneralStyle(const QString &generalStyle) {
 void Frame::updateStyleSheet() {
 
     setStyleSheet(
-            QString(".QFrame {background-color: %1; %2}")
+            QString("background-color: %1; %2")
                     .arg(backgroundColor)
                     .arg(generalStyle)
     );

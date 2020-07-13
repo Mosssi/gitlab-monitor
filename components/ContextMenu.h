@@ -2,9 +2,9 @@
 #define GITLAB_DESKTOP_MONITOR_CONTEXTMENU_H
 
 
-#include <QtWidgets/QWidget>
+#include "library/Frame.h"
 
-class ContextMenu : public QWidget {
+class ContextMenu : public Frame {
 Q_OBJECT
 public:
     explicit ContextMenu();
@@ -15,6 +15,7 @@ signals:
 
 private:
     void setupUi();
+    void updateStyleSheet() override;
 };
 
 

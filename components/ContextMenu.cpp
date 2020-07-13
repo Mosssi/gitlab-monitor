@@ -4,10 +4,9 @@
 
 #include "ContextMenuButton.h"
 
-ContextMenu::ContextMenu() : QWidget(nullptr) {
+ContextMenu::ContextMenu() : Frame(nullptr) {
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
-    setStyleSheet("background-color: " + GuiManager::backgroundColor() + ";");
     setupUi();
 }
 
@@ -23,4 +22,9 @@ void ContextMenu::setupUi() {
 
     connect(openButton, &ContextMenuButton::clicked, [this]() { emit openClicked(); });
     connect(exitButton, &ContextMenuButton::clicked, [this]() { emit exitClicked(); });
+}
+
+void ContextMenu::updateStyleSheet() {
+
+    setBackgroundColor(GuiManager::backgroundColor());
 }

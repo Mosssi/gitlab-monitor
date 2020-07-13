@@ -17,6 +17,7 @@ signals:
 private:
     void setupUi();
     void updateUi();
+    void updateStyleSheet() override;
 
     Issue issue;
     int projectId;

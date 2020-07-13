@@ -18,13 +18,9 @@ protected:
     void mouseReleaseEvent(QMouseEvent * event) override;
     void enterEvent(QEvent * event) override;
     void leaveEvent(QEvent * event) override;
-
-private:
-    const QString normalColor = GuiManager::backgroundColor();
-    const QString hoverColor = GuiManager::hoverColor();
-    const QString pressColor = GuiManager::pressColor();
     void updateStyleSheet() override;
 
+private:
     bool hovered = false;
     bool pressed = false;
 

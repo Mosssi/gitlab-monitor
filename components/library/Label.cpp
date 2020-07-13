@@ -40,7 +40,7 @@ void Label::updateStyleSheet() {
             QString("font-size: %1px; font-weight: %2; color: %3; background-color: %4; %5")
                     .arg(this->fontSize)
                     .arg(this->bold ? "bold" : "normal")
-                    .arg(GuiManager::textColor())
+                    .arg(color.isEmpty() ? GuiManager::textColor() : color)
                     .arg(this->backgroundColor)
                     .arg(generalStyle)
     );

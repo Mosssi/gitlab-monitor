@@ -25,7 +25,7 @@ private:
 
     int fontSize;
     bool bold = false;
-    QString color;
+    QString color = "";
     QString backgroundColor = "none";
     QString generalStyle = "";
 };

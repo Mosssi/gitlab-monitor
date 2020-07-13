@@ -52,6 +52,7 @@ void ProjectWidget::updateUi() {
 
 void ProjectWidget::updateStyleSheet() {
 
+    HoverClickFrame::updateStyleSheet();
     nameLabel->setColor(GuiManager::textColor());
     descriptionLabel->setColor(GuiManager::secondaryTextColor());
     openIssuesCountLabel->setColor(GuiManager::textColor());

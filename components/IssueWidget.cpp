@@ -6,10 +6,11 @@
 #include "../utilities/DataStore.h"
 #include "library/PushButton.h"
 
-IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : HoverClickFrame(parent), issue(issue), projectId(projectId) {
+IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : HoverClickFrame(parent, false), issue(issue), projectId(projectId) {
 
     setupUi();
     updateUi();
+    IssueWidget::updateStyleSheet();
 }
 
 void IssueWidget::setupUi() {
@@ -25,9 +26,7 @@ void IssueWidget::setupUi() {
 
     projectDetailsLayout->addWidget(iidLabel = new Label());
     iidLabel->setFontSize(GuiManager::smallFontSize());
-    iidLabel->setColor(GuiManager::tertiaryTextColor());
     projectDetailsLayout->addWidget(nameLabel = new Label());
-    nameLabel->setColor(GuiManager::textColor());
 
     mainLayout->addLayout(projectDetailsLayout);
 
@@ -42,4 +41,11 @@ void IssueWidget::updateUi() {
 
     nameLabel->setText(issue.title);
     iidLabel->setText(QString("#%1").arg(issue.iid));
+}
+
+void IssueWidget::updateStyleSheet() {
+
+    HoverClickFrame::updateStyleSheet();
+    iidLabel->setColor(GuiManager::tertiaryTextColor());
+    nameLabel->setColor(GuiManager::textColor());
 }
