@@ -46,6 +46,6 @@ void IssueWidget::updateUi() {
 void IssueWidget::updateStyleSheet() {
 
     HoverClickFrame::updateStyleSheet();
-    iidLabel->setColor(GuiManager::tertiaryTextColor());
-    nameLabel->setColor(GuiManager::textColor());
+    iidLabel->setColor(GuiManager::getTheme().tertiaryTextColor());
+    nameLabel->setColor(GuiManager::getTheme().textColor());
 }

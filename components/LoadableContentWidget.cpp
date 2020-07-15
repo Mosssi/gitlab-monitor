@@ -10,12 +10,12 @@ LoadableContentWidget::LoadableContentWidget(QLayout * contentsLayout, QWidget *
 
     addWidget(contentStateWidget = new ScrollArea(contentsLayout));
 
-    auto * loadingLayout = new QHBoxLayout(loadingStateWidget = new QFrame());
+    auto * loadingLayout = new QVBoxLayout(loadingStateWidget = new QFrame());
     loadingLayout->setAlignment(Qt::AlignCenter);
     loadingLayout->addWidget(new LoadingWidget(), 0, Qt::AlignCenter);
     addWidget(loadingStateWidget);
 
-    auto * errorLayout = new QHBoxLayout(errorStateWidget = new QFrame());
+    auto * errorLayout = new QVBoxLayout(errorStateWidget = new QFrame());
     errorLayout->setAlignment(Qt::AlignCenter);
     errorLayout->addWidget(new Label("Error in fetching data ..."), 0, Qt::AlignCenter);
     addWidget(errorStateWidget);

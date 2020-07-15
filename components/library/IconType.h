@@ -11,6 +11,8 @@ enum class IconType {
     NEW,
     QUESTION_MARK,
     RELOAD,
+    SETTINGS,
+    HAMBURDER,
 };
 
 QString getIconTypeString(const IconType &iconType);

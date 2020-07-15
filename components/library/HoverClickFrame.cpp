@@ -43,10 +43,10 @@ void HoverClickFrame::leaveEvent(QEvent * event) {
 void HoverClickFrame::updateStyleSheet() {
 
     if (pressed) {
-        setBackgroundColor(GuiManager::pressColor());
+        setBackgroundColor(GuiManager::getTheme().pressColor());
     } else if (hovered) {
-        setBackgroundColor(GuiManager::hoverColor());
+        setBackgroundColor(GuiManager::getTheme().hoverColor());
     } else {
-        setBackgroundColor(GuiManager::backgroundColor());
+        setBackgroundColor(GuiManager::getTheme().backgroundColor());
     }
 }

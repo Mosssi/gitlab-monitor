@@ -45,14 +45,14 @@ void PushButton::paintEvent(QPaintEvent * event) {
 
     QString fillColor;
     if (pressed) {
-        fillColor = GuiManager::buttonPressColor();
+        fillColor = GuiManager::getTheme().buttonPressColor();
     } else if (hovered || confirmingValue > 0) {
-        fillColor = GuiManager::buttonHoverColor();
+        fillColor = GuiManager::getTheme().buttonHoverColor();
     } else {
-        fillColor = GuiManager::buttonColor();
+        fillColor = GuiManager::getTheme().buttonColor();
     }
 
-    QString textColor = GuiManager::textColor();
+    QString textColor = GuiManager::getTheme().textColor();
 
     painter.fillPath(circlePath, QBrush(QColor(fillColor)));
 

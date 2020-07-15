@@ -36,11 +36,11 @@ void LoadingWidget::paintEvent(QPaintEvent * event) {
 
     auto pen = painter.pen();
     pen.setWidth(arcWidth);
-    pen.setColor(GuiManager::tertiaryTextColor());
+    pen.setColor(GuiManager::getTheme().loadingRingColor());
     painter.setPen(pen);
     painter.drawEllipse(arcRect);
 
-    pen.setColor(GuiManager::redOrangeColor()); // TODO: Better to define separate color
+    pen.setColor(GuiManager::getTheme().loadingColor());
     painter.setPen(pen);
     painter.drawArc(arcRect, arcPosition * 16, arcLength * 16);
 }

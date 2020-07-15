@@ -40,7 +40,7 @@ void Modal::setupUi() {
 void Modal::updateStyleSheet() {
 
     setBackgroundColor("#44000000");
-    mainWidget->setBackgroundColor(GuiManager::backgroundColor());
-    titleFrame->setBackgroundColor(GuiManager::headerColor());
-    titleLabel->setColor(GuiManager::titleColor());
+    mainWidget->setBackgroundColor(GuiManager::getTheme().backgroundColor());
+    titleFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
+    titleLabel->setColor(GuiManager::getTheme().titleColor());
 }

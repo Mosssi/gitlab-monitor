@@ -3,7 +3,9 @@
 
 #include <QtWidgets/QWidget>
 
-class ToggleSwitch : public QWidget {
+#include "StyledWidget.h"
+
+class ToggleSwitch : public QWidget, private StyledWidget {
 Q_OBJECT
 Q_PROPERTY(double switchPosition READ getSwitchPosition WRITE setSwitchPosition)
 Q_PROPERTY(double pressureValue READ getPressureValue WRITE setPressureValue)
@@ -24,6 +26,7 @@ private:
     void mousePressEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
     void toggleState();
+    void updateStyleSheet() override;
 
     bool checked = false;
     double switchPosition = 0;

@@ -20,6 +20,7 @@ private:
     void hide();
     [[nodiscard]] int getCurrentWidth() const;
     void setCurrentWidth(int currentWidth);
+    void updateStyleSheet() override;
 
     QString text = "";
     NotificationStatus status = NotificationStatus::INFO;

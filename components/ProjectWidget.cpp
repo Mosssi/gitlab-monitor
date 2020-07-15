@@ -53,7 +53,7 @@ void ProjectWidget::updateUi() {
 void ProjectWidget::updateStyleSheet() {
 
     HoverClickFrame::updateStyleSheet();
-    nameLabel->setColor(GuiManager::textColor());
-    descriptionLabel->setColor(GuiManager::secondaryTextColor());
-    openIssuesCountLabel->setColor(GuiManager::textColor());
+    nameLabel->setColor(GuiManager::getTheme().textColor());
+    descriptionLabel->setColor(GuiManager::getTheme().secondaryTextColor());
+    openIssuesCountLabel->setColor(GuiManager::getTheme().textColor());
 }

@@ -6,7 +6,7 @@
 
 #include "StyledWidget.h"
 
-class Label : public QLabel, StyledWidget {
+class Label : public QLabel, private StyledWidget {
 public:
     explicit Label(const QString &text = "", QWidget * parent = nullptr);
     [[maybe_unused]] void setFontSize(int fontSize);

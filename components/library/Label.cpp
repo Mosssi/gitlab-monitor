@@ -1,7 +1,6 @@
 #include "Label.h"
 
 #include <QResizeEvent>
-#include <QDebug>
 
 #include "../../utilities/GuiManager.h"
 
@@ -40,7 +39,7 @@ void Label::updateStyleSheet() {
             QString("font-size: %1px; font-weight: %2; color: %3; background-color: %4; %5")
                     .arg(this->fontSize)
                     .arg(this->bold ? "bold" : "normal")
-                    .arg(color.isEmpty() ? GuiManager::textColor() : color)
+                    .arg(color.isEmpty() ? GuiManager::getTheme().textColor() : color)
                     .arg(this->backgroundColor)
                     .arg(generalStyle)
     );

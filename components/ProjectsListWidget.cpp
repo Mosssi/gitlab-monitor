@@ -1,7 +1,5 @@
 #include "ProjectsListWidget.h"
 
-#include <QDebug>
-
 #include "../utilities/DataStore.h"
 #include "../utilities/NotificationService.h"
 #include "ProjectWidget.h"
@@ -85,7 +83,7 @@ void ProjectsListWidget::emptyScrollLayout() {
 
 void ProjectsListWidget::updateStyleSheet() {
 
-    setBackgroundColor(GuiManager::backgroundColor());
-    topFrame->setBackgroundColor(GuiManager::headerColor());
-    starredIssuesLabel->setColor(GuiManager::titleColor());
+    setBackgroundColor(GuiManager::getTheme().backgroundColor());
+    topFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
+    starredIssuesLabel->setColor(GuiManager::getTheme().titleColor());
 }

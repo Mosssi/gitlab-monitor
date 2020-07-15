@@ -6,11 +6,11 @@
 
 #include "../components/ApplicationWidget.h"
 #include "Configuration.h"
+#include "Theme.h"
 
 class GuiManager {
 public:
     static QFont applicationFont() { return QFont("Ubuntu", normalFontSize()); }
-
     static QFont iconFont() { return QFont("gitlab-monitoring", smallFontSize()); }
 
     constexpr static int smallFontSize() { return 12; }
@@ -32,30 +32,14 @@ public:
     constexpr static int toggleSwitchWidth() { return 26; }
     constexpr static int toggleSwitchHeight() { return 14; }
 
-    static inline QString lightOrangeColor() { return "#fca121"; }
-    static inline QString orangeColor() { return "#fc6d26"; }
-    static inline QString redOrangeColor() { return "#db3b21"; }
-    static inline QString lightPurpleColor() { return "#6e49cb"; }
-    static inline QString purpleColor() { return "#380d75"; }
-
-    static QString textColor() { return Configuration::getInstance().getDarkTheme() ? lightColor() : darkGrayColor(); }
-    static QString secondaryTextColor() { return Configuration::getInstance().getDarkTheme() ? darkerLightColor() : grayColor(); }
-    static QString tertiaryTextColor() { return Configuration::getInstance().getDarkTheme() ? evenDarkerLightColor() : lighterGrayColor(); }
-    static QString titleColor() { return Configuration::getInstance().getDarkTheme() ? darkerLightColor() : lightGrayColor(); } // TODO: fix name
-
-    static QString mainHeaderColor() { return Configuration::getInstance().getDarkTheme() ? darkGrayColor() : lightColor(); }
-    static QString headerColor() { return Configuration::getInstance().getDarkTheme() ? lightGrayColor() : darkLightColor(); }
-    static QString backgroundColor() { return Configuration::getInstance().getDarkTheme() ? darkGrayColor() : whiteColor(); }
-    static QString hoverColor() { return Configuration::getInstance().getDarkTheme() ? grayColor() : lighterColor(); }
-    static QString pressColor() { return Configuration::getInstance().getDarkTheme() ? lightGrayColor() : lightColor(); }
-    static QString buttonColor() { return Configuration::getInstance().getDarkTheme() ? lightGrayColor() : darkLightColor(); }
-    static QString buttonHoverColor() { return Configuration::getInstance().getDarkTheme() ? lighterGrayColor() : darkerLightColor(); }
-    static QString buttonPressColor() { return Configuration::getInstance().getDarkTheme() ? grayColor() : lightColor(); }
+    static Theme &getTheme();
 
     static void setApplicationWindow(ApplicationWidget * widget);
     static ApplicationWidget * getApplicationWindow();
 
 private:
+    friend class LightTheme;
+    friend class DarkTheme;
     static GuiManager &getInstance();
 
     static inline QString darkGrayColor() { return "#2e2e2e"; }
@@ -68,6 +52,11 @@ private:
     static inline QString darkLightColor() { return "#e5e5e5"; }
     static inline QString darkerLightColor() { return "#d0d0d0"; }
     static inline QString evenDarkerLightColor() { return "#a0a0a0"; }
+    static inline QString lightOrangeColor() { return "#fca121"; }
+    static inline QString orangeColor() { return "#fc6d26"; }
+    static inline QString redOrangeColor() { return "#db3b21"; }
+    static inline QString lightPurpleColor() { return "#6e49cb"; }
+    static inline QString purpleColor() { return "#380d75"; }
 
     ApplicationWidget * applicationWindow;
 };

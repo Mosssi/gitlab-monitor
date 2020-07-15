@@ -51,6 +51,8 @@ add_executable(gitlab_desktop_monitor
         components/library/LineEdit.h
         components/library/LoadingWidget.cpp
         components/library/LoadingWidget.h
+        components/library/Modal.cpp
+        components/library/Modal.h
         components/library/PushButton.cpp
         components/library/PushButton.h
         components/library/ResizeAwareWidget.cpp
@@ -82,14 +84,17 @@ add_executable(gitlab_desktop_monitor
         resources/resources.qrc
         utilities/Configuration.cpp
         utilities/Configuration.h
+        utilities/DarkTheme.h
         utilities/DataStore.cpp
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
+        utilities/LightTheme.h
         utilities/NotificationService.cpp
         utilities/NotificationService.h
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
-        components/library/Modal.cpp components/library/Modal.h)
+        utilities/Theme.h
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)

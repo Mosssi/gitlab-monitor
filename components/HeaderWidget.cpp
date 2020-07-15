@@ -40,7 +40,7 @@ void HeaderWidget::setupUi() {
     mainLayout->addWidget(logoLabel);
     mainLayout->addStretch();
     mainLayout->addWidget(userWelcomeLabel);
-    auto * configurationButton = new PushButton(IconType::EMPTY);
+    auto * configurationButton = new PushButton(IconType::SETTINGS);
     mainLayout->addWidget(configurationButton);
     connect(configurationButton, &PushButton::clicked, [this]() {
         GuiManager::getApplicationWindow()->showConfiguration();
@@ -49,7 +49,7 @@ void HeaderWidget::setupUi() {
 
 void HeaderWidget::updateStyleSheet() {
 
-    setBackgroundColor(GuiManager::mainHeaderColor());
-    setGeneralStyle(QString("border-bottom: 2px solid %1").arg(GuiManager::lightOrangeColor()));
-    userWelcomeLabel->setColor(GuiManager::secondaryTextColor());
+    setBackgroundColor(GuiManager::getTheme().mainHeaderColor());
+    setGeneralStyle(QString("border-bottom: 2px solid %1").arg(GuiManager::getTheme().headerBorderColor()));
+    userWelcomeLabel->setColor(GuiManager::getTheme().secondaryTextColor());
 }

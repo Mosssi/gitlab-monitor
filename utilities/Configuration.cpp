@@ -20,15 +20,15 @@ QString Configuration::getToken() const {
     return token;
 }
 
-void Configuration::setDarkTheme(bool darkTheme) {
+void Configuration::setTheme(ThemeMode theme) {
 
-    this->darkTheme = darkTheme;
-    emit darkThemeChanged();
+    this->theme = theme;
+    emit themeChanged();
 }
 
-bool Configuration::getDarkTheme() const {
+ThemeMode Configuration::getTheme() const {
 
-    return darkTheme;
+    return theme;
 }
 
 void Configuration::setAssignedToMe(bool assignedToMe) {

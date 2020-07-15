@@ -43,5 +43,5 @@ void BodyWidget::showIssuesList() {
 
 void BodyWidget::updateStyleSheet() {
 
-    setStyleSheet(QString("background-color: %1;").arg(GuiManager::backgroundColor()));
+    setStyleSheet(QString("background-color: %1;").arg(GuiManager::getTheme().backgroundColor()));
 }

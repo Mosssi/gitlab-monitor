@@ -106,5 +106,5 @@ void ApplicationWidget::hideConfiguration() {
 
 void ApplicationWidget::updateStyleSheet() {
 
-    setBackgroundColor(GuiManager::backgroundColor());
+    setBackgroundColor(GuiManager::getTheme().backgroundColor());
 }

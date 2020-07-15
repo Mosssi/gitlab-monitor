@@ -139,6 +139,6 @@ void IssuesListWidget::refreshList(bool forceLoading) {
 
 void IssuesListWidget::updateStyleSheet() {
 
-    headerFrame->setBackgroundColor(GuiManager::headerColor());
-    projectNameLabel->setColor(GuiManager::titleColor());
+    headerFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
+    projectNameLabel->setColor(GuiManager::getTheme().titleColor());
 }

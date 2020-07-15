@@ -19,9 +19,11 @@ void ConfigurationWindow::setupUi() {
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
     auto * darkThemeSwitch = new ToggleSwitch();
-    darkThemeSwitch->setChecked(Configuration::getInstance().getDarkTheme());
+    darkThemeSwitch->setChecked(Configuration::getInstance().getTheme() == ThemeMode::DARK);
     themeLayout->addWidget(darkThemeSwitch);
-    connect(darkThemeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setDarkTheme);
+    connect(darkThemeSwitch, &ToggleSwitch::toggled, [this](bool checked) {
+        Configuration::getInstance().setTheme(checked ? ThemeMode::DARK : ThemeMode::LIGHT);
+    });
 
     auto * issuesLayout = new QHBoxLayout();
     issuesLayout->addWidget(new Label("Assigned To Me"));

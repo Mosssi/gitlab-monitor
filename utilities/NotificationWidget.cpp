@@ -10,14 +10,13 @@ const int padding = 5;
 NotificationWidget::NotificationWidget(const QString &text, NotificationStatus status, int availableWidth, QWidget * parent)
         : Label(text, parent), text(text), status(status), availableWidth(availableWidth) {
 
-    setColor(GuiManager::backgroundColor()); // TODO: Define color
     setFontSize(GuiManager::smallFontSize());
     switch (status) {
         case NotificationStatus::INFO:
-            setBackgroundColor(GuiManager::textColor()); // TODO: Define color
+            setBackgroundColor(GuiManager::getTheme().infoNotificationColor()); // TODO: Define color
             break;
         case NotificationStatus::ERROR:
-            setBackgroundColor(GuiManager::redOrangeColor());
+            setBackgroundColor(GuiManager::getTheme().errorNotificationColor());
             break;
     }
 
@@ -75,4 +74,16 @@ void NotificationWidget::setCurrentWidth(int currentWidth) {
 
     this->currentWidth = currentWidth;
     setFixedWidth(currentWidth);
+}
+
+void NotificationWidget::updateStyleSheet() {
+
+    switch (status) {
+        case NotificationStatus::INFO:
+            setColor(GuiManager::getTheme().infoNotificationTextColor());
+            break;
+        case NotificationStatus::ERROR:
+            setColor(GuiManager::getTheme().errorNotificationTextColor());
+            break;
+    }
 }

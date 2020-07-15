@@ -5,7 +5,7 @@
 
 #include "../../utilities/GuiManager.h"
 
-ToggleSwitch::ToggleSwitch(QWidget * parent) : QWidget(parent) {
+ToggleSwitch::ToggleSwitch(QWidget * parent) : QWidget(parent), StyledWidget() {
 
     setFixedSize(GuiManager::toggleSwitchWidth(), GuiManager::toggleSwitchHeight());
 }
@@ -22,11 +22,11 @@ void ToggleSwitch::paintEvent(QPaintEvent *) {
 
     QPainterPath rail;
     rail.addRoundRect(p, p, w - 2 * p, h - 2 * p, 100);
-    painter.fillPath(rail, QBrush(QColor(checked ? GuiManager::orangeColor() : GuiManager::pressColor())));
+    painter.fillPath(rail, QBrush(QColor(checked ? GuiManager::getTheme().switchOnBackgroundColor() : GuiManager::getTheme().switchOffBackgroundColor())));
 
     QPainterPath circle;
     circle.addEllipse(QPointF(h / 2 + switchPosition * (w - h), h / 2), h / 2 - pressureValue, h / 2 - pressureValue);
-    painter.fillPath(circle, QBrush(QColor(checked ? GuiManager::secondaryTextColor() : GuiManager::tertiaryTextColor())));
+    painter.fillPath(circle, QBrush(QColor(checked ? GuiManager::getTheme().switchOnColor() : GuiManager::getTheme().switchOffColor())));
 }
 
 void ToggleSwitch::mousePressEvent(QMouseEvent * event) {
@@ -84,4 +84,9 @@ void ToggleSwitch::setChecked(bool checked) {
 bool ToggleSwitch::getChecked() const {
 
     return checked;
+}
+
+void ToggleSwitch::updateStyleSheet() {
+
+    update();
 }

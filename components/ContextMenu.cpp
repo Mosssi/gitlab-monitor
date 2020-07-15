@@ -26,5 +26,5 @@ void ContextMenu::setupUi() {
 
 void ContextMenu::updateStyleSheet() {
 
-    setBackgroundColor(GuiManager::backgroundColor());
+    setBackgroundColor(GuiManager::getTheme().backgroundColor());
 }
