@@ -8,7 +8,7 @@
 
 class Label : public QLabel, private StyledWidget {
 public:
-    explicit Label(const QString &text = "", QWidget * parent = nullptr);
+    explicit Label(const QString &text = "", bool elided = true, QWidget * parent = nullptr);
     [[maybe_unused]] void setFontSize(int fontSize);
     [[maybe_unused]] void setBold(bool bold);
     [[maybe_unused]] void setColor(const QString &color);
@@ -28,6 +28,8 @@ private:
     QString color = "";
     QString backgroundColor = "none";
     QString generalStyle = "";
+
+    bool elided;
 };
 
 

@@ -5,11 +5,13 @@
 #include "../models/Issue.h"
 #include "library/HoverClickFrame.h"
 #include "library/Label.h"
+#include "library/PushButton.h"
 
 class IssueWidget : public HoverClickFrame {
 Q_OBJECT
 public:
     explicit IssueWidget(int projectId, const Issue &issue, QWidget * parent = nullptr);
+    void setLoading(bool loading);
 
 signals:
     void closed();
@@ -24,6 +26,7 @@ private:
 
     Label * nameLabel = nullptr;
     Label * iidLabel = nullptr;
+    PushButton * closeIssueButton = nullptr;
 };
 
 

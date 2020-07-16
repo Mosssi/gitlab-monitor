@@ -22,8 +22,8 @@ private:
     void setCurrentWidth(int currentWidth);
     void updateStyleSheet() override;
 
-    QString text = "";
-    NotificationStatus status = NotificationStatus::INFO;
+    QString text;
+    NotificationStatus status;
 
     int currentWidth = 0;
     int maxWidth;

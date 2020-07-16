@@ -18,6 +18,7 @@ IssuesListWidget::IssuesListWidget(QWidget * parent) : Frame(parent) {
             contentWidget->setState(LoadableContentState::ERROR);
         } else {
             NotificationService::error("Error in updating list of open issues");
+            contentWidget->setState(LoadableContentState::CONTENT);
         }
     });
 }
@@ -70,9 +71,13 @@ void IssuesListWidget::updateUi() {
     } else {
         for (const auto &issue: project.openIssues) {
             auto * issueWidget = new IssueWidget(projectId, issue);
-            connect(issueWidget, &IssueWidget::closed, [this, issue]() {
-                ServiceMediator::closeIssue(projectId, issue.iid, [this](CALLBACK_SIGNATURE) {
-                    DataStore::getInstance().refreshProjectOpenIssues(projectId);
+            connect(issueWidget, &IssueWidget::closed, [this, issue, issueWidget]() {
+                issueWidget->setLoading(true);
+                ServiceMediator::closeIssue(projectId, issue.iid, [this, issueWidget](CALLBACK_SIGNATURE) {
+                    issueWidget->setLoading(false);
+                    if (status == ResponseStatus::SUCCESSFUL) {
+                        DataStore::getInstance().refreshProjectOpenIssues(projectId);
+                    }
                 });
             });
             scrollLayout->addWidget(issueWidget);
@@ -115,7 +120,9 @@ void IssuesListWidget::hideIssueInputWidget() {
 
 void IssuesListWidget::requestIssueCreation(const QString &issueTitle) {
 
+    issueInputWidget->setLoading(true);
     ServiceMediator::createIssue(projectId, issueTitle, [this](CALLBACK_SIGNATURE) {
+        issueInputWidget->setLoading(false);
         if (status == ResponseStatus::SUCCESSFUL) {
             hideIssueInputWidget();
             DataStore::getInstance().refreshProjectOpenIssues(projectId);

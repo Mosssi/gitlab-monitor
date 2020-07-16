@@ -16,6 +16,8 @@ public:
     ~PushButton() override = default;
     void setConfirmingValue(double value) { confirmingValue = value; update(); }
     [[nodiscard]] double getConfirmingValue() const { return confirmingValue; }
+    void setLoading(bool loading) { this->loading = loading; update(); }
+    [[nodiscard]] bool getLoading() const { return loading; }
 
 signals:
     void clicked();
@@ -35,8 +37,11 @@ private:
     bool hovered = false;
     bool pressed = false;
     double confirmingValue = 0;
+    bool loading = false;
+    int arcPosition = 0;
 
     QTimer * confirmTimer = nullptr;
+    QTimer * loadingTimer = nullptr;
 
     QPropertyAnimation * confirmAnimation = nullptr;
     QPropertyAnimation * unConfirmAnimation = nullptr;

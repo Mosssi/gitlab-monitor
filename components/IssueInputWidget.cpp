@@ -2,8 +2,6 @@
 
 #include <QtWidgets/QHBoxLayout>
 
-#include "library/PushButton.h"
-
 IssueInputWidget::IssueInputWidget() : QFrame(nullptr) {
 
     setupUi();
@@ -17,7 +15,7 @@ void IssueInputWidget::setupUi() {
     mainLayout->addWidget(issueTitleInput);
 
     auto * cancelButton = new PushButton(IconType::CLOSE);
-    auto * createButton = new PushButton(IconType::DONE);
+    createButton = new PushButton(IconType::DONE);
 
     mainLayout->addWidget(cancelButton);
     mainLayout->addWidget(createButton);
@@ -30,4 +28,9 @@ void IssueInputWidget::setupUi() {
 void IssueInputWidget::clearInput() {
 
     issueTitleInput->clear();
+}
+
+void IssueInputWidget::setLoading(bool loading) {
+
+    createButton->setLoading(loading);
 }

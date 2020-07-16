@@ -5,12 +5,14 @@
 #include <QtWidgets/QFrame>
 
 #include "library/LineEdit.h"
+#include "library/PushButton.h"
 
 class IssueInputWidget : public QFrame {
 Q_OBJECT
 public:
     explicit IssueInputWidget();
     void clearInput();
+    void setLoading(bool loading);
 
 signals:
     void cancelled();
@@ -20,6 +22,7 @@ private:
     void setupUi();
 
     LineEdit * issueTitleInput = nullptr;
+    PushButton * createButton = nullptr;
 };
 
 

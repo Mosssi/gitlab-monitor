@@ -17,6 +17,7 @@ ProjectsListWidget::ProjectsListWidget(QWidget * parent) : Frame(parent) {
             contentWidget->setState(LoadableContentState::ERROR);
         } else {
             NotificationService::error("Error in updating list of projects");
+            contentWidget->setState(LoadableContentState::CONTENT);
         }
     });
 }

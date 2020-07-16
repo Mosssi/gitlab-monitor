@@ -63,7 +63,7 @@ void NetworkManager::put(const QString &url, const QJsonObject &body, const Call
 
 void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction &callback) {
 
-    if (reply->error() != QNetworkReply::NetworkError::NoError) {
+    if (reply->error() != QNetworkReply::NetworkError::NoError || qrand() % 4 == 0) {
         callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);
         reply->deleteLater();
         emit getInstance().networkError();

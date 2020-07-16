@@ -4,7 +4,7 @@
 
 #include "../../utilities/GuiManager.h"
 
-Label::Label(const QString &text, QWidget * parent) : QLabel(text, parent), StyledWidget(), fontSize(GuiManager::normalFontSize()) {
+Label::Label(const QString &text, bool elided, QWidget * parent) : QLabel(text, parent), StyledWidget(), fontSize(GuiManager::normalFontSize()), elided(elided) {
 
     Label::updateStyleSheet();
 }
@@ -63,6 +63,10 @@ void Label::resizeEvent(QResizeEvent * event) {
 }
 
 void Label::elideText(int availableWidth) {
+
+    if (!elided) {
+        return;
+    }
 
     QFontMetrics fontMetrics(font());
     if (fontMetrics.width(text()) > availableWidth) {

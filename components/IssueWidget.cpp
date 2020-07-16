@@ -4,7 +4,6 @@
 
 #include "../network/ServiceMediator.h"
 #include "../utilities/DataStore.h"
-#include "library/PushButton.h"
 
 IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : HoverClickFrame(parent, false), issue(issue), projectId(projectId) {
 
@@ -32,7 +31,7 @@ void IssueWidget::setupUi() {
 
     mainLayout->addStretch();
 
-    auto * closeIssueButton = new PushButton(IconType::DONE, true);
+    closeIssueButton = new PushButton(IconType::DONE, true);
     connect(closeIssueButton, &PushButton::clicked, this, &IssueWidget::closed);
     mainLayout->addWidget(closeIssueButton);
 }
@@ -48,4 +47,9 @@ void IssueWidget::updateStyleSheet() {
     HoverClickFrame::updateStyleSheet();
     iidLabel->setColor(GuiManager::getTheme().tertiaryTextColor());
     nameLabel->setColor(GuiManager::getTheme().textColor());
+}
+
+void IssueWidget::setLoading(bool loading) {
+
+    closeIssueButton->setLoading(loading);
 }

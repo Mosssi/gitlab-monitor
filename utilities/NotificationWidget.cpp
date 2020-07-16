@@ -8,19 +8,11 @@ const int animationDuration = 500;
 const int padding = 5;
 
 NotificationWidget::NotificationWidget(const QString &text, NotificationStatus status, int availableWidth, QWidget * parent)
-        : Label(text, parent), text(text), status(status), availableWidth(availableWidth) {
+        : Label(text, false, parent), text(text), status(status), availableWidth(availableWidth) {
 
     setFontSize(GuiManager::smallFontSize());
-    switch (status) {
-        case NotificationStatus::INFO:
-            setBackgroundColor(GuiManager::getTheme().infoNotificationColor()); // TODO: Define color
-            break;
-        case NotificationStatus::ERROR:
-            setBackgroundColor(GuiManager::getTheme().errorNotificationColor());
-            break;
-    }
-
     setFixedHeight(GuiManager::smallFontSize() + 2 * padding);
+    NotificationWidget::updateStyleSheet();
 
     QFont font;
     font.setPixelSize(GuiManager::smallFontSize());
@@ -43,7 +35,9 @@ NotificationWidget::NotificationWidget(const QString &text, NotificationStatus s
 
 void NotificationWidget::show() {
 
-    QWidget::show();
+    setFixedWidth(maxWidth);
+
+    Label::show();
 
     auto * showAnimation = new QPropertyAnimation(this, "currentWidth");
     showAnimation->setStartValue(0);
@@ -81,8 +75,10 @@ void NotificationWidget::updateStyleSheet() {
     switch (status) {
         case NotificationStatus::INFO:
             setColor(GuiManager::getTheme().infoNotificationTextColor());
+            setBackgroundColor(GuiManager::getTheme().infoNotificationColor());
             break;
         case NotificationStatus::ERROR:
+            setBackgroundColor(GuiManager::getTheme().errorNotificationColor());
             setColor(GuiManager::getTheme().errorNotificationTextColor());
             break;
     }

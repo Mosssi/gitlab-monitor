@@ -10,6 +10,10 @@
 const int CONFIRM_DURATION = 3000;
 const int CONFIRM_ANIMATION_DURATION = 150;
 
+const double arcRadius = 0.8;
+const int arcWidth = 2;
+const int arcLength = 100;
+
 PushButton::PushButton(const IconType &icon, bool confirmRequired) :
         QWidget(nullptr), iconType(icon), confirmRequired(confirmRequired) {
 
@@ -33,6 +37,13 @@ PushButton::PushButton(const IconType &icon, bool confirmRequired) :
     connect(confirmTimer, &QTimer::timeout, [this]() {
         unConfirmAnimation->start();
     });
+
+    loadingTimer = new QTimer(this);
+    loadingTimer->setInterval(25);
+    connect(loadingTimer, &QTimer::timeout, [this]() {
+        arcPosition += 10;
+        update();
+    });
 }
 
 void PushButton::paintEvent(QPaintEvent * event) {
@@ -52,34 +63,50 @@ void PushButton::paintEvent(QPaintEvent * event) {
         fillColor = GuiManager::getTheme().buttonColor();
     }
 
-    QString textColor = GuiManager::getTheme().textColor();
-
     painter.fillPath(circlePath, QBrush(QColor(fillColor)));
 
-    if (confirmingValue != 0) {
-        auto color = QColor(textColor);
-        color.setAlphaF(confirmingValue);
-        painter.setPen(color);
-        int pixelSize = (int) ((2 - confirmingValue) * GuiManager::largeFontSize());
-        if (pixelSize > 0) {
-            auto font = painter.font();
-            font.setPixelSize(pixelSize);
-            painter.setFont(font);
+    if (loading) {
+        if (!loadingTimer->isActive()) {
+            loadingTimer->start();
         }
-        painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(IconType::QUESTION_MARK));
-    }
-
-    if (confirmingValue != 1) {
-        auto color = QColor(textColor);
-        color.setAlphaF(1.0 - confirmingValue);
-        painter.setPen(color);
-        int pixelSize = (int) ((1 - confirmingValue) * GuiManager::largeFontSize());
-        if (pixelSize > 0) {
-            auto font = painter.font();
-            font.setPixelSize(pixelSize);
-            painter.setFont(font);
+        auto pen = painter.pen();
+        pen.setWidth(arcWidth);
+        pen.setColor(GuiManager::getTheme().loadingColor());
+        painter.setPen(pen);
+        painter.drawArc(
+                QRectF(rect().left() + arcWidth, rect().top() + arcWidth, rect().width() - 2 * arcWidth, rect().height() - 2 * arcWidth),
+                arcPosition * 16,
+                arcLength * 16
+        );
+    } else {
+        if (loadingTimer->isActive()) {
+            loadingTimer->stop();
         }
-        painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(iconType));
+        QString textColor = GuiManager::getTheme().textColor();
+        if (confirmingValue != 0) {
+            auto color = QColor(textColor);
+            color.setAlphaF(confirmingValue);
+            painter.setPen(color);
+            int pixelSize = (int) ((2 - confirmingValue) * GuiManager::largeFontSize());
+            if (pixelSize > 0) {
+                auto font = painter.font();
+                font.setPixelSize(pixelSize);
+                painter.setFont(font);
+            }
+            painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(IconType::QUESTION_MARK));
+        }
+        if (confirmingValue != 1) {
+            auto color = QColor(textColor);
+            color.setAlphaF(1.0 - confirmingValue);
+            painter.setPen(color);
+            int pixelSize = (int) ((1 - confirmingValue) * GuiManager::largeFontSize());
+            if (pixelSize > 0) {
+                auto font = painter.font();
+                font.setPixelSize(pixelSize);
+                painter.setFont(font);
+            }
+            painter.drawText(this->rect(), Qt::AlignCenter, getIconTypeString(iconType));
+        }
     }
 }
 
