@@ -31,7 +31,8 @@ void ProjectsListWidget::setupUi() {
     topFrame = new Frame();
     auto * topLayout = new QHBoxLayout(topFrame);
     topFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
-    starredIssuesLabel = new Label("STARRED PROJECTS");
+    auto * starredIssuesLabel = new Label("STARRED PROJECTS");
+    starredIssuesLabel->setColor(TextColor::TITLE);
     topLayout->addWidget(starredIssuesLabel);
     topLayout->addStretch();
     auto * refreshButton = new PushButton(IconType::RELOAD);
@@ -86,5 +87,4 @@ void ProjectsListWidget::updateStyleSheet() {
 
     setBackgroundColor(GuiManager::getTheme().backgroundColor());
     topFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
-    starredIssuesLabel->setColor(GuiManager::getTheme().titleColor());
 }

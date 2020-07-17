@@ -27,6 +27,7 @@ void ProjectWidget::setupUi() {
     projectDetailsLayout->addWidget(nameLabel = new Label());
 
     projectDetailsLayout->addWidget(descriptionLabel = new Label());
+    descriptionLabel->setColor(TextColor::TERTIARY);
     descriptionLabel->setVisible(false);
     descriptionLabel->setFontSize(GuiManager::smallFontSize());
 
@@ -53,7 +54,4 @@ void ProjectWidget::updateUi() {
 void ProjectWidget::updateStyleSheet() {
 
     HoverClickFrame::updateStyleSheet();
-    nameLabel->setColor(GuiManager::getTheme().textColor());
-    descriptionLabel->setColor(GuiManager::getTheme().secondaryTextColor());
-    openIssuesCountLabel->setColor(GuiManager::getTheme().textColor());
 }

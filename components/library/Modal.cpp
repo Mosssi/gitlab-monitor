@@ -26,7 +26,8 @@ void Modal::setupUi() {
     auto * titleLayout = new QHBoxLayout(titleFrame);
     titleFrame->setGeneralStyle("border-bottom-left-radius: 0; border-bottom-right-radius: 0;");
     titleFrame->setFixedHeight(GuiManager::bodyHeaderHeight());
-    titleLabel = new Label(title);
+    auto * titleLabel = new Label(title);
+    titleLabel->setColor(TextColor::TITLE);
     titleLayout->addWidget(titleLabel, 0, Qt::AlignVCenter | Qt::AlignLeft);
 
     layout->addWidget(titleFrame);
@@ -42,5 +43,4 @@ void Modal::updateStyleSheet() {
     setBackgroundColor("#44000000");
     mainWidget->setBackgroundColor(GuiManager::getTheme().backgroundColor());
     titleFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
-    titleLabel->setColor(GuiManager::getTheme().titleColor());
 }

@@ -14,6 +14,7 @@ private:
     void updateStyleSheet() override;
 
     Label * userWelcomeLabel = nullptr;
+    Frame * borderFrame = nullptr;
 };
 
 

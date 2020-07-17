@@ -25,6 +25,7 @@ void IssueWidget::setupUi() {
 
     projectDetailsLayout->addWidget(iidLabel = new Label());
     iidLabel->setFontSize(GuiManager::smallFontSize());
+    iidLabel->setColor(TextColor::TERTIARY);
     projectDetailsLayout->addWidget(nameLabel = new Label());
 
     mainLayout->addLayout(projectDetailsLayout);
@@ -45,8 +46,6 @@ void IssueWidget::updateUi() {
 void IssueWidget::updateStyleSheet() {
 
     HoverClickFrame::updateStyleSheet();
-    iidLabel->setColor(GuiManager::getTheme().tertiaryTextColor());
-    nameLabel->setColor(GuiManager::getTheme().textColor());
 }
 
 void IssueWidget::setLoading(bool loading) {

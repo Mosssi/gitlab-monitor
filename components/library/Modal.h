@@ -21,7 +21,6 @@ private:
     QString title;
     Frame * mainWidget = nullptr;
     Frame * titleFrame = nullptr;
-    Label * titleLabel = nullptr;
 };
 
 

@@ -90,6 +90,8 @@ add_executable(gitlab_desktop_monitor
         utilities/GuiManager.cpp
         utilities/GuiManager.h
         utilities/LightTheme.h
+        utilities/LogService.cpp
+        utilities/LogService.h
         utilities/NotificationService.cpp
         utilities/NotificationService.h
         utilities/NotificationWidget.cpp

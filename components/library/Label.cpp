@@ -21,7 +21,7 @@ void Label::setBold(bool bold) {
     Label::updateStyleSheet();
 }
 
-void Label::setColor(const QString &color) {
+void Label::setColor(const TextColor &color) {
 
     this->color = color;
     Label::updateStyleSheet();
@@ -35,11 +35,33 @@ void Label::setGeneralStyle(const QString &generalStyle) {
 
 void Label::updateStyleSheet() {
 
+    QString textColor = GuiManager::getTheme().textColor();
+    switch (color) {
+        case TextColor::SECONDARY:
+            textColor = GuiManager::getTheme().secondaryTextColor();
+            break;
+        case TextColor::TERTIARY:
+            textColor = GuiManager::getTheme().tertiaryTextColor();
+            break;
+        case TextColor::TITLE:
+            textColor = GuiManager::getTheme().titleColor();
+            break;
+        case TextColor::INFO_NOTIFICATION:
+            textColor = GuiManager::getTheme().infoNotificationTextColor();
+            break;
+        case TextColor::ERROR_NOTIFICATION:
+            textColor = GuiManager::getTheme().errorNotificationColor();
+            break;
+        case TextColor::PRIMARY:
+        default:
+            break;
+    }
+
     setStyleSheet(
             QString("font-size: %1px; font-weight: %2; color: %3; background-color: %4; %5")
                     .arg(this->fontSize)
                     .arg(this->bold ? "bold" : "normal")
-                    .arg(color.isEmpty() ? GuiManager::getTheme().textColor() : color)
+                    .arg(textColor)
                     .arg(this->backgroundColor)
                     .arg(generalStyle)
     );

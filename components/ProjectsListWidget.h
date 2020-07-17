@@ -27,7 +27,6 @@ private:
     QVBoxLayout * scrollLayout = nullptr;
     LoadableContentWidget * contentWidget = nullptr;
     Frame * topFrame;
-    Label * starredIssuesLabel;
 };
 
 

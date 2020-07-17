@@ -14,6 +14,15 @@ NotificationWidget::NotificationWidget(const QString &text, NotificationStatus s
     setFixedHeight(GuiManager::smallFontSize() + 2 * padding);
     NotificationWidget::updateStyleSheet();
 
+    switch (status) {
+        case NotificationStatus::INFO:
+            setColor(TextColor::INFO_NOTIFICATION);
+            break;
+        case NotificationStatus::ERROR:
+            setColor(TextColor::ERROR_NOTIFICATION);
+            break;
+    }
+
     QFont font;
     font.setPixelSize(GuiManager::smallFontSize());
     QFontMetrics fontMetrics(font);
@@ -74,12 +83,10 @@ void NotificationWidget::updateStyleSheet() {
 
     switch (status) {
         case NotificationStatus::INFO:
-            setColor(GuiManager::getTheme().infoNotificationTextColor());
             setBackgroundColor(GuiManager::getTheme().infoNotificationColor());
             break;
         case NotificationStatus::ERROR:
             setBackgroundColor(GuiManager::getTheme().errorNotificationColor());
-            setColor(GuiManager::getTheme().errorNotificationTextColor());
             break;
     }
 }

@@ -2,6 +2,7 @@
 
 #include <QtCore/QJsonDocument>
 #include <QJsonArray>
+#include <zconf.h>
 
 #include "../utilities/Configuration.h"
 #include "../components/SystemTrayIcon.h"
@@ -19,6 +20,8 @@ NetworkManager &NetworkManager::getInstance() {
 
 void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
 
+    qDebug() << "Sending GET request, url: " << url;
+
     if (Configuration::getInstance().getToken().isEmpty()) {
         return;
     }
@@ -30,6 +33,8 @@ void NetworkManager::get(const QString &url, const CallbackFunction &callback) {
 }
 
 void NetworkManager::post(const QString &url, const QJsonObject &body, const CallbackFunction &callback) {
+
+    qDebug() << "Sending POST request, url: " << url;
 
     if (Configuration::getInstance().getToken().isEmpty()) {
         return;
@@ -46,6 +51,8 @@ void NetworkManager::post(const QString &url, const QJsonObject &body, const Cal
 }
 
 void NetworkManager::put(const QString &url, const QJsonObject &body, const CallbackFunction &callback) {
+
+    qDebug() << "Sending PUT request, url: " << url;
 
     if (Configuration::getInstance().getToken().isEmpty()) {
         return;
@@ -64,6 +71,8 @@ void NetworkManager::put(const QString &url, const QJsonObject &body, const Call
 void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction &callback) {
 
     if (reply->error() != QNetworkReply::NetworkError::NoError || qrand() % 4 == 0) {
+
+        qDebug() << "Error in network reply, " << reply->error();
         callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);
         reply->deleteLater();
         emit getInstance().networkError();

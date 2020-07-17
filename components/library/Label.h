@@ -6,12 +6,21 @@
 
 #include "StyledWidget.h"
 
+enum class TextColor {
+    PRIMARY,
+    SECONDARY,
+    TERTIARY,
+    TITLE,
+    INFO_NOTIFICATION,
+    ERROR_NOTIFICATION,
+};
+
 class Label : public QLabel, private StyledWidget {
 public:
     explicit Label(const QString &text = "", bool elided = true, QWidget * parent = nullptr);
     [[maybe_unused]] void setFontSize(int fontSize);
     [[maybe_unused]] void setBold(bool bold);
-    [[maybe_unused]] void setColor(const QString &color);
+    [[maybe_unused]] void setColor(const TextColor &color);
     [[maybe_unused]] void setBackgroundColor(const QString &backgroundColor);
     [[maybe_unused]] void setGeneralStyle(const QString &generalStyle);
 
@@ -25,7 +34,7 @@ private:
 
     int fontSize;
     bool bold = false;
-    QString color = "";
+    TextColor color = TextColor::PRIMARY;
     QString backgroundColor = "none";
     QString generalStyle = "";
 

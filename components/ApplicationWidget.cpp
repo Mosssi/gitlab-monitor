@@ -14,6 +14,7 @@
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
 #include "SystemTrayIcon.h"
+#include "../utilities/LogService.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
@@ -24,10 +25,10 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
     ApplicationWidget::updateStyleSheet();
     setupUi();
 
-    Configuration::getInstance().setServerAddress("https://gitlab.com");
-    Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
+//    Configuration::getInstance().setServerAddress("https://gitlab.com");
+//    Configuration::getInstance().setToken("BEqfZheThA3cR9bpLMF-");
 
-    DataStore::getInstance().initialize();
+    LogService::getInstance().initializeService(true, false);
 
     GuiManager::setApplicationWindow(this);
 
@@ -92,7 +93,7 @@ void ApplicationWidget::setupUi() {
     mainLayout->setSpacing(0);
 
     mainLayout->addWidget(new HeaderWidget());
-    mainLayout->addWidget(new BodyWidget());
+//    mainLayout->addWidget(new BodyWidget());
 }
 
 void ApplicationWidget::showConfiguration() {

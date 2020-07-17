@@ -11,9 +11,9 @@ LineEdit::LineEdit(QWidget * parent) : QLineEdit(parent), StyledWidget() {
 void LineEdit::updateStyleSheet() {
 
     setStyleSheet(
-            QString("background-color: %1; font-size: %2px; border: 1px solid %3; border-radius: 2px;")
+            QString("background-color: %1; font-size: %2px; color: %3; border-radius: 2px;")
                     .arg(GuiManager::getTheme().buttonColor()) // TODO: Define color
                     .arg(GuiManager::normalFontSize())
-                    .arg(GuiManager::getTheme().buttonHoverColor()) // TODO: Define color
+                    .arg(GuiManager::getTheme().textColor())
     );
 }
