@@ -3,11 +3,16 @@
 
 #include <QtCore/QString>
 #include <QtCore/QObject>
+#include <QtCore/QSettings>
 
 enum class ThemeMode {
     LIGHT,
     DARK,
 };
+
+QString stringifyThemeMode(const ThemeMode &themeMode);
+
+ThemeMode enumerateThemeMode(const QString &themeMode);
 
 class Configuration : public QObject {
 Q_OBJECT
@@ -29,10 +34,12 @@ signals:
 private:
     explicit Configuration();
 
-    QString serverAddress = "";
-    QString token = "";
-    ThemeMode theme = ThemeMode::LIGHT;
-    bool assignedToMe = false;
+    QSettings settings;
+
+    QString serverAddress;
+    QString token;
+    ThemeMode theme;
+    bool assignedToMe;
 };
 
 

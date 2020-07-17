@@ -18,8 +18,9 @@
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
     setupTrayIcon();
-//    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
+    setWindowTitle("GitLab Monitor");
     ApplicationWidget::updateStyleSheet();
     setupUi();
 

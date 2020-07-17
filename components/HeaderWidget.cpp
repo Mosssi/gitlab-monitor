@@ -34,7 +34,7 @@ void HeaderWidget::setupUi() {
     userWelcomeLabel->setFontSize(GuiManager::smallFontSize());
 
     auto * logoLabel = new Label();
-    const QPixmap pixmap(":/images/gitlab-logo-gray-rgb.png");
+    const QPixmap pixmap(":/images/header-image.png");
     logoLabel->setPixmap(pixmap.scaledToHeight(GuiManager::logoHeight(), Qt::SmoothTransformation));
 
     mainLayout->addWidget(logoLabel);

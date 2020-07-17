@@ -2,8 +2,8 @@
 
 #include <QDebug>
 
-#define ENABLED_ICON ":/images/icon.png"
-#define DISABLED_ICON ":/images/gray-icon.png"
+#define ENABLED_ICON ":/images/tray-icon.png"
+#define DISABLED_ICON ":/images/tray-icon-gray.png"
 
 
 SystemTrayIcon::SystemTrayIcon() : QSystemTrayIcon(nullptr) {
