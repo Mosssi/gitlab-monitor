@@ -68,10 +68,12 @@ void HeaderWidget::setupUi() {
     topContentLayout->addStretch();
 
     auto * serverAddressInput = new LineEdit();
+    serverAddressInput->setText("https://gitlab.com");
     topContentLayout->addWidget(new Label("Server Address:"));
     topContentLayout->addWidget(serverAddressInput);
 
     auto * tokenInput = new LineEdit();
+    tokenInput->setText("BEqfZheThA3cR9bpLMF-");
     topContentLayout->addWidget(new Label("Token:"));
     topContentLayout->addWidget(tokenInput);
 
