@@ -8,6 +8,7 @@ ContextMenu::ContextMenu() : Frame(nullptr) {
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setupUi();
+    ContextMenu::updateStyleSheet();
 }
 
 void ContextMenu::setupUi() {

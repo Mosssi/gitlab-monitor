@@ -26,7 +26,7 @@ HeaderWidget::HeaderWidget(QWidget * parent) : Frame(parent) {
 
 void HeaderWidget::setupUi() {
 
-    setFixedHeight(GuiManager::applicationHeight());
+    setFixedHeight(GuiManager::headerHeight());
 
     borderFrame = new Frame();
     borderFrame->setFixedHeight(2);
@@ -59,34 +59,6 @@ void HeaderWidget::setupUi() {
     });
 
     topContentLayout->addLayout(topLayout);
-
-    auto * descriptionLabel = new Label("Welcome to state-of-the-art monitoring technology");
-    descriptionLabel->setFontSize(GuiManager::smallFontSize());
-    descriptionLabel->setColor(TextColor::TERTIARY);
-    topContentLayout->addWidget(descriptionLabel);
-
-    topContentLayout->addStretch();
-
-    auto * serverAddressInput = new LineEdit();
-    serverAddressInput->setText("https://gitlab.com");
-    topContentLayout->addWidget(new Label("Server Address:"));
-    topContentLayout->addWidget(serverAddressInput);
-
-    auto * tokenInput = new LineEdit();
-    tokenInput->setText("BEqfZheThA3cR9bpLMF-");
-    topContentLayout->addWidget(new Label("Token:"));
-    topContentLayout->addWidget(tokenInput);
-
-    auto * saveServerConfigsButton = new PushButton(IconType::DONE);
-    connect(saveServerConfigsButton, &PushButton::clicked, [this, serverAddressInput, tokenInput]() {
-        Configuration::getInstance().setServerAddress(serverAddressInput->text());
-        Configuration::getInstance().setToken(tokenInput->text());
-
-        DataStore::getInstance().initialize();
-    });
-    topContentLayout->addWidget(saveServerConfigsButton);
-
-    topContentLayout->addStretch();
 }
 
 void HeaderWidget::updateStyleSheet() {

@@ -18,6 +18,7 @@ enum class TextColor {
 class Label : public QLabel, private StyledWidget {
 public:
     explicit Label(const QString &text = "", bool elided = true, QWidget * parent = nullptr);
+    explicit Label(const QString &text, int fontSize, const TextColor &color, bool elided = true, QWidget * parent = nullptr);
     [[maybe_unused]] void setFontSize(int fontSize);
     [[maybe_unused]] void setBold(bool bold);
     [[maybe_unused]] void setColor(const TextColor &color);

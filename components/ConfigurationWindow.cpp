@@ -42,4 +42,11 @@ void ConfigurationWindow::setupUi() {
     });
     mainLayout->addSpacing(10);
     mainLayout->addWidget(doneButton, 0, Qt::AlignCenter);
+
+    auto * logoutButton = new PushButton(IconType::CLOSE);
+    connect(logoutButton, &PushButton::clicked, [this]() {
+        GuiManager::getApplicationWindow()->logout();
+        GuiManager::getApplicationWindow()->hideConfiguration();
+    });
+    mainLayout->addWidget(logoutButton);
 }

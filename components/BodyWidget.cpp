@@ -29,6 +29,8 @@ void BodyWidget::setupUi() {
             issuesListWidget->refreshList(true);
         }
     });
+
+    DataStore::getInstance().initialize();
 }
 
 void BodyWidget::showProjectList() {

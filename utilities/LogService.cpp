@@ -4,7 +4,6 @@
 #include <QByteArray>
 #include <QtCore/QTime>
 #include <QtCore/QElapsedTimer>
-#include <QDebug>
 
 LogService &LogService::getInstance() {
 

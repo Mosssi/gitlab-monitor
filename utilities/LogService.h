@@ -4,6 +4,7 @@
 
 #include <QtCore/QtMessageHandler>
 #include <QtCore/QString>
+#include <QDebug>
 
 class LogService {
 

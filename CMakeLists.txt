@@ -11,6 +11,7 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
+add_library(keyutils)
 
 add_executable(gitlab_desktop_monitor
         components/ApplicationWidget.cpp
@@ -97,6 +98,8 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
         utilities/Theme.h
-)
+        utilities/KeyStore.cpp
+        utilities/KeyStore.h
+        components/library/WelcomeWidget.cpp components/library/WelcomeWidget.h)
 
-target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
+target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network keyutils)

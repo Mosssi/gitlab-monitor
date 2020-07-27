@@ -70,7 +70,7 @@ void NetworkManager::put(const QString &url, const QJsonObject &body, const Call
 
 void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction &callback) {
 
-    if (reply->error() != QNetworkReply::NetworkError::NoError || qrand() % 4 == 0) {
+    if (reply->error() != QNetworkReply::NetworkError::NoError /*|| qrand() % 4 == 0*/) {
 
         qDebug() << "Error in network reply, " << reply->error();
         callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);

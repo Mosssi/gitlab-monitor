@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <functional>
+#include <QtWidgets/QStackedWidget>
 
 #include "ContextMenu.h"
 #include "SystemTrayIcon.h"
@@ -13,6 +14,7 @@ public:
     explicit ApplicationWidget(QWidget * parent = nullptr);
     void showConfiguration();
     void hideConfiguration();
+    void logout();
 
 private:
     void setupTrayIcon();
@@ -20,6 +22,8 @@ private:
     void updateStyleSheet() override;
 
     std::function<void()> showApplication;
+
+    QStackedWidget * stackedWidget = nullptr;
 
     ContextMenu * contextMenu = nullptr;
     SystemTrayIcon * systemTrayIcon = nullptr;

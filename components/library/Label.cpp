@@ -9,6 +9,13 @@ Label::Label(const QString &text, bool elided, QWidget * parent) : QLabel(text, 
     Label::updateStyleSheet();
 }
 
+Label::Label(const QString &text, int fontSize, const TextColor &color, bool elided, QWidget * parent) : Label(text, elided, parent) {
+
+    setFontSize(fontSize);
+    setColor(color);
+    Label::updateStyleSheet();
+}
+
 void Label::setFontSize(int t_fontSize) {
 
     this->fontSize = t_fontSize;
