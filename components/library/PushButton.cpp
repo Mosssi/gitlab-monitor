@@ -55,7 +55,9 @@ void PushButton::paintEvent(QPaintEvent * event) {
     circlePath.addEllipse(this->rect());
 
     QString fillColor;
-    if (pressed) {
+    if (loading) {
+        fillColor = GuiManager::getTheme().buttonColor();
+    } else if (pressed) {
         fillColor = GuiManager::getTheme().buttonPressColor();
     } else if (hovered || confirmingValue > 0) {
         fillColor = GuiManager::getTheme().buttonHoverColor();

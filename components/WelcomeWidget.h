@@ -1,9 +1,8 @@
-
 #ifndef GITLAB_DESKTOP_MONITOR_WELCOMEWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_WELCOMEWIDGET_H
 
 
-#include "Frame.h"
+#include "library/Frame.h"
 
 class WelcomeWidget : public Frame {
 Q_OBJECT

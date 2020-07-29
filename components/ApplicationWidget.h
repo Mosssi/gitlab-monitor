@@ -15,7 +15,10 @@ public:
     void showConfiguration();
     void hideConfiguration();
     void logout();
-
+protected:
+    void keyPressEvent(QKeyEvent * event) override;
+protected:
+    void closeEvent(QCloseEvent * event) override;
 private:
     void setupTrayIcon();
     void setupUi();

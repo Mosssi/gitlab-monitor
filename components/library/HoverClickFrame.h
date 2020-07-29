@@ -8,7 +8,7 @@
 class HoverClickFrame : public Frame {
 Q_OBJECT
 public:
-    explicit HoverClickFrame(QWidget * parent, bool pressEnabled = true);
+    explicit HoverClickFrame(QWidget * parent = nullptr, bool pressEnabled = true);
 
 signals:
     void clicked();

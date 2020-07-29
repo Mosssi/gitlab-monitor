@@ -8,8 +8,12 @@
 #include "Label.h"
 
 class Modal : public Frame {
+Q_OBJECT
 public:
     explicit Modal(const QString &title, QWidget * parent);
+
+signals:
+    void closed();
 
 protected:
     QVBoxLayout * mainLayout = nullptr;
@@ -17,6 +21,7 @@ protected:
 private:
     void setupUi();
     void updateStyleSheet() override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
 
     QString title;
     Frame * mainWidget = nullptr;

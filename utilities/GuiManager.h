@@ -29,6 +29,7 @@ public:
     constexpr static int contextMenuButtonHeight() { return 30; }
     constexpr static int configurationWindowWidth() { return 200; }
     constexpr static int configurationWindowHeight() { return 150; }
+    constexpr static int configurationItemHeight() { return 20; }
     constexpr static int toggleSwitchWidth() { return 26; }
     constexpr static int toggleSwitchHeight() { return 14; }
 

@@ -7,6 +7,7 @@
 #include "library/Label.h"
 #include "library/PushButton.h"
 #include "library/ToggleSwitch.h"
+#include "library/HoverClickFrame.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATION", parent) {
 
@@ -15,7 +16,11 @@ ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATIO
 
 void ConfigurationWindow::setupUi() {
 
-    auto * themeLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(0, 5, 0, 5);
+
+    auto * themeFrame = new HoverClickFrame();
+    themeFrame->setGeneralStyle("border-radius: 0");
+    auto * themeLayout = new QHBoxLayout(themeFrame);
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
     auto * darkThemeSwitch = new ToggleSwitch();
@@ -24,29 +29,34 @@ void ConfigurationWindow::setupUi() {
     connect(darkThemeSwitch, &ToggleSwitch::toggled, [this](bool checked) {
         Configuration::getInstance().setTheme(checked ? ThemeMode::DARK : ThemeMode::LIGHT);
     });
+    connect(themeFrame, &HoverClickFrame::clicked, [darkThemeSwitch]() {
+        darkThemeSwitch->toggleState();
+    });
 
-    auto * issuesLayout = new QHBoxLayout();
+    auto * issuesFrame = new HoverClickFrame();
+    issuesFrame->setGeneralStyle("border-radius: 0");
+    auto * issuesLayout = new QHBoxLayout(issuesFrame);
     issuesLayout->addWidget(new Label("Assigned To Me"));
     issuesLayout->addStretch();
     auto * assignedToMeSwitch = new ToggleSwitch();
     assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());
     issuesLayout->addWidget(assignedToMeSwitch);
     connect(assignedToMeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
-
-    mainLayout->addLayout(themeLayout);
-    mainLayout->addLayout(issuesLayout);
-
-    auto * doneButton = new PushButton(IconType::DONE);
-    connect(doneButton, &PushButton::clicked, [this]() {
-        GuiManager::getApplicationWindow()->hideConfiguration();
+    connect(issuesFrame, &HoverClickFrame::clicked, [assignedToMeSwitch]() {
+        assignedToMeSwitch->toggleState();
     });
-    mainLayout->addSpacing(10);
-    mainLayout->addWidget(doneButton, 0, Qt::AlignCenter);
 
-    auto * logoutButton = new PushButton(IconType::CLOSE);
-    connect(logoutButton, &PushButton::clicked, [this]() {
+    auto * logoutFrame = new HoverClickFrame();
+    logoutFrame->setGeneralStyle("border-radius: 0");
+    auto * logoutLayout = new QHBoxLayout(logoutFrame);
+    logoutLayout->addWidget(new Label("Logout"));
+    logoutLayout->addStretch();
+    connect(logoutFrame, &HoverClickFrame::clicked, [this]() {
         GuiManager::getApplicationWindow()->logout();
-        GuiManager::getApplicationWindow()->hideConfiguration();
+        emit closed();
     });
-    mainLayout->addWidget(logoutButton);
+
+    mainLayout->addWidget(themeFrame);
+    mainLayout->addWidget(issuesFrame);
+    mainLayout->addWidget(logoutFrame);
 }

@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include <QScreen>
 #include <QtWidgets/QVBoxLayout>
+#include <QKeyEvent>
 
 #include "../models/Project.h"
 #include "../models/User.h"
@@ -13,7 +14,7 @@
 #include "HeaderWidget.h"
 #include "SystemTrayIcon.h"
 #include "../utilities/LogService.h"
-#include "library/WelcomeWidget.h"
+#include "WelcomeWidget.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
@@ -43,6 +44,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
     configurationWindow = new ConfigurationWindow(this);
     configurationWindow->hide();
     configurationWindow->move(0, 0);
+    connect(configurationWindow, &ConfigurationWindow::closed, this, &ApplicationWidget::hideConfiguration);
 }
 
 void ApplicationWidget::setupTrayIcon() {
@@ -135,16 +137,17 @@ void ApplicationWidget::logout() {
     stackedWidget->setCurrentIndex(0);
 }
 
-/*
- 1. Check if server address and token are entered
-    1.1 Not entered: Show very first welcome page, showing a single GitLab logo, probably
-        name of the application and copyright, inputs for credentials.  When submitted,
-        request for user, if OK, go to main page
-    1.2 Entered: Simply show the main page, no need for any animations or waiting for user
-        to welcome him!
- 2. When user logs out, go to 1.1,
+void ApplicationWidget::closeEvent(QCloseEvent * event) {
 
- Then: ApplicationWidget contains a StackedWidget, first widget is the welcome page, second
-    one consists of HeaderWidget and BodyWidget.  A simple animation when transitioning suffices.
+    QWidget::closeEvent(event);
+    hideConfiguration();
+}
 
- */
+void ApplicationWidget::keyPressEvent(QKeyEvent * event) {
+
+    if (configurationWindow->isVisible() && event->key() == Qt::Key_Escape) {
+        hideConfiguration();
+    } else {
+        QWidget::keyPressEvent(event);
+    }
+}

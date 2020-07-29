@@ -1,11 +1,12 @@
 #include "WelcomeWidget.h"
-#include "Label.h"
-#include "../../utilities/GuiManager.h"
-#include "LineEdit.h"
-#include "PushButton.h"
-#include "../../utilities/DataStore.h"
 
 #include <QtWidgets/QVBoxLayout>
+
+#include "library/Label.h"
+#include "../utilities/GuiManager.h"
+#include "library/LineEdit.h"
+#include "library/PushButton.h"
+#include "../utilities/DataStore.h"
 
 WelcomeWidget::WelcomeWidget(QWidget * parent) : Frame(parent) {
 
@@ -23,14 +24,16 @@ void WelcomeWidget::setupUi() {
     mainLayout->addStretch(1);
     mainLayout->addWidget(logoLabel, 0, Qt::AlignCenter);
 
+    mainLayout->addSpacing(10);
     auto * serverAddressInput = new LineEdit();
     serverAddressInput->setText("https://gitlab.com");
-    mainLayout->addWidget(new Label("Server Address:", GuiManager::smallFontSize(), TextColor::SECONDARY));
+    mainLayout->addWidget(new Label("SERVER ADDRESS:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(serverAddressInput);
 
+    mainLayout->addSpacing(10);
     auto * tokenInput = new LineEdit();
     tokenInput->setText("BEqfZheThA3cR9bpLMF-");
-    mainLayout->addWidget(new Label("Token:", GuiManager::smallFontSize(), TextColor::SECONDARY));
+    mainLayout->addWidget(new Label("TOKEN:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(tokenInput);
 
     auto * saveServerConfigsButton = new PushButton(IconType::DONE);
@@ -41,7 +44,8 @@ void WelcomeWidget::setupUi() {
 
         DataStore::getInstance().initialize();
     });
-    mainLayout->addWidget(saveServerConfigsButton);
+    mainLayout->addSpacing(10);
+    mainLayout->addWidget(saveServerConfigsButton, 0, Qt::AlignCenter);
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this, saveServerConfigsButton]() {
         saveServerConfigsButton->setLoading(false);
@@ -55,4 +59,5 @@ void WelcomeWidget::setupUi() {
     });
 
     mainLayout->addStretch(3);
+    mainLayout->addWidget(new Label("© Copyright for Mohsen Esmaeili", GuiManager::smallFontSize(), TextColor::TERTIARY), 0, Qt::AlignCenter);
 }

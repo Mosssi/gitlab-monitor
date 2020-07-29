@@ -21,6 +21,7 @@ void Modal::setupUi() {
 
     auto * layout = new QVBoxLayout(mainWidget);
     layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
     titleFrame = new Frame();
     auto * titleLayout = new QHBoxLayout(titleFrame);
@@ -33,8 +34,8 @@ void Modal::setupUi() {
     layout->addWidget(titleFrame);
 
     mainLayout = new QVBoxLayout();
-    mainLayout->setContentsMargins(10, 10, 10, 10);
-    mainLayout->setSpacing(10);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(5);
     layout->addLayout(mainLayout);
 }
 
@@ -43,4 +44,11 @@ void Modal::updateStyleSheet() {
     setBackgroundColor("#44000000");
     mainWidget->setBackgroundColor(GuiManager::getTheme().backgroundColor());
     titleFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
+}
+
+void Modal::mouseReleaseEvent(QMouseEvent * event) {
+
+    if (!mainWidget->underMouse()) {
+        emit closed();
+    }
 }
