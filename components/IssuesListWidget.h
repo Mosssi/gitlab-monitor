@@ -4,7 +4,7 @@
 
 #include <QtWidgets/QVBoxLayout>
 
-#include "IssueInputWidget.h"
+#include "IssueInputWindow.h"
 #include "LoadableContentWidget.h"
 #include "library/Frame.h"
 #include "library/Label.h"
@@ -24,14 +24,11 @@ private:
     void setupUi();
     void updateUi();
     void emptyScrollLayout();
-    void showIssueInputWidget();
-    void hideIssueInputWidget();
     void requestIssueCreation(const QString &issueTitle);
     void updateStyleSheet() override;
 
     int projectId = 0;
 
-    IssueInputWidget * issueInputWidget = nullptr;
     QVBoxLayout * scrollLayout = nullptr;
     Label * projectNameLabel = nullptr;
     LoadableContentWidget * contentWidget = nullptr;

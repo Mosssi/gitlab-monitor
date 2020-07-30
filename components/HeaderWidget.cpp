@@ -8,6 +8,7 @@
 #include "library/Label.h"
 #include "library/PushButton.h"
 #include "library/LineEdit.h"
+#include "ModalManager.h"
 
 
 HeaderWidget::HeaderWidget(QWidget * parent) : Frame(parent) {
@@ -55,7 +56,7 @@ void HeaderWidget::setupUi() {
     auto * configurationButton = new PushButton(IconType::SETTINGS);
     topLayout->addWidget(configurationButton);
     connect(configurationButton, &PushButton::clicked, [this]() {
-        GuiManager::getApplicationWindow()->showConfiguration();
+        ModalManager::getInstance().showConfigurationWindow();
     });
 
     topContentLayout->addLayout(topLayout);

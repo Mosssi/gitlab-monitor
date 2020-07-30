@@ -36,7 +36,7 @@ void ConfigurationWindow::setupUi() {
     auto * issuesFrame = new HoverClickFrame();
     issuesFrame->setGeneralStyle("border-radius: 0");
     auto * issuesLayout = new QHBoxLayout(issuesFrame);
-    issuesLayout->addWidget(new Label("Assigned To Me"));
+    issuesLayout->addWidget(new Label("Filter Assigned To Me"));
     issuesLayout->addStretch();
     auto * assignedToMeSwitch = new ToggleSwitch();
     assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());

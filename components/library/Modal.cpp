@@ -52,3 +52,14 @@ void Modal::mouseReleaseEvent(QMouseEvent * event) {
         emit closed();
     }
 }
+
+//void Modal::keyPressEvent(QKeyEvent * event) {
+//
+//    qDebug() << "------";
+//    if (isVisible() && event->key() == Qt::Key_Escape) {
+//        emit closed();
+//        event->ignore();
+//    } else {
+//        QWidget::keyPressEvent(event);
+//    }
+//}

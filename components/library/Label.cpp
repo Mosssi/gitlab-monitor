@@ -57,7 +57,7 @@ void Label::updateStyleSheet() {
             textColor = GuiManager::getTheme().infoNotificationTextColor();
             break;
         case TextColor::ERROR_NOTIFICATION:
-            textColor = GuiManager::getTheme().errorNotificationColor();
+            textColor = GuiManager::getTheme().errorNotificationTextColor();
             break;
         case TextColor::PRIMARY:
         default:

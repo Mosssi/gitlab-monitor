@@ -1,21 +1,19 @@
-#ifndef GITLAB_DESKTOP_MONITOR_ISSUEINPUTWIDGET_H
-#define GITLAB_DESKTOP_MONITOR_ISSUEINPUTWIDGET_H
+#ifndef GITLAB_DESKTOP_MONITOR_ISSUEINPUTWINDOW_H
+#define GITLAB_DESKTOP_MONITOR_ISSUEINPUTWINDOW_H
 
-
-#include <QtWidgets/QFrame>
 
 #include "library/LineEdit.h"
 #include "library/PushButton.h"
+#include "library/Modal.h"
 
-class IssueInputWidget : public QFrame {
+class IssueInputWindow : public Modal {
 Q_OBJECT
 public:
-    explicit IssueInputWidget();
+    explicit IssueInputWindow(QWidget * parent = nullptr);
     void clearInput();
     void setLoading(bool loading);
 
 signals:
-    void cancelled();
     void submitted(const QString &issueTitle);
 
 private:
@@ -26,4 +24,4 @@ private:
 };
 
 
-#endif //GITLAB_DESKTOP_MONITOR_ISSUEINPUTWIDGET_H
+#endif //GITLAB_DESKTOP_MONITOR_ISSUEINPUTWINDOW_H

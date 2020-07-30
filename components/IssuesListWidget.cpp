@@ -5,6 +5,7 @@
 #include "IssueWidget.h"
 #include "library/PushButton.h"
 #include "../utilities/NotificationService.h"
+#include "ModalManager.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : Frame(parent) {
@@ -34,7 +35,6 @@ void IssuesListWidget::setupUi() {
     auto * headerLayout = new QHBoxLayout(headerFrame);
     auto * backButton = new PushButton(IconType::BACK);
     connect(backButton, &PushButton::clicked, [this]() {
-        hideIssueInputWidget();
         emit backClicked();
     });
     headerLayout->addWidget(backButton);
@@ -43,14 +43,11 @@ void IssuesListWidget::setupUi() {
     auto * createIssueButton = new PushButton(IconType::NEW);
     headerLayout->addStretch();
     headerLayout->addWidget(createIssueButton);
-    connect(createIssueButton, &PushButton::clicked, this, &IssuesListWidget::showIssueInputWidget);
+    connect(createIssueButton, &PushButton::clicked, &ModalManager::getInstance(), &ModalManager::showIssueInputWindow);
 
     mainLayout->addWidget(headerFrame);
 
-    mainLayout->addWidget(issueInputWidget = new IssueInputWidget());
-    issueInputWidget->setVisible(false);
-    connect(issueInputWidget, &IssueInputWidget::cancelled, this, &IssuesListWidget::hideIssueInputWidget);
-    connect(issueInputWidget, &IssueInputWidget::submitted, this, &IssuesListWidget::requestIssueCreation);
+    connect(ModalManager::getInstance().getIssueInputWindow(), &IssueInputWindow::submitted, this, &IssuesListWidget::requestIssueCreation);
 
     scrollLayout = new QVBoxLayout();
     scrollLayout->setContentsMargins(0, 0, 0, 0);
@@ -110,24 +107,13 @@ void IssuesListWidget::emptyScrollLayout() {
     }
 }
 
-void IssuesListWidget::showIssueInputWidget() {
-
-    issueInputWidget->setVisible(true);
-    issueInputWidget->clearInput();
-}
-
-void IssuesListWidget::hideIssueInputWidget() {
-
-    issueInputWidget->setVisible(false);
-}
-
 void IssuesListWidget::requestIssueCreation(const QString &issueTitle) {
 
-    issueInputWidget->setLoading(true);
+    ModalManager::getInstance().getIssueInputWindow()->setLoading(true);
     ServiceMediator::createIssue(projectId, issueTitle, [this](CALLBACK_SIGNATURE) {
-        issueInputWidget->setLoading(false);
+        ModalManager::getInstance().getIssueInputWindow()->setLoading(false);
         if (status == ResponseStatus::SUCCESSFUL) {
-            hideIssueInputWidget();
+            ModalManager::getInstance().hideIssueInputWindow();
             DataStore::getInstance().refreshProjectOpenIssues(projectId);
             updateUi();
         } else {

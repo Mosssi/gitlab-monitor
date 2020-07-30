@@ -2,11 +2,11 @@
 
 #include <QtWidgets/QVBoxLayout>
 
-#include "library/Label.h"
+#include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
+#include "library/Label.h"
 #include "library/LineEdit.h"
 #include "library/PushButton.h"
-#include "../utilities/DataStore.h"
 
 WelcomeWidget::WelcomeWidget(QWidget * parent) : Frame(parent) {
 
@@ -16,6 +16,7 @@ WelcomeWidget::WelcomeWidget(QWidget * parent) : Frame(parent) {
 void WelcomeWidget::setupUi() {
 
     auto * mainLayout = new QVBoxLayout(this);
+    mainLayout->setContentsMargins(30, 10, 30, 10);
 
     auto * logoLabel = new Label();
     const QPixmap pixmap(":/images/gitlab-icon.png");

@@ -26,20 +26,14 @@ add_executable(gitlab_desktop_monitor
         components/ContextMenuButton.h
         components/HeaderWidget.cpp
         components/HeaderWidget.h
-        components/IssueInputWidget.cpp
-        components/IssueInputWidget.h
-        components/IssueWidget.cpp
-        components/IssueWidget.h
+        components/IssueInputWindow.cpp
+        components/IssueInputWindow.h
         components/IssuesListWidget.cpp
         components/IssuesListWidget.h
-        components/LoadableContentWidget.cpp
-        components/LoadableContentWidget.h
-        components/ProjectWidget.cpp
-        components/ProjectWidget.h
-        components/ProjectsListWidget.cpp
-        components/ProjectsListWidget.h
-        components/SystemTrayIcon.cpp
-        components/SystemTrayIcon.h
+        components/IssueWidget.cpp
+        components/IssueWidget.h
+        components/library/ConfigurationItemHolder.cpp
+        components/library/ConfigurationItemHolder.h
         components/library/Frame.cpp
         components/library/Frame.h
         components/library/HoverClickFrame.cpp
@@ -68,6 +62,18 @@ add_executable(gitlab_desktop_monitor
         components/library/StyledWidget.h
         components/library/ToggleSwitch.cpp
         components/library/ToggleSwitch.h
+        components/LoadableContentWidget.cpp
+        components/LoadableContentWidget.h
+        components/ModalManager.cpp
+        components/ModalManager.h
+        components/ProjectsListWidget.cpp
+        components/ProjectsListWidget.h
+        components/ProjectWidget.cpp
+        components/ProjectWidget.h
+        components/SystemTrayIcon.cpp
+        components/SystemTrayIcon.h
+        components/WelcomeWidget.cpp
+        components/WelcomeWidget.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
@@ -90,6 +96,8 @@ add_executable(gitlab_desktop_monitor
         utilities/DataStore.h
         utilities/GuiManager.cpp
         utilities/GuiManager.h
+        utilities/KeyStore.cpp
+        utilities/KeyStore.h
         utilities/LightTheme.h
         utilities/LogService.cpp
         utilities/LogService.h
@@ -98,8 +106,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
         utilities/Theme.h
-        utilities/KeyStore.cpp
-        utilities/KeyStore.h
-        components/WelcomeWidget.cpp components/WelcomeWidget.h components/library/ConfigurationItemHolder.cpp components/library/ConfigurationItemHolder.h)
+)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network keyutils)

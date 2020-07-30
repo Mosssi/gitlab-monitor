@@ -2,18 +2,15 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QScreen>
-#include <QtWidgets/QVBoxLayout>
 #include <QKeyEvent>
+#include <QScreen>
 
-#include "../models/Project.h"
-#include "../models/User.h"
-#include "../network/ServiceMediator.h"
 #include "../utilities/GuiManager.h"
+#include "../utilities/LogService.h"
 #include "BodyWidget.h"
 #include "HeaderWidget.h"
+#include "ModalManager.h"
 #include "SystemTrayIcon.h"
-#include "../utilities/LogService.h"
 #include "WelcomeWidget.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
@@ -40,11 +37,6 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
     connect(contextMenu, &ContextMenu::exitClicked, [this]() {
         QApplication::exit(0);
     });
-
-    configurationWindow = new ConfigurationWindow(this);
-    configurationWindow->hide();
-    configurationWindow->move(0, 0);
-    connect(configurationWindow, &ConfigurationWindow::closed, this, &ApplicationWidget::hideConfiguration);
 }
 
 void ApplicationWidget::setupTrayIcon() {
@@ -109,20 +101,10 @@ void ApplicationWidget::setupUi() {
     if (!Configuration::getInstance().getServerAddress().isEmpty() && !Configuration::getInstance().getToken().isEmpty()) {
         stackedWidget->setCurrentWidget(goodbyeWidget);
     }
-    
+
     connect(welcomeWidget, &WelcomeWidget::serverAndTokenValidated, [this, goodbyeWidget]() {
         stackedWidget->setCurrentWidget(goodbyeWidget);
     });
-}
-
-void ApplicationWidget::showConfiguration() {
-
-    configurationWindow->show();
-}
-
-void ApplicationWidget::hideConfiguration() {
-
-    configurationWindow->hide();
 }
 
 void ApplicationWidget::updateStyleSheet() {
@@ -140,13 +122,16 @@ void ApplicationWidget::logout() {
 void ApplicationWidget::closeEvent(QCloseEvent * event) {
 
     QWidget::closeEvent(event);
-    hideConfiguration();
+    ModalManager::getInstance().hideIssueInputWindow();
+    ModalManager::getInstance().hideConfigurationWindow();
 }
 
 void ApplicationWidget::keyPressEvent(QKeyEvent * event) {
 
-    if (configurationWindow->isVisible() && event->key() == Qt::Key_Escape) {
-        hideConfiguration();
+    bool modalVisible = ModalManager::getInstance().getConfigurationWindow()->isVisible() || ModalManager::getInstance().getIssueInputWindow()->isVisible();
+    if (event->key() == Qt::Key_Escape && modalVisible) {
+        ModalManager::getInstance().hideConfigurationWindow();
+        ModalManager::getInstance().hideIssueInputWindow();
     } else {
         QWidget::keyPressEvent(event);
     }
