@@ -33,6 +33,21 @@ void ConfigurationWindow::setupUi() {
         darkThemeSwitch->toggleState();
     });
 
+    auto * autoStartFrame = new HoverClickFrame();
+    autoStartFrame->setGeneralStyle("border-radius: 0");
+    auto * autoStartLayout = new QHBoxLayout(autoStartFrame);
+    autoStartLayout->addWidget(new Label("Launch on Startup"));
+    autoStartLayout->addStretch();
+    auto * autoStartSwitch = new ToggleSwitch();
+    autoStartSwitch->setChecked(Configuration::getInstance().getAutoStart());
+    autoStartLayout->addWidget(autoStartSwitch);
+    connect(autoStartSwitch, &ToggleSwitch::toggled, [this](bool checked) {
+        Configuration::getInstance().setAutoStart(checked);
+    });
+    connect(autoStartFrame, &HoverClickFrame::clicked, [autoStartSwitch]() {
+        autoStartSwitch->toggleState();
+    });
+
     auto * issuesFrame = new HoverClickFrame();
     issuesFrame->setGeneralStyle("border-radius: 0");
     auto * issuesLayout = new QHBoxLayout(issuesFrame);
@@ -57,6 +72,7 @@ void ConfigurationWindow::setupUi() {
     });
 
     mainLayout->addWidget(themeFrame);
+    mainLayout->addWidget(autoStartFrame);
     mainLayout->addWidget(issuesFrame);
     mainLayout->addWidget(logoutFrame);
 }

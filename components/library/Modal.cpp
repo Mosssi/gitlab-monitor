@@ -17,7 +17,7 @@ void Modal::setupUi() {
     mainWidget->move(
             (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
             (GuiManager::applicationHeight() - GuiManager::configurationWindowHeight()) / 2
-    );
+    ); // TODO: Fix fixed height
 
     auto * layout = new QVBoxLayout(mainWidget);
     layout->setContentsMargins(0, 0, 0, 0);

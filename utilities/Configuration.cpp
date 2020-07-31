@@ -72,6 +72,17 @@ ThemeMode Configuration::getTheme() const {
     return theme;
 }
 
+void Configuration::setAutoStart(bool autoStart) {
+
+    settings.setValue(ASSIGNED_TO_ME_KEY, autoStart);
+    this->autoStart = autoStart;
+}
+
+bool Configuration::getAutoStart() const {
+
+    return assignedToMe;
+}
+
 void Configuration::setAssignedToMe(bool assignedToMe) {
 
     settings.setValue(ASSIGNED_TO_ME_KEY, assignedToMe);

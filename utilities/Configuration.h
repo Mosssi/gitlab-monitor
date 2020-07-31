@@ -24,6 +24,8 @@ public:
     [[nodiscard]] QString getToken() const;
     void setTheme(ThemeMode theme);
     [[nodiscard]] ThemeMode getTheme() const;
+    void setAutoStart(bool autoStart);
+    [[nodiscard]] bool getAutoStart() const;
     void setAssignedToMe(bool assignedToMe);
     [[nodiscard]] bool getAssignedToMe() const;
 
@@ -39,6 +41,7 @@ private:
     QString serverAddress;
     QString token;
     ThemeMode theme;
+    bool autoStart;
     bool assignedToMe;
 };
 
