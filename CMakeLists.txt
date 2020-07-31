@@ -28,10 +28,22 @@ add_executable(gitlab_desktop_monitor
         components/HeaderWidget.h
         components/IssueInputWindow.cpp
         components/IssueInputWindow.h
-        components/IssuesListWidget.cpp
-        components/IssuesListWidget.h
         components/IssueWidget.cpp
         components/IssueWidget.h
+        components/IssuesListWidget.cpp
+        components/IssuesListWidget.h
+        components/LoadableContentWidget.cpp
+        components/LoadableContentWidget.h
+        components/ModalManager.cpp
+        components/ModalManager.h
+        components/ProjectWidget.cpp
+        components/ProjectWidget.h
+        components/ProjectsListWidget.cpp
+        components/ProjectsListWidget.h
+        components/SystemTrayIcon.cpp
+        components/SystemTrayIcon.h
+        components/WelcomeWidget.cpp
+        components/WelcomeWidget.h
         components/library/ConfigurationItemHolder.cpp
         components/library/ConfigurationItemHolder.h
         components/library/Frame.cpp
@@ -62,18 +74,6 @@ add_executable(gitlab_desktop_monitor
         components/library/StyledWidget.h
         components/library/ToggleSwitch.cpp
         components/library/ToggleSwitch.h
-        components/LoadableContentWidget.cpp
-        components/LoadableContentWidget.h
-        components/ModalManager.cpp
-        components/ModalManager.h
-        components/ProjectsListWidget.cpp
-        components/ProjectsListWidget.h
-        components/ProjectWidget.cpp
-        components/ProjectWidget.h
-        components/SystemTrayIcon.cpp
-        components/SystemTrayIcon.h
-        components/WelcomeWidget.cpp
-        components/WelcomeWidget.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
@@ -89,6 +89,7 @@ add_executable(gitlab_desktop_monitor
         network/ServiceMediator.cpp
         network/ServiceMediator.h
         resources/resources.qrc
+        utilities/ColorPalette.h
         utilities/Configuration.cpp
         utilities/Configuration.h
         utilities/DarkTheme.h

@@ -3,7 +3,7 @@
 
 
 #include "Theme.h"
-#include "GuiManager.h"
+#include "ColorPalette.h"
 
 class DarkTheme : public Theme {
 public:
@@ -12,31 +12,31 @@ public:
         return theme;
     }
 
-    QString textColor() override { return GuiManager::darkLightColor(); }
-    QString secondaryTextColor() override { return GuiManager::darkerLightColor(); }
-    QString tertiaryTextColor() override { return GuiManager::evenDarkerLightColor(); }
-    QString titleColor() override { return GuiManager::darkerLightColor(); }
-    QString headerBorderColor() override { return GuiManager::orangeColor(); }
-    QString mainHeaderColor() override { return GuiManager::darkGrayColor(); }
-    QString headerColor() override { return GuiManager::lightGrayColor(); }
-    QString backgroundColor() override { return GuiManager::darkGrayColor(); }
-    QString hoverColor() override { return GuiManager::grayColor(); }
-    QString pressColor() override { return GuiManager::lightGrayColor(); }
-    QString buttonColor() override { return GuiManager::lightGrayColor(); }
-    QString buttonHoverColor() override { return GuiManager::lighterGrayColor(); }
-    QString buttonPressColor() override { return GuiManager::grayColor(); }
-    QString loadingColor() override { return GuiManager::evenDarkerLightColor(); }
-    QString loadingRingColor() override { return GuiManager::grayColor(); }
+    QString textColor() override { return DARK_LIGHT_COLOR; }
+    QString secondaryTextColor() override { return DARKER_LIGHT_COLOR; }
+    QString tertiaryTextColor() override { return EVEN_DARKER_LIGHT_COLOR; }
+    QString titleColor() override { return DARKER_LIGHT_COLOR; }
+    QString headerBorderColor() override { return ORANGE_COLOR; }
+    QString mainHeaderColor() override { return D_GRAY_COLOR; }
+    QString headerColor() override { return L_GRAY_COLOR; }
+    QString backgroundColor() override { return D_GRAY_COLOR; }
+    QString hoverColor() override { return GRAY_COLOR; }
+    QString pressColor() override { return L_GRAY_COLOR; }
+    QString buttonColor() override { return L_GRAY_COLOR; }
+    QString buttonHoverColor() override { return LL_GRAY_COLOR; }
+    QString buttonPressColor() override { return GRAY_COLOR; }
+    QString loadingColor() override { return EVEN_DARKER_LIGHT_COLOR; }
+    QString loadingRingColor() override { return GRAY_COLOR; }
 
-    QString switchOffColor() override { return GuiManager::grayColor(); }
-    QString switchOffBackgroundColor() override { return GuiManager::lighterGrayColor(); }
-    QString switchOnColor() override { return GuiManager::darkerLightColor(); }
-    QString switchOnBackgroundColor() override { return GuiManager::lightOrangeColor(); }
+    QString switchOffColor() override { return GRAY_COLOR; }
+    QString switchOffBackgroundColor() override { return LL_GRAY_COLOR; }
+    QString switchOnColor() override { return DARKER_LIGHT_COLOR; }
+    QString switchOnBackgroundColor() override { return LIGHT_ORANGE_COLOR; }
 
-    QString infoNotificationColor() override { return GuiManager::grayColor(); }
-    QString infoNotificationTextColor() override { return GuiManager::lightColor(); }
-    QString errorNotificationColor() override { return GuiManager::redOrangeColor(); }
-    QString errorNotificationTextColor() override { return GuiManager::lightColor(); }
+    QString infoNotificationColor() override { return GRAY_COLOR; }
+    QString infoNotificationTextColor() override { return LIGHT_COLOR; }
+    QString errorNotificationColor() override { return RED_ORANGE_COLOR; }
+    QString errorNotificationTextColor() override { return LIGHT_COLOR; }
 };
 
 #endif //GITLAB_DESKTOP_MONITOR_DARKTHEME_H

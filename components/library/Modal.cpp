@@ -41,7 +41,7 @@ void Modal::setupUi() {
 
 void Modal::updateStyleSheet() {
 
-    setBackgroundColor("#44000000");
+    setBackgroundColor("#55000000");
     mainWidget->setBackgroundColor(GuiManager::getTheme().backgroundColor());
     titleFrame->setBackgroundColor(GuiManager::getTheme().headerColor());
 }
@@ -52,14 +52,3 @@ void Modal::mouseReleaseEvent(QMouseEvent * event) {
         emit closed();
     }
 }
-
-//void Modal::keyPressEvent(QKeyEvent * event) {
-//
-//    qDebug() << "------";
-//    if (isVisible() && event->key() == Qt::Key_Escape) {
-//        emit closed();
-//        event->ignore();
-//    } else {
-//        QWidget::keyPressEvent(event);
-//    }
-//}

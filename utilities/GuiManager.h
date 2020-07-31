@@ -39,25 +39,7 @@ public:
     static ApplicationWidget * getApplicationWindow();
 
 private:
-    friend class LightTheme;
-    friend class DarkTheme;
     static GuiManager &getInstance();
-
-    static inline QString darkGrayColor() { return "#2e2e2e"; }
-    static inline QString grayColor() { return "#4a4a4a"; }
-    static inline QString lightGrayColor() { return "#666666"; }
-    static inline QString lighterGrayColor() { return "#888888"; }
-    static inline QString whiteColor() { return "#ffffff"; }
-    static inline QString lighterColor() { return "#f7f7f7"; }
-    static inline QString lightColor() { return "#f0f0f0"; }
-    static inline QString darkLightColor() { return "#e5e5e5"; }
-    static inline QString darkerLightColor() { return "#d0d0d0"; }
-    static inline QString evenDarkerLightColor() { return "#a0a0a0"; }
-    static inline QString lightOrangeColor() { return "#fca121"; }
-    static inline QString orangeColor() { return "#fc6d26"; }
-    static inline QString redOrangeColor() { return "#db3b21"; }
-    static inline QString lightPurpleColor() { return "#6e49cb"; }
-    static inline QString purpleColor() { return "#380d75"; }
 
     ApplicationWidget * applicationWindow;
 };

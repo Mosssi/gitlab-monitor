@@ -8,7 +8,6 @@
 
 class DataStore : public QObject {
 Q_OBJECT
-    friend class ServiceMediator;
 public:
     static DataStore &getInstance();
     void initialize();

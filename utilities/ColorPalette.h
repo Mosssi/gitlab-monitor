@@ -1,0 +1,23 @@
+#ifndef GITLAB_DESKTOP_MONITOR_COLORPALETTE_H
+#define GITLAB_DESKTOP_MONITOR_COLORPALETTE_H
+
+/* Gray */
+#define DD_GRAY_COLOR "#2e2e2e"
+#define D_GRAY_COLOR "#434343"
+#define GRAY_COLOR "#4a4a4a"
+#define L_GRAY_COLOR "#666666"
+#define LL_GRAY_COLOR "#888888"
+
+/* Light */
+#define WHITE_COLOR "#ffffff"
+#define LIGHTER_COLOR "#f7f7f7"
+#define LIGHT_COLOR "#f0f0f0"
+#define DARK_LIGHT_COLOR "#e5e5e5"
+#define DARKER_LIGHT_COLOR "#d0d0d0"
+#define EVEN_DARKER_LIGHT_COLOR "#a0a0a0"
+
+#define LIGHT_ORANGE_COLOR "#fca121"
+#define ORANGE_COLOR "#fc6d26"
+#define RED_ORANGE_COLOR "#db3b21"
+
+#endif //GITLAB_DESKTOP_MONITOR_COLORPALETTE_H
