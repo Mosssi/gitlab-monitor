@@ -1,5 +1,7 @@
 #include "Modal.h"
 
+#include <QResizeEvent>
+
 #include "../../utilities/GuiManager.h"
 
 Modal::Modal(const QString &title, QWidget * parent) : Frame(parent), title(title) {
@@ -14,10 +16,12 @@ void Modal::setupUi() {
     mainWidget = new Frame(this);
     mainWidget->setFixedWidth(GuiManager::configurationWindowWidth());
     mainWidget->setGeneralStyle("border-radius: 6px;");
-    mainWidget->move(
-            (GuiManager::applicationWidth() - GuiManager::configurationWindowWidth()) / 2,
-            (GuiManager::applicationHeight() - GuiManager::configurationWindowHeight()) / 2
-    ); // TODO: Fix fixed height
+    connect(mainWidget, &Frame::resized, [this]() {
+        mainWidget->move(
+                (GuiManager::applicationWidth() - mainWidget->width()) / 2,
+                (GuiManager::applicationHeight() - mainWidget->height()) / 2
+        );
+    });
 
     auto * layout = new QVBoxLayout(mainWidget);
     layout->setContentsMargins(0, 0, 0, 0);

@@ -29,3 +29,9 @@ void Frame::updateStyleSheet() {
                     .arg(generalStyle)
     );
 }
+
+void Frame::resizeEvent(QResizeEvent * event) {
+
+    QWidget::resizeEvent(event);
+    emit resized();
+}
