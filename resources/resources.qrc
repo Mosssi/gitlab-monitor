@@ -4,6 +4,7 @@
         <file>images/tray-icon-gray.png</file>
         <file>images/header-image.png</file>
         <file>images/gitlab-icon.png</file>
+        <file>images/gitlab-icon.svg</file>
         <file>fonts/gitlab-monitoring.ttf</file>
     </qresource>
 </RCC>
