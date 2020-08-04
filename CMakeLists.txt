@@ -107,6 +107,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
         utilities/Theme.h
-)
+        constants.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network keyutils)

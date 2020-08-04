@@ -35,6 +35,7 @@ signals:
 
 private:
     explicit Configuration();
+    static QString getDesktopFileContents();
 
     QSettings settings;
 

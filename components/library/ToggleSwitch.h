@@ -10,7 +10,7 @@ Q_OBJECT
 Q_PROPERTY(double switchPosition READ getSwitchPosition WRITE setSwitchPosition)
 Q_PROPERTY(double pressureValue READ getPressureValue WRITE setPressureValue)
 public:
-    explicit ToggleSwitch(QWidget * parent = nullptr);
+    explicit ToggleSwitch(bool checked = false, QWidget * parent = nullptr);
     void setChecked(bool checked);
     [[nodiscard]] bool getChecked() const;
     void setSwitchPosition(double switchPosition);

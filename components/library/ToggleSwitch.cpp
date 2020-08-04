@@ -5,8 +5,9 @@
 
 #include "../../utilities/GuiManager.h"
 
-ToggleSwitch::ToggleSwitch(QWidget * parent) : QWidget(parent), StyledWidget() {
+ToggleSwitch::ToggleSwitch(bool checked, QWidget * parent) : QWidget(parent), StyledWidget(), checked(checked) {
 
+    switchPosition = checked ? 1 : 0;
     setFixedSize(GuiManager::toggleSwitchWidth(), GuiManager::toggleSwitchHeight());
 }
 
@@ -79,6 +80,7 @@ void ToggleSwitch::setPressureValue(double pressureValue) {
 void ToggleSwitch::setChecked(bool checked) {
 
     this->checked = checked;
+    switchPosition = checked ? 1 : 0;
 }
 
 bool ToggleSwitch::getChecked() const {

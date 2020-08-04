@@ -23,8 +23,7 @@ void ConfigurationWindow::setupUi() {
     auto * themeLayout = new QHBoxLayout(themeFrame);
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
-    auto * darkThemeSwitch = new ToggleSwitch();
-    darkThemeSwitch->setChecked(Configuration::getInstance().getTheme() == ThemeMode::DARK);
+    auto * darkThemeSwitch = new ToggleSwitch(Configuration::getInstance().getTheme() == ThemeMode::DARK);
     themeLayout->addWidget(darkThemeSwitch);
     connect(darkThemeSwitch, &ToggleSwitch::toggled, [this](bool checked) {
         Configuration::getInstance().setTheme(checked ? ThemeMode::DARK : ThemeMode::LIGHT);
@@ -38,8 +37,7 @@ void ConfigurationWindow::setupUi() {
     auto * autoStartLayout = new QHBoxLayout(autoStartFrame);
     autoStartLayout->addWidget(new Label("Launch on Startup"));
     autoStartLayout->addStretch();
-    auto * autoStartSwitch = new ToggleSwitch();
-    autoStartSwitch->setChecked(Configuration::getInstance().getAutoStart());
+    auto * autoStartSwitch = new ToggleSwitch(Configuration::getInstance().getAutoStart());
     autoStartLayout->addWidget(autoStartSwitch);
     connect(autoStartSwitch, &ToggleSwitch::toggled, [this](bool checked) {
         Configuration::getInstance().setAutoStart(checked);
@@ -53,8 +51,7 @@ void ConfigurationWindow::setupUi() {
     auto * issuesLayout = new QHBoxLayout(issuesFrame);
     issuesLayout->addWidget(new Label("Filter Assigned To Me"));
     issuesLayout->addStretch();
-    auto * assignedToMeSwitch = new ToggleSwitch();
-    assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());
+    auto * assignedToMeSwitch = new ToggleSwitch(Configuration::getInstance().getAssignedToMe());
     issuesLayout->addWidget(assignedToMeSwitch);
     connect(assignedToMeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
     connect(issuesFrame, &HoverClickFrame::clicked, [assignedToMeSwitch]() {
