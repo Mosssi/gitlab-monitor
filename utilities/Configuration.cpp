@@ -1,5 +1,9 @@
 #include "Configuration.h"
 
+#include <QDebug>
+#include <QtCore/QDir>
+#include <QApplication>
+
 #define SERVER_ADDR_KEY "server-address"
 #define TOKEN_KEY "token"
 #define THEME_KEY "theme"
@@ -28,6 +32,40 @@ Configuration::Configuration() : QObject(nullptr) {
         settings.setValue(ASSIGNED_TO_ME_KEY, false);
         assignedToMe = false;
     }
+
+    const QString &basePath = QString("%1/.local/share/Mosssi/gitlab-monitor").arg(QDir::homePath());
+    QDir binDirectory = QDir(basePath + "/bin/");
+    QDir logDirectory = QDir(basePath + "/log/");
+    QDir iconDirectory = QDir(basePath + "/icon/");
+    if (!binDirectory.exists("gitlab-monitor")) {
+        QDir(basePath).mkpath("/bin");
+        QFile(QApplication::applicationFilePath()).copy(basePath + "/bin/gitlab-monitor");
+    }
+    if (!logDirectory.exists()) {
+        QDir(basePath).mkpath("/log");
+    }
+    if (!iconDirectory.exists("gitlab-monitor.svg")) {
+        QFile(":/images/gitlab-icon.svg").copy(basePath + "/icon/gitlab-monitor.svg");
+    }
+
+    if (!QFile("/home/mohsen/.local/share/applications/gitlab-monitor.desktop").exists()) {
+        QFile file("/home/mohsen/.local/share/applications/gitlab-monitor.desktop");
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        QTextStream out(&file);
+
+        QString fileContents = QString("[Desktop Entry]\n"
+                               "Icon=%1/.local/share/Mosssi/gitlab-monitor/icon/gitlab-monitor.svg\n"
+                               "Exec=%1/.local/share/Mosssi/gitlab-monitor/bin/gitlab-monitor %u\n"
+                               "Version=1.0\n"
+                               "Type=Application\n"
+                               "Categories=Development\n"
+                               "Name=Gitlab Monitor\n"
+                               "StartupWMClass=gitlab-monitor\n"
+                               "Terminal=false\n").arg(QDir::homePath());
+        out << fileContents;
+    }
+
+    // TODO: refactor codes above, add to .config/autologin ...
 }
 
 Configuration &Configuration::getInstance() {

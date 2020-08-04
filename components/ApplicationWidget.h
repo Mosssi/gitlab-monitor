@@ -1,10 +1,10 @@
 #ifndef GITLAB_DESKTOP_MONITOR_APPLICATIONWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_APPLICATIONWIDGET_H
 
-#include <QWidget>
 #include <functional>
 #include <QtWidgets/QStackedWidget>
 
+#include "library/Frame.h"
 #include "ContextMenu.h"
 #include "SystemTrayIcon.h"
 #include "ConfigurationWindow.h"
