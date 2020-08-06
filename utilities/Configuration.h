@@ -5,6 +5,10 @@
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
 
+#ifndef __linux
+ #define NO_AUTO_START
+#endif
+
 enum class ThemeMode {
     LIGHT,
     DARK,
@@ -24,14 +28,17 @@ public:
     [[nodiscard]] QString getToken() const;
     void setTheme(ThemeMode theme);
     [[nodiscard]] ThemeMode getTheme() const;
+#ifndef NO_AUTO_START
     void setAutoStart(bool autoStart);
     [[nodiscard]] bool getAutoStart() const;
+#endif
     void setAssignedToMe(bool assignedToMe);
     [[nodiscard]] bool getAssignedToMe() const;
 
 signals:
     void themeChanged();
     void assignedToMeChanged();
+    void autoStartChanged();
 
 private:
     explicit Configuration();

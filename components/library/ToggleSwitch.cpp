@@ -26,43 +26,8 @@ void ToggleSwitch::paintEvent(QPaintEvent *) {
     painter.fillPath(rail, QBrush(QColor(checked ? GuiManager::getTheme().switchOnBackgroundColor() : GuiManager::getTheme().switchOffBackgroundColor())));
 
     QPainterPath circle;
-    circle.addEllipse(QPointF(h / 2 + switchPosition * (w - h), h / 2), h / 2 - pressureValue, h / 2 - pressureValue);
+    circle.addEllipse(QPointF(h / 2 + switchPosition * (w - h), h / 2), h / 2, h / 2);
     painter.fillPath(circle, QBrush(QColor(checked ? GuiManager::getTheme().switchOnColor() : GuiManager::getTheme().switchOffColor())));
-}
-
-void ToggleSwitch::mousePressEvent(QMouseEvent * event) {
-
-    auto * pressAnimation = new QPropertyAnimation(this, "pressureValue");
-    pressAnimation->setStartValue(0);
-    pressAnimation->setEndValue(1);
-    pressAnimation->setDuration(100);
-    pressAnimation->setEasingCurve(QEasingCurve::Linear);
-    pressAnimation->start();
-}
-
-void ToggleSwitch::mouseReleaseEvent(QMouseEvent * event) {
-
-    auto * unPressAnimation = new QPropertyAnimation(this, "pressureValue");
-    unPressAnimation->setStartValue(1);
-    unPressAnimation->setEndValue(0);
-    unPressAnimation->setDuration(100);
-    unPressAnimation->setEasingCurve(QEasingCurve::Linear);
-    unPressAnimation->start();
-
-    toggleState();
-}
-
-void ToggleSwitch::toggleState() {
-
-    checked = !checked;
-    emit toggled(checked);
-
-    auto * toggleAnimation = new QPropertyAnimation(this, "switchPosition");
-    toggleAnimation->setStartValue(checked ? 0 : 1);
-    toggleAnimation->setEndValue(checked ? 1 : 0);
-    toggleAnimation->setDuration(100);
-    toggleAnimation->setEasingCurve(QEasingCurve::OutQuad);
-    toggleAnimation->start();
 }
 
 void ToggleSwitch::setSwitchPosition(double switchPosition) {
@@ -71,16 +36,16 @@ void ToggleSwitch::setSwitchPosition(double switchPosition) {
     update();
 }
 
-void ToggleSwitch::setPressureValue(double pressureValue) {
-
-    this->pressureValue = pressureValue;
-    update();
-}
-
 void ToggleSwitch::setChecked(bool checked) {
 
     this->checked = checked;
-    switchPosition = checked ? 1 : 0;
+
+    auto * toggleAnimation = new QPropertyAnimation(this, "switchPosition");
+    toggleAnimation->setStartValue(checked ? 0 : 1);
+    toggleAnimation->setEndValue(checked ? 1 : 0);
+    toggleAnimation->setDuration(100);
+    toggleAnimation->setEasingCurve(QEasingCurve::OutQuad);
+    toggleAnimation->start();
 }
 
 bool ToggleSwitch::getChecked() const {

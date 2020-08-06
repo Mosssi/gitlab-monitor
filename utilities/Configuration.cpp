@@ -1,5 +1,6 @@
 #include "Configuration.h"
 #include "../constants.h"
+#include "NotificationService.h"
 
 #include <QDebug>
 #include <QtCore/QDir>
@@ -10,6 +11,7 @@
 #define THEME_KEY "theme"
 #define ASSIGNED_TO_ME_KEY "assigned-to-me"
 #define AUTO_START_KEY "auto_start"
+
 
 Configuration::Configuration() : QObject(nullptr) {
 
@@ -42,6 +44,7 @@ Configuration::Configuration() : QObject(nullptr) {
         autoStart = true;
     }
 
+#ifndef NO_AUTO_START
     const QString &basePath = QString("%1/.local/share/%2/%3").arg(QDir::homePath()).arg(ORGANIZATION_NAME).arg(APP_NAME);
     if (!QDir(basePath + "/bin/").exists(BINARY_NAME)) {
         QDir(basePath).mkpath("bin");
@@ -64,6 +67,7 @@ Configuration::Configuration() : QObject(nullptr) {
 
         out << getDesktopFileContents();
     }
+#endif
 }
 
 Configuration &Configuration::getInstance() {
@@ -108,23 +112,31 @@ ThemeMode Configuration::getTheme() const {
     return theme;
 }
 
+#ifndef NO_AUTO_START
 void Configuration::setAutoStart(bool autoStart) {
 
-    settings.setValue(AUTO_START_KEY, autoStart);
-    this->autoStart = autoStart;
-
+    bool result = false;
     const QString autoLoginFile = QString("%1/.config/autostart/%2.desktop").arg(QDir::homePath()).arg(APP_NAME);
     const QFile &autoStartFile = QFile(autoLoginFile);
     if (autoStart) {
         if (!autoStartFile.exists()) {
             QFile file(autoLoginFile);
-            file.open(QIODevice::WriteOnly | QIODevice::Text);
-            QTextStream out(&file);
-
-            out << getDesktopFileContents();
+            result = file.open(QIODevice::WriteOnly | QIODevice::Text);
+            if (result) {
+                QTextStream out(&file);
+                out << getDesktopFileContents();
+            }
         }
     } else {
-        QFile::remove(autoLoginFile);
+        result = QFile::remove(autoLoginFile);
+    }
+
+    if (result) {
+        settings.setValue(AUTO_START_KEY, autoStart);
+        this->autoStart = autoStart;
+        emit autoStartChanged();
+    } else {
+        NotificationService::error("Error in updating configuration");
     }
 }
 
@@ -132,6 +144,7 @@ bool Configuration::getAutoStart() const {
 
     return autoStart;
 }
+#endif
 
 void Configuration::setAssignedToMe(bool assignedToMe) {
 

@@ -12,6 +12,17 @@
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATION", parent) {
 
     setupUi();
+    connect(&Configuration::getInstance(), &Configuration::themeChanged, [this]() {
+        darkThemeSwitch->setChecked(Configuration::getInstance().getTheme() == ThemeMode::DARK);
+    });
+#ifndef NO_AUTO_START
+    connect(&Configuration::getInstance(), &Configuration::autoStartChanged, [this]() {
+        autoStartSwitch->setChecked(Configuration::getInstance().getAutoStart());
+    });
+#endif
+    connect(&Configuration::getInstance(), &Configuration::assignedToMeChanged, [this]() {
+        assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());
+    });
 }
 
 void ConfigurationWindow::setupUi() {
@@ -23,40 +34,38 @@ void ConfigurationWindow::setupUi() {
     auto * themeLayout = new QHBoxLayout(themeFrame);
     themeLayout->addWidget(new Label("Dark Theme"));
     themeLayout->addStretch();
-    auto * darkThemeSwitch = new ToggleSwitch(Configuration::getInstance().getTheme() == ThemeMode::DARK);
+    darkThemeSwitch = new ToggleSwitch(Configuration::getInstance().getTheme() == ThemeMode::DARK);
     themeLayout->addWidget(darkThemeSwitch);
-    connect(darkThemeSwitch, &ToggleSwitch::toggled, [this](bool checked) {
-        Configuration::getInstance().setTheme(checked ? ThemeMode::DARK : ThemeMode::LIGHT);
+    connect(themeFrame, &HoverClickFrame::clicked, [this]() {
+        Configuration::getInstance().setTheme(Configuration::getInstance().getTheme() == ThemeMode::LIGHT ? ThemeMode::DARK : ThemeMode::LIGHT);
     });
-    connect(themeFrame, &HoverClickFrame::clicked, [darkThemeSwitch]() {
-        darkThemeSwitch->toggleState();
-    });
+    mainLayout->addWidget(themeFrame);
 
+#ifndef NO_AUTO_START
     auto * autoStartFrame = new HoverClickFrame();
     autoStartFrame->setGeneralStyle("border-radius: 0");
     auto * autoStartLayout = new QHBoxLayout(autoStartFrame);
     autoStartLayout->addWidget(new Label("Launch on Startup"));
     autoStartLayout->addStretch();
-    auto * autoStartSwitch = new ToggleSwitch(Configuration::getInstance().getAutoStart());
+    autoStartSwitch = new ToggleSwitch(Configuration::getInstance().getAutoStart());
     autoStartLayout->addWidget(autoStartSwitch);
-    connect(autoStartSwitch, &ToggleSwitch::toggled, [this](bool checked) {
-        Configuration::getInstance().setAutoStart(checked);
+    connect(autoStartFrame, &HoverClickFrame::clicked, [this]() {
+        Configuration::getInstance().setAutoStart(!Configuration::getInstance().getAutoStart());
     });
-    connect(autoStartFrame, &HoverClickFrame::clicked, [autoStartSwitch]() {
-        autoStartSwitch->toggleState();
-    });
+    mainLayout->addWidget(autoStartFrame);
+#endif
 
     auto * issuesFrame = new HoverClickFrame();
     issuesFrame->setGeneralStyle("border-radius: 0");
     auto * issuesLayout = new QHBoxLayout(issuesFrame);
     issuesLayout->addWidget(new Label("Filter Assigned To Me"));
     issuesLayout->addStretch();
-    auto * assignedToMeSwitch = new ToggleSwitch(Configuration::getInstance().getAssignedToMe());
+    assignedToMeSwitch = new ToggleSwitch(Configuration::getInstance().getAssignedToMe());
     issuesLayout->addWidget(assignedToMeSwitch);
-    connect(assignedToMeSwitch, &ToggleSwitch::toggled, &Configuration::getInstance(), &Configuration::setAssignedToMe);
-    connect(issuesFrame, &HoverClickFrame::clicked, [assignedToMeSwitch]() {
-        assignedToMeSwitch->toggleState();
+    connect(issuesFrame, &HoverClickFrame::clicked, [this]() {
+        Configuration::getInstance().setAssignedToMe(!Configuration::getInstance().getAssignedToMe());
     });
+    mainLayout->addWidget(issuesFrame);
 
     auto * logoutFrame = new HoverClickFrame();
     logoutFrame->setGeneralStyle("border-radius: 0");
@@ -67,9 +76,5 @@ void ConfigurationWindow::setupUi() {
         GuiManager::getApplicationWindow()->logout();
         emit closed();
     });
-
-    mainLayout->addWidget(themeFrame);
-    mainLayout->addWidget(autoStartFrame);
-    mainLayout->addWidget(issuesFrame);
     mainLayout->addWidget(logoutFrame);
 }
