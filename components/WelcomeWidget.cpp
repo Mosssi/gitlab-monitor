@@ -17,6 +17,7 @@ void WelcomeWidget::setupUi() {
 
     auto * mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(30, 10, 30, 10);
+    mainLayout->setSpacing(3);
 
     auto * logoLabel = new Label();
     const QPixmap pixmap(":/images/gitlab-icon.png");
@@ -25,15 +26,13 @@ void WelcomeWidget::setupUi() {
     mainLayout->addStretch(1);
     mainLayout->addWidget(logoLabel, 0, Qt::AlignCenter);
 
-    mainLayout->addSpacing(10);
+    mainLayout->addSpacing(20);
     auto * serverAddressInput = new LineEdit();
-    serverAddressInput->setText("https://gitlab.com");
     mainLayout->addWidget(new Label("SERVER ADDRESS:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(serverAddressInput);
 
     mainLayout->addSpacing(10);
     auto * tokenInput = new LineEdit();
-    tokenInput->setText("BEqfZheThA3cR9bpLMF-");
     mainLayout->addWidget(new Label("TOKEN:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(tokenInput);
 
@@ -60,5 +59,4 @@ void WelcomeWidget::setupUi() {
     });
 
     mainLayout->addStretch(3);
-    mainLayout->addWidget(new Label("© Copyright for Mohsen Esmaeili", GuiManager::smallFontSize(), TextColor::TERTIARY), 0, Qt::AlignCenter);
 }
