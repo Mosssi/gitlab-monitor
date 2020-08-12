@@ -48,7 +48,7 @@ void ToggleSwitch::setChecked(bool checked) {
     toggleAnimation->start();
 }
 
-bool ToggleSwitch::getChecked() const {
+bool ToggleSwitch::isChecked() const {
 
     return checked;
 }

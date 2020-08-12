@@ -13,20 +13,12 @@ void IssueInputWindow::setupUi() {
     mainLayout->setContentsMargins(10, 10, 10, 10);
     mainLayout->addWidget(issueTitleInput);
 
-    auto * cancelButton = new PushButton(IconType::CLOSE);
     createButton = new PushButton(IconType::DONE);
 
     auto * buttonsLayout = new QHBoxLayout();
     buttonsLayout->setAlignment(Qt::AlignCenter);
-    buttonsLayout->addWidget(cancelButton);
     buttonsLayout->addWidget(createButton);
-
     mainLayout->addLayout(buttonsLayout);
-
-    connect(cancelButton, &PushButton::clicked, [this]() {
-        clearInput();
-        emit closed();
-    });
 
     connect(createButton, &PushButton::clicked, [this]() { emit submitted(issueTitleInput->text()); });
 }

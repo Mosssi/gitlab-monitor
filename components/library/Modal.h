@@ -5,8 +5,6 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include "Frame.h"
-#include "Label.h"
-#include "ResizeAwareWidget.h"
 
 class Modal : public Frame {
 Q_OBJECT

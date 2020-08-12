@@ -11,7 +11,7 @@ Q_PROPERTY(double switchPosition READ getSwitchPosition WRITE setSwitchPosition)
 public:
     explicit ToggleSwitch(bool checked = false, QWidget * parent = nullptr);
     void setChecked(bool checked);
-    [[nodiscard]] bool getChecked() const;
+    [[nodiscard]] bool isChecked() const;
     void setSwitchPosition(double switchPosition);
     [[nodiscard]] double getSwitchPosition() const { return switchPosition; }
 

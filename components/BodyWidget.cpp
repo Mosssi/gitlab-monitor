@@ -2,6 +2,8 @@
 
 #include "../utilities/DataStore.h"
 #include "ProjectWidget.h"
+#include "../utilities/Configuration.h"
+#include "../utilities/GuiManager.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 
@@ -14,7 +16,7 @@ void BodyWidget::setupUi() {
     addWidget(projectsListWidget = new ProjectsListWidget());
     addWidget(issuesListWidget = new IssuesListWidget());
 
-    connect(projectsListWidget, &ProjectsListWidget::projectSelected, [this](int projectId, QString projectName) {
+    connect(projectsListWidget, &ProjectsListWidget::projectSelected, [this](int projectId, const QString &projectName) {
         issuesListWidget->setProjectId(projectId);
         issuesListWidget->setProjectName(projectName);
         showIssuesList();

@@ -128,7 +128,11 @@ void Configuration::setAutoStart(bool autoStart) {
             }
         }
     } else {
-        result = QFile::remove(autoLoginFile);
+        if (autoStartFile.exists()) {
+            result = QFile::remove(autoLoginFile);
+        } else {
+            result = true;
+        }
     }
 
     if (result) {

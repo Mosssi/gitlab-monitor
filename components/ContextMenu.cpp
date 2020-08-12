@@ -3,6 +3,8 @@
 #include <QtWidgets/QVBoxLayout>
 
 #include "ContextMenuButton.h"
+#include "../utilities/GuiManager.h"
+
 
 ContextMenu::ContextMenu() : Frame(nullptr) {
 

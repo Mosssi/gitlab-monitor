@@ -6,6 +6,7 @@
 #include "library/PushButton.h"
 #include "../utilities/NotificationService.h"
 #include "ModalManager.h"
+#include "../utilities/GuiManager.h"
 
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : Frame(parent) {

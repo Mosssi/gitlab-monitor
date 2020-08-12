@@ -4,6 +4,7 @@
 
 #include "library/Modal.h"
 #include "library/ToggleSwitch.h"
+#include "library/ModalToggle.h"
 
 class ConfigurationWindow : public Modal {
 public:
@@ -12,9 +13,9 @@ public:
 private:
     void setupUi();
 
-    ToggleSwitch * darkThemeSwitch = nullptr;
-    ToggleSwitch * autoStartSwitch = nullptr;
-    ToggleSwitch * assignedToMeSwitch = nullptr;
+    ModalToggle * themeToggle = nullptr;
+    ModalToggle * autoStartToggle = nullptr;
+    ModalToggle * filterAssigneeToggle = nullptr;
 };
 
 

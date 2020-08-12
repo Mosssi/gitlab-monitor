@@ -1,6 +1,7 @@
 #include "LoadingWidget.h"
 
 #include <QPainter>
+#include <QTimer>
 
 #include "../../utilities/GuiManager.h"
 
@@ -12,7 +13,7 @@ LoadingWidget::LoadingWidget(QWidget * parent) : QWidget(parent) {
 
     setFixedSize(GuiManager::loadingWidgetHeight(), GuiManager::loadingWidgetHeight());
 
-    timer = new QTimer(this);
+    auto * timer = new QTimer(this);
     timer->setInterval(25);
     connect(timer, &QTimer::timeout, [this]() {
         arcPosition += 10;

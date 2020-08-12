@@ -1,6 +1,6 @@
 #include "HoverClickFrame.h"
 
-#include <QDebug>
+#include "../../utilities/GuiManager.h"
 
 HoverClickFrame::HoverClickFrame(QWidget * parent, bool pressEnabled) : Frame(parent), pressEnabled(pressEnabled) {
 

@@ -3,7 +3,6 @@
 
 
 #include "Frame.h"
-#include "../../utilities/GuiManager.h"
 
 class HoverClickFrame : public Frame {
 Q_OBJECT

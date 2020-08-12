@@ -12,7 +12,7 @@ enum class IconType {
     QUESTION_MARK,
     RELOAD,
     SETTINGS,
-    HAMBURDER,
+    HAMBURGER,
 };
 
 QString getIconTypeString(const IconType &iconType);

@@ -34,6 +34,7 @@ void ModalManager::hideConfigurationWindow() {
 
 void ModalManager::showIssueInputWindow() {
 
+    issueInputWindow->clearInput();
     issueInputWindow->setVisible(true);
 }
 

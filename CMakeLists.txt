@@ -44,8 +44,6 @@ add_executable(gitlab_desktop_monitor
         components/SystemTrayIcon.h
         components/WelcomeWidget.cpp
         components/WelcomeWidget.h
-        components/library/ConfigurationItemHolder.cpp
-        components/library/ConfigurationItemHolder.h
         components/library/Frame.cpp
         components/library/Frame.h
         components/library/HoverClickFrame.cpp
@@ -107,6 +105,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
         utilities/Theme.h
-        constants.h)
+        constants.h components/library/ModalToggle.cpp components/library/ModalToggle.h)
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network keyutils)

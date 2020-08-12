@@ -5,6 +5,7 @@
 #include "ProjectWidget.h"
 #include "library/LoadingWidget.h"
 #include "library/PushButton.h"
+#include "../utilities/GuiManager.h"
 
 ProjectsListWidget::ProjectsListWidget(QWidget * parent) : Frame(parent) {
 

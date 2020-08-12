@@ -19,7 +19,7 @@ QString getIconTypeString(const IconType &iconType) {
             return "e";
         case IconType::SETTINGS:
             return "h";
-        case IconType::HAMBURDER:
+        case IconType::HAMBURGER:
             return "i";
     }
 }

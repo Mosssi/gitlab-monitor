@@ -8,20 +8,21 @@
 #include "library/PushButton.h"
 #include "library/ToggleSwitch.h"
 #include "library/HoverClickFrame.h"
+#include "library/ModalToggle.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATION", parent) {
 
     setupUi();
     connect(&Configuration::getInstance(), &Configuration::themeChanged, [this]() {
-        darkThemeSwitch->setChecked(Configuration::getInstance().getTheme() == ThemeMode::DARK);
+        themeToggle->setChecked(Configuration::getInstance().getTheme() == ThemeMode::DARK);
     });
 #ifndef NO_AUTO_START
     connect(&Configuration::getInstance(), &Configuration::autoStartChanged, [this]() {
-        autoStartSwitch->setChecked(Configuration::getInstance().getAutoStart());
+        autoStartToggle->setChecked(Configuration::getInstance().getAutoStart());
     });
 #endif
     connect(&Configuration::getInstance(), &Configuration::assignedToMeChanged, [this]() {
-        assignedToMeSwitch->setChecked(Configuration::getInstance().getAssignedToMe());
+        filterAssigneeToggle->setChecked(Configuration::getInstance().getAssignedToMe());
     });
 }
 
@@ -29,43 +30,25 @@ void ConfigurationWindow::setupUi() {
 
     mainLayout->setContentsMargins(0, 5, 0, 5);
 
-    auto * themeFrame = new HoverClickFrame();
-    themeFrame->setGeneralStyle("border-radius: 0");
-    auto * themeLayout = new QHBoxLayout(themeFrame);
-    themeLayout->addWidget(new Label("Dark Theme"));
-    themeLayout->addStretch();
-    darkThemeSwitch = new ToggleSwitch(Configuration::getInstance().getTheme() == ThemeMode::DARK);
-    themeLayout->addWidget(darkThemeSwitch);
-    connect(themeFrame, &HoverClickFrame::clicked, [this]() {
+    themeToggle = new ModalToggle("Dark Theme", Configuration::getInstance().getTheme() == ThemeMode::DARK);
+    connect(themeToggle, &HoverClickFrame::clicked, [this]() {
         Configuration::getInstance().setTheme(Configuration::getInstance().getTheme() == ThemeMode::LIGHT ? ThemeMode::DARK : ThemeMode::LIGHT);
     });
-    mainLayout->addWidget(themeFrame);
+    mainLayout->addWidget(themeToggle);
 
 #ifndef NO_AUTO_START
-    auto * autoStartFrame = new HoverClickFrame();
-    autoStartFrame->setGeneralStyle("border-radius: 0");
-    auto * autoStartLayout = new QHBoxLayout(autoStartFrame);
-    autoStartLayout->addWidget(new Label("Launch on Startup"));
-    autoStartLayout->addStretch();
-    autoStartSwitch = new ToggleSwitch(Configuration::getInstance().getAutoStart());
-    autoStartLayout->addWidget(autoStartSwitch);
-    connect(autoStartFrame, &HoverClickFrame::clicked, [this]() {
+    autoStartToggle = new ModalToggle("Launch on Startup", Configuration::getInstance().getAutoStart());
+    connect(autoStartToggle, &HoverClickFrame::clicked, [this]() {
         Configuration::getInstance().setAutoStart(!Configuration::getInstance().getAutoStart());
     });
-    mainLayout->addWidget(autoStartFrame);
+    mainLayout->addWidget(autoStartToggle);
 #endif
 
-    auto * issuesFrame = new HoverClickFrame();
-    issuesFrame->setGeneralStyle("border-radius: 0");
-    auto * issuesLayout = new QHBoxLayout(issuesFrame);
-    issuesLayout->addWidget(new Label("Filter Assigned To Me"));
-    issuesLayout->addStretch();
-    assignedToMeSwitch = new ToggleSwitch(Configuration::getInstance().getAssignedToMe());
-    issuesLayout->addWidget(assignedToMeSwitch);
-    connect(issuesFrame, &HoverClickFrame::clicked, [this]() {
+    filterAssigneeToggle = new ModalToggle("Filter Assigned To Me", Configuration::getInstance().getAssignedToMe());
+    connect(filterAssigneeToggle, &HoverClickFrame::clicked, [this]() {
         Configuration::getInstance().setAssignedToMe(!Configuration::getInstance().getAssignedToMe());
     });
-    mainLayout->addWidget(issuesFrame);
+    mainLayout->addWidget(filterAssigneeToggle);
 
     auto * logoutFrame = new HoverClickFrame();
     logoutFrame->setGeneralStyle("border-radius: 0");

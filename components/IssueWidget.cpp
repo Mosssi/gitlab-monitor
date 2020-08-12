@@ -4,6 +4,7 @@
 
 #include "../network/ServiceMediator.h"
 #include "../utilities/DataStore.h"
+#include "../utilities/GuiManager.h"
 
 IssueWidget::IssueWidget(int projectId, const Issue &issue, QWidget * parent) : HoverClickFrame(parent, false), issue(issue), projectId(projectId) {
 

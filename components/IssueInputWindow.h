@@ -5,6 +5,7 @@
 #include "library/LineEdit.h"
 #include "library/PushButton.h"
 #include "library/Modal.h"
+#include "library/ModalToggle.h"
 
 class IssueInputWindow : public Modal {
 Q_OBJECT

@@ -3,6 +3,7 @@
 #include <QResizeEvent>
 
 #include "../../utilities/GuiManager.h"
+#include "Label.h"
 
 Modal::Modal(const QString &title, QWidget * parent) : Frame(parent), title(title) {
 

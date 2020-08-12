@@ -3,7 +3,6 @@
 
 
 #include <QtWidgets/QWidget>
-#include <QTimer>
 
 class LoadingWidget : public QWidget {
 public:
@@ -13,8 +12,6 @@ protected:
     void paintEvent(QPaintEvent * event) override;
 
     int arcPosition = 0;
-
-    QTimer * timer = nullptr;
 };
 
 
