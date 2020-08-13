@@ -16,6 +16,7 @@ public:
     constexpr static int smallFontSize() { return 12; }
     constexpr static int normalFontSize() { return 14; }
     constexpr static int largeFontSize() { return 16; }
+    constexpr static int iconTextSize() { return 17; }
     constexpr static int applicationWidth() { return 300; }
     constexpr static int applicationHeight() { return 400; }
     constexpr static int headerHeight() { return 70; }
@@ -28,8 +29,7 @@ public:
     constexpr static int contextMenuButtonWidth() { return 160; }
     constexpr static int contextMenuButtonHeight() { return 30; }
     constexpr static int configurationWindowWidth() { return 200; }
-    constexpr static int configurationWindowHeight() { return 150; }
-    constexpr static int configurationItemHeight() { return 18; }
+    constexpr static int configurationItemHeight() { return 32; }
     constexpr static int toggleSwitchWidth() { return 26; }
     constexpr static int toggleSwitchHeight() { return 14; }
 

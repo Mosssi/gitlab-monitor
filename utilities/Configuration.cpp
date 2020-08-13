@@ -10,7 +10,7 @@
 #define TOKEN_KEY "token"
 #define THEME_KEY "theme"
 #define ASSIGNED_TO_ME_KEY "assigned-to-me"
-#define AUTO_START_KEY "auto_start"
+#define AUTO_START_KEY "auto-start"
 
 
 Configuration::Configuration() : QObject(nullptr) {

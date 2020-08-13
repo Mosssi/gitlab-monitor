@@ -7,19 +7,15 @@ QString getIconTypeString(const IconType &iconType) {
             return "";
         case IconType::BACK:
             return "a";
-        case IconType::DONE:
-            return "d";
-        case IconType::CLOSE:
-            return "b";
         case IconType::NEW:
+            return "b";
+        case IconType::DONE:
             return "c";
-        case IconType::QUESTION_MARK:
-            return "f";
         case IconType::RELOAD:
+            return "d";
+        case IconType::QUESTION_MARK:
             return "e";
         case IconType::SETTINGS:
-            return "h";
-        case IconType::HAMBURGER:
-            return "i";
+            return "f";
     }
 }

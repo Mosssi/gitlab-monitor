@@ -51,8 +51,10 @@ void ConfigurationWindow::setupUi() {
     mainLayout->addWidget(filterAssigneeToggle);
 
     auto * logoutFrame = new HoverClickFrame();
+    logoutFrame->setFixedHeight(GuiManager::configurationItemHeight());
     logoutFrame->setGeneralStyle("border-radius: 0");
     auto * logoutLayout = new QHBoxLayout(logoutFrame);
+    logoutLayout->setContentsMargins(10, 0, 10, 0);
     logoutLayout->addWidget(new Label("Logout"));
     logoutLayout->addStretch();
     connect(logoutFrame, &HoverClickFrame::clicked, [this]() {

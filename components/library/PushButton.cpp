@@ -89,7 +89,7 @@ void PushButton::paintEvent(QPaintEvent * event) {
             auto color = QColor(textColor);
             color.setAlphaF(confirmingValue);
             painter.setPen(color);
-            int pixelSize = (int) ((2 - confirmingValue) * GuiManager::largeFontSize());
+            int pixelSize = (int) ((2 - confirmingValue) * GuiManager::iconTextSize());
             if (pixelSize > 0) {
                 auto font = painter.font();
                 font.setPixelSize(pixelSize);
@@ -101,7 +101,7 @@ void PushButton::paintEvent(QPaintEvent * event) {
             auto color = QColor(textColor);
             color.setAlphaF(1.0 - confirmingValue);
             painter.setPen(color);
-            int pixelSize = (int) ((1 - confirmingValue) * GuiManager::largeFontSize());
+            int pixelSize = (int) ((1 - confirmingValue) * GuiManager::iconTextSize());
             if (pixelSize > 0) {
                 auto font = painter.font();
                 font.setPixelSize(pixelSize);

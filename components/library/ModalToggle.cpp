@@ -1,5 +1,8 @@
-#include <QtWidgets/QHBoxLayout>
 #include "ModalToggle.h"
+
+#include <QtWidgets/QHBoxLayout>
+
+#include "../../utilities/GuiManager.h"
 #include "Label.h"
 
 ModalToggle::ModalToggle(const QString &text, bool checked, QWidget * parent) : HoverClickFrame(parent) {
@@ -9,6 +12,7 @@ ModalToggle::ModalToggle(const QString &text, bool checked, QWidget * parent) : 
 
 void ModalToggle::setupUi(const QString &text, bool checked) {
 
+    setFixedHeight(GuiManager::configurationItemHeight());
     setGeneralStyle("border-radius: 0");
 
     auto * mainLayout = new QHBoxLayout(this);
