@@ -1,9 +1,9 @@
 #include "BodyWidget.h"
 
-#include "../utilities/DataStore.h"
-#include "ProjectWidget.h"
 #include "../utilities/Configuration.h"
+#include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
+#include "ProjectWidget.h"
 
 BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 

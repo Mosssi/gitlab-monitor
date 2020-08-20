@@ -7,6 +7,8 @@
 #include "library/Label.h"
 #include "library/LineEdit.h"
 #include "library/PushButton.h"
+#include "../network/ResponseStatus.h"
+#include "../utilities/NotificationService.h"
 
 WelcomeWidget::WelcomeWidget(QWidget * parent) : Frame(parent) {
 
@@ -30,16 +32,35 @@ void WelcomeWidget::setupUi() {
     auto * serverAddressInput = new LineEdit();
     mainLayout->addWidget(new Label("SERVER ADDRESS:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(serverAddressInput);
+    connect(serverAddressInput, &LineEdit::textChanged, [serverAddressInput]() {
+        serverAddressInput->setHasError(false);
+    });
 
     mainLayout->addSpacing(10);
     auto * tokenInput = new LineEdit();
     mainLayout->addWidget(new Label("TOKEN:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(tokenInput);
+    connect(tokenInput, &LineEdit::textChanged, [tokenInput]() {
+        tokenInput->setHasError(false);
+    });
 
     auto * saveServerConfigsButton = new PushButton(IconType::DONE);
     connect(saveServerConfigsButton, &PushButton::clicked, [this, serverAddressInput, tokenInput, saveServerConfigsButton]() {
+
+        if (serverAddressInput->text().isEmpty()) {
+            serverAddressInput->setFocus();
+            serverAddressInput->setHasError(true);
+            return;
+        }
+
+        if (tokenInput->text().isEmpty()) {
+            tokenInput->setFocus();
+            tokenInput->setHasError(true);
+            return;
+        }
+
         saveServerConfigsButton->setLoading(true);
-        Configuration::getInstance().setServerAddress(serverAddressInput->text());
+        Configuration::getInstance().setServerAddress(serverAddressInput->text() + "/api/v4");
         Configuration::getInstance().setToken(tokenInput->text());
 
         DataStore::getInstance().initialize();
@@ -52,7 +73,8 @@ void WelcomeWidget::setupUi() {
         emit serverAndTokenValidated();
     });
 
-    connect(&DataStore::getInstance(), &DataStore::userReceiveFailed, [saveServerConfigsButton]() {
+    connect(&DataStore::getInstance(), &DataStore::userReceiveFailed, [saveServerConfigsButton](ResponseStatus status) {
+        NotificationService::connectionError(status);
         saveServerConfigsButton->setLoading(false);
         Configuration::getInstance().setServerAddress("");
         Configuration::getInstance().setToken("");

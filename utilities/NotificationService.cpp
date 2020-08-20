@@ -4,6 +4,7 @@
 #include <QTimer>
 
 #include "GuiManager.h"
+#include "LogService.h"
 
 int const interval = 5000;
 
@@ -59,4 +60,27 @@ void NotificationService::addNotification(const QString &message, NotificationSt
 NotificationService::NotificationService() {
 
     baseHeight = GuiManager::applicationHeight() - margin + spacing;
+}
+
+void NotificationService::connectionError(ResponseStatus status) {
+
+    switch (status) {
+        case ResponseStatus::SUCCESSFUL:
+            return;
+        case ResponseStatus::UNSUCCESSFUL:
+            error("Error in communication with server");
+            return;
+        case ResponseStatus::TIMEOUT:
+            error("Timeout in communication with server");
+            return;
+        case ResponseStatus::INTERNAL_SERVER_ERROR:
+            error("Internal server error");
+            return;
+        case ResponseStatus::AUTHENTICATION_REQUIRED_ERROR:
+            error("Authentication error");
+            return;
+        case ResponseStatus::HOST_NOT_FOUND_ERROR:
+            error("Invalid host name");
+            return;
+    }
 }

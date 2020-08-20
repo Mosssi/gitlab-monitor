@@ -4,6 +4,7 @@
 #include <QList>
 
 #include "NotificationWidget.h"
+#include "../network/ResponseStatus.h"
 
 int const margin = 15;
 int const spacing = 1;
@@ -14,6 +15,7 @@ Q_PROPERTY(int baseHeight READ getBaseHeight WRITE setBaseHeight)
 public:
     static void info(const QString &message);
     static void error(const QString &message);
+    static void connectionError(ResponseStatus status);
 
 private:
     explicit NotificationService();

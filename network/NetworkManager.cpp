@@ -2,7 +2,6 @@
 
 #include <QtCore/QJsonDocument>
 #include <QJsonArray>
-#include <zconf.h>
 
 #include "../utilities/Configuration.h"
 #include "../components/SystemTrayIcon.h"
@@ -72,7 +71,7 @@ void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction 
 
     if (reply->error() != QNetworkReply::NetworkError::NoError) {
         qDebug() << "Error in network reply," << reply->error();
-        callback(QJsonObject{{"error", reply->error()}}, ResponseStatus::UNSUCCESSFUL);
+        callback(QJsonObject{{"error", reply->error()}}, getResponseStatus(reply->error()));
         reply->deleteLater();
         emit getInstance().networkError();
         return;
@@ -94,4 +93,20 @@ void NetworkManager::processReply(QNetworkReply * reply, const CallbackFunction 
     callback(jsonValue, ResponseStatus::SUCCESSFUL);
 
     reply->deleteLater();
+}
+
+ResponseStatus NetworkManager::getResponseStatus(QNetworkReply::NetworkError error) {
+
+    switch (error) {
+        case QNetworkReply::TimeoutError:
+            return ResponseStatus::TIMEOUT;
+        case QNetworkReply::InternalServerError:
+            return ResponseStatus::INTERNAL_SERVER_ERROR;
+        case QNetworkReply::AuthenticationRequiredError:
+            return ResponseStatus::AUTHENTICATION_REQUIRED_ERROR;
+        case QNetworkReply::HostNotFoundError:
+            return ResponseStatus::HOST_NOT_FOUND_ERROR;
+        default:
+            return ResponseStatus::UNSUCCESSFUL;
+    }
 }

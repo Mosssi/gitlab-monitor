@@ -5,6 +5,7 @@
 
 #include "../models/User.h"
 #include "../models/Project.h"
+#include "../network/ResponseStatus.h"
 
 class DataStore : public QObject {
 Q_OBJECT
@@ -22,7 +23,7 @@ public:
 
 signals:
     void userReceived();
-    void userReceiveFailed();
+    void userReceiveFailed(ResponseStatus status);
     void projectsReceived();
     void projectsReceiveFailed();
     void projectOpenIssuesReceived();

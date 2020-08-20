@@ -9,9 +9,12 @@
 class LineEdit : public QLineEdit, StyledWidget {
 public:
     explicit LineEdit(QWidget * parent = nullptr);
+    void setHasError(bool hasError);
 
 private:
     void updateStyleSheet() override;
+
+    bool hasError = false;
 };
 
 

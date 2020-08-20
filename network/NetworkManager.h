@@ -21,6 +21,7 @@ private:
     void post(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
     void put(const QString &url, const QJsonObject &body, const CallbackFunction &callback);
     static void processReply(QNetworkReply * reply, const CallbackFunction &callback);
+    static ResponseStatus getResponseStatus(QNetworkReply::NetworkError error);
 
     QNetworkAccessManager * networkAccessManager;
 

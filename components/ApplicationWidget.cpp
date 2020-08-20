@@ -21,7 +21,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
     setWindowTitle("GitLab Monitor");
     ApplicationWidget::updateStyleSheet();
 
-    LogService::getInstance().initializeService(false, false);
+    LogService::getInstance().initializeService(true, false);
     GuiManager::setApplicationWindow(this);
 
     setupUi();

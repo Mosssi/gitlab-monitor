@@ -58,6 +58,8 @@ add_executable(gitlab_desktop_monitor
         components/library/LoadingWidget.h
         components/library/Modal.cpp
         components/library/Modal.h
+        components/library/ModalToggle.cpp
+        components/library/ModalToggle.h
         components/library/PushButton.cpp
         components/library/PushButton.h
         components/library/ResizeAwareWidget.cpp
@@ -72,6 +74,7 @@ add_executable(gitlab_desktop_monitor
         components/library/StyledWidget.h
         components/library/ToggleSwitch.cpp
         components/library/ToggleSwitch.h
+        constants.h
         main.cpp
         models/BaseModel.cpp
         models/BaseModel.h
@@ -105,6 +108,6 @@ add_executable(gitlab_desktop_monitor
         utilities/NotificationWidget.cpp
         utilities/NotificationWidget.h
         utilities/Theme.h
-        constants.h components/library/ModalToggle.cpp components/library/ModalToggle.h)
+        )
 
 target_link_libraries(gitlab_desktop_monitor Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network keyutils)

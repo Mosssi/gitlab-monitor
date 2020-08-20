@@ -78,10 +78,8 @@ Configuration &Configuration::getInstance() {
 
 void Configuration::setServerAddress(const QString &serverAddress) {
 
-    // TODO: parse serverAddress and act more flexible
-    const QString &addr = serverAddress + "/api/v4";
-    settings.setValue(SERVER_ADDR_KEY, addr);
-    this->serverAddress = addr;
+    settings.setValue(SERVER_ADDR_KEY, serverAddress);
+    this->serverAddress = serverAddress;
 }
 
 QString Configuration::getServerAddress() const {

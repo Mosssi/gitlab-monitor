@@ -94,7 +94,7 @@ void DataStore::refreshUser() {
             emit userReceived();
         } else {
             QTimer::singleShot(2000, [this]() { initialize(); });
-            emit userReceiveFailed();
+            emit userReceiveFailed(status);
         }
     });
 }

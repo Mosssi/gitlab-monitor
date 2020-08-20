@@ -6,31 +6,33 @@
 
 class Theme {
 public:
-    virtual QString textColor() = 0;
-    virtual QString secondaryTextColor() = 0;
-    virtual QString tertiaryTextColor() = 0;
-    virtual QString titleColor() = 0;
+    [[nodiscard]] virtual QString textColor() const = 0;
+    [[nodiscard]] virtual QString secondaryTextColor() const = 0;
+    [[nodiscard]] virtual QString tertiaryTextColor() const = 0;
+    [[nodiscard]] virtual QString titleColor() const = 0;
 
-    virtual QString headerBorderColor() = 0;
-    virtual QString mainHeaderColor() = 0;
-    virtual QString headerColor() = 0;
-    virtual QString backgroundColor() = 0;
-    virtual QString hoverColor() = 0;
-    virtual QString pressColor() = 0;
-    virtual QString buttonColor() = 0;
-    virtual QString buttonHoverColor() = 0;
-    virtual QString buttonPressColor() = 0;
-    virtual QString loadingColor() = 0;
-    virtual QString loadingRingColor() = 0;
-    virtual QString switchOffColor() = 0;
-    virtual QString switchOffBackgroundColor() = 0;
-    virtual QString switchOnColor() = 0;
-    virtual QString switchOnBackgroundColor() = 0;
+    [[nodiscard]] virtual QString headerBorderColor() const = 0;
+    [[nodiscard]] virtual QString mainHeaderColor() const = 0;
+    [[nodiscard]] virtual QString headerColor() const = 0;
+    [[nodiscard]] virtual QString backgroundColor() const = 0;
+    [[nodiscard]] virtual QString hoverColor() const = 0;
+    [[nodiscard]] virtual QString pressColor() const = 0;
+    [[nodiscard]] virtual QString buttonColor() const = 0;
+    [[nodiscard]] virtual QString buttonHoverColor() const = 0;
+    [[nodiscard]] virtual QString buttonPressColor() const = 0;
+    [[nodiscard]] virtual QString loadingColor() const = 0;
+    [[nodiscard]] virtual QString loadingRingColor() const = 0;
+    [[nodiscard]] virtual QString switchOffColor() const = 0;
+    [[nodiscard]] virtual QString switchOffBackgroundColor() const = 0;
+    [[nodiscard]] virtual QString switchOnColor() const = 0;
+    [[nodiscard]] virtual QString switchOnBackgroundColor() const = 0;
+    [[nodiscard]] virtual QString lineEditBackgroundColor() const = 0;
+    [[nodiscard]] virtual QString lineEditErrorBackgroundColor() const = 0;
 
-    virtual QString infoNotificationColor() = 0;
-    virtual QString infoNotificationTextColor() = 0;
-    virtual QString errorNotificationColor() = 0;
-    virtual QString errorNotificationTextColor() = 0;
+    [[nodiscard]] virtual QString infoNotificationColor() const = 0;
+    [[nodiscard]] virtual QString infoNotificationTextColor() const = 0;
+    [[nodiscard]] virtual QString errorNotificationColor() const = 0;
+    [[nodiscard]] virtual QString errorNotificationTextColor() const = 0;
 };
 
 
