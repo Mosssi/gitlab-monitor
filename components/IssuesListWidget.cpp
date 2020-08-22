@@ -73,8 +73,6 @@ void IssuesListWidget::updateUi() {
             connect(issueWidget, &IssueWidget::closed, [this, issue, issueWidget]() {
                 issueWidget->setLoading(true);
                 ServiceMediator::closeIssue(projectId, issue.iid, [this, issueWidget](CALLBACK_SIGNATURE) {
-                    // TODO: You know what, this loading thing should become false when the result of next
-                    // request is received, unless we have a gap between falsifying loading and hiding close issue
                     issueWidget->setLoading(false);
                     if (status == ResponseStatus::SUCCESSFUL) {
                         DataStore::getInstance().refreshProjectOpenIssues(projectId);

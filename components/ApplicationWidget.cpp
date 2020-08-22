@@ -12,6 +12,7 @@
 #include "ModalManager.h"
 #include "SystemTrayIcon.h"
 #include "WelcomeWidget.h"
+#include "../utilities/DataStore.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
@@ -114,6 +115,7 @@ void ApplicationWidget::updateStyleSheet() {
 
 void ApplicationWidget::logout() {
 
+    DataStore::getInstance().clear();
     Configuration::getInstance().setServerAddress("");
     Configuration::getInstance().setToken("");
     stackedWidget->setCurrentIndex(0);

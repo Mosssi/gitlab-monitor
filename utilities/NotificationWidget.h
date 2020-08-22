@@ -8,7 +8,6 @@ enum class NotificationStatus {
     ERROR,
 };
 
-// TODO: Find a better location for this class
 class NotificationWidget : public Label {
 Q_OBJECT
 Q_PROPERTY(int currentWidth READ getCurrentWidth WRITE setCurrentWidth)

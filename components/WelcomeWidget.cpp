@@ -30,6 +30,7 @@ void WelcomeWidget::setupUi() {
 
     mainLayout->addSpacing(20);
     auto * serverAddressInput = new LineEdit();
+    serverAddressInput->setText("https://gitlab.com");
     mainLayout->addWidget(new Label("SERVER ADDRESS:", GuiManager::smallFontSize(), TextColor::TERTIARY));
     mainLayout->addWidget(serverAddressInput);
     connect(serverAddressInput, &LineEdit::textChanged, [serverAddressInput]() {

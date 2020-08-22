@@ -12,6 +12,7 @@ Q_OBJECT
 public:
     static DataStore &getInstance();
     void initialize();
+    void clear();
     [[nodiscard]] User getUser() const;
     [[nodiscard]] Project getProject(int projectId) const;
     [[nodiscard]] QList<Project> getProjects() const;
@@ -19,7 +20,6 @@ public:
     void refreshUser();
     void refreshProjects();
     void refreshProjectOpenIssues(int projectId);
-    // TO-CONSIDER: I don't like the difference between ways of calling and using these functions
 
 signals:
     void userReceived();

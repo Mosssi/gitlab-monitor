@@ -19,7 +19,6 @@ QString ServiceMediator::getUrl(const QString &url, const QList<QPair<QString, Q
     return qUrl.toString();
 }
 
-// TODO: Consider making required changes on DataStore right here
 void ServiceMediator::requestUser(const CallbackFunction &callback) {
     NetworkManager::getInstance().get(
             getUrl("/user"),

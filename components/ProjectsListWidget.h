@@ -23,7 +23,6 @@ private:
     void emptyScrollLayout();
     void updateStyleSheet() override;
 
-    // TODO: Better names?!
     QVBoxLayout * scrollLayout = nullptr;
     LoadableContentWidget * contentWidget = nullptr;
     Frame * topFrame;

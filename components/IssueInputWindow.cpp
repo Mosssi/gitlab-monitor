@@ -12,6 +12,9 @@ void IssueInputWindow::setupUi() {
     issueTitleInput = new LineEdit();
     mainLayout->setContentsMargins(10, 10, 10, 10);
     mainLayout->addWidget(issueTitleInput);
+    connect(issueTitleInput, &LineEdit::textChanged, [this]() {
+        issueTitleInput->setHasError(false);
+    });
 
     createButton = new PushButton(IconType::DONE);
 
@@ -20,7 +23,13 @@ void IssueInputWindow::setupUi() {
     buttonsLayout->addWidget(createButton);
     mainLayout->addLayout(buttonsLayout);
 
-    connect(createButton, &PushButton::clicked, [this]() { emit submitted(issueTitleInput->text()); });
+    connect(createButton, &PushButton::clicked, [this]() {
+        if (issueTitleInput->text().isEmpty()) {
+            issueTitleInput->setHasError(true);
+        } else {
+            emit submitted(issueTitleInput->text());
+        }
+    });
 }
 
 void IssueInputWindow::clearInput() {

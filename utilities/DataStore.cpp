@@ -13,10 +13,6 @@ DataStore &DataStore::getInstance() {
 
 void DataStore::initialize() {
 
-    // TODO: to-consider: what is the correct way of keeping track of connection status, and repairing it
-    // whenever necessary?  A refresh button?  A notification like Telegram which shows we are trying to
-    // get data but cannot?
-
     refreshUser();
 }
 
@@ -97,4 +93,10 @@ void DataStore::refreshUser() {
             emit userReceiveFailed(status);
         }
     });
+}
+
+void DataStore::clear() {
+
+    user = User();
+    projects.clear();
 }
