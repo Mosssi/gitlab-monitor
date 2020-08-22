@@ -1,10 +1,9 @@
 #ifndef GITLAB_DESKTOP_MONITOR_LOGSERVICE_H
 #define GITLAB_DESKTOP_MONITOR_LOGSERVICE_H
 
-
-#include <QtCore/QtMessageHandler>
-#include <QtCore/QString>
 #include <QDebug>
+#include <QtCore/QString>
+#include <QtCore/QtMessageHandler>
 
 class LogService {
 

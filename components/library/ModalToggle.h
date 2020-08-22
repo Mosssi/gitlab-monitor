@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_MODALTOGGLE_H
 #define GITLAB_DESKTOP_MONITOR_MODALTOGGLE_H
 
-
 #include "HoverClickFrame.h"
 #include "ToggleSwitch.h"
 

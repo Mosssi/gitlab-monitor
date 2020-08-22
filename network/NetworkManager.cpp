@@ -3,8 +3,8 @@
 #include <QtCore/QJsonDocument>
 #include <QJsonArray>
 
-#include "../utilities/Configuration.h"
 #include "../components/SystemTrayIcon.h"
+#include "../utilities/Configuration.h"
 
 NetworkManager::NetworkManager() {
 

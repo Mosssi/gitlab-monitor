@@ -2,10 +2,10 @@
 
 #include <QtWidgets/QHBoxLayout>
 
-#include "../utilities/DataStore.h"
 #include "../network/ServiceMediator.h"
-#include "library/LoadingWidget.h"
+#include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
+#include "library/LoadingWidget.h"
 
 ProjectWidget::ProjectWidget(int projectId, QWidget * parent) : HoverClickFrame(parent), projectId(projectId) {
 

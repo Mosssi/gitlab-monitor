@@ -2,7 +2,6 @@
 #define GITLAB_DESKTOP_MONITOR_COLORPALETTE_H
 
 /* Gray */
-#define DD_GRAY_COLOR "#2e2e2e"
 #define D_GRAY_COLOR "#434343"
 #define GRAY_COLOR "#4a4a4a"
 #define L_GRAY_COLOR "#666666"
@@ -19,7 +18,5 @@
 #define LIGHT_ORANGE_COLOR "#fca121"
 #define ORANGE_COLOR "#fc6d26"
 #define RED_ORANGE_COLOR "#db3b21"
-#define LIGHT_RED_COLOR "#ffd2b6"
-#define DARK_RED_COLOR "#762012"
 
 #endif //GITLAB_DESKTOP_MONITOR_COLORPALETTE_H

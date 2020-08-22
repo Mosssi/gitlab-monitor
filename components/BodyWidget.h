@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_BODYWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_BODYWIDGET_H
 
-
 #include "IssuesListWidget.h"
 #include "ProjectsListWidget.h"
 #include "library/SlidingStackedWidget.h"

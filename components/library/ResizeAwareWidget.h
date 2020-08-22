@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_RESIZEAWAREWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_RESIZEAWAREWIDGET_H
 
-
 #include <QtWidgets/QWidget>
 
 class ResizeAwareWidget : public QWidget {

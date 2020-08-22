@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_LIGHTTHEME_H
 #define GITLAB_DESKTOP_MONITOR_LIGHTTHEME_H
 
-
 #include "Theme.h"
 #include "ColorPalette.h"
 

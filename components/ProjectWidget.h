@@ -1,10 +1,9 @@
 #ifndef GITLAB_DESKTOP_MONITOR_PROJECTWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_PROJECTWIDGET_H
 
-
 #include "../models/Project.h"
-#include "library/Label.h"
 #include "library/HoverClickFrame.h"
+#include "library/Label.h"
 
 class ProjectWidget : public HoverClickFrame {
 Q_OBJECT

@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_LOADABLECONTENTWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_LOADABLECONTENTWIDGET_H
 
-
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QStackedWidget>
 

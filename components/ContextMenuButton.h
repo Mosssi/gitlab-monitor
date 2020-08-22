@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_CONTEXTMENUBUTTON_H
 #define GITLAB_DESKTOP_MONITOR_CONTEXTMENUBUTTON_H
 
-
 #include "library/HoverClickFrame.h"
 
 class ContextMenuButton : public HoverClickFrame {

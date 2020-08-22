@@ -1,9 +1,8 @@
 #ifndef GITLAB_DESKTOP_MONITOR_DARKTHEME_H
 #define GITLAB_DESKTOP_MONITOR_DARKTHEME_H
 
-
-#include "Theme.h"
 #include "ColorPalette.h"
+#include "Theme.h"
 
 class DarkTheme : public Theme {
 public:

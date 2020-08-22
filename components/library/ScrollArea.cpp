@@ -1,7 +1,8 @@
 #include "ScrollArea.h"
-#include "ResizeAwareWidget.h"
 
 #include <QScrollBar>
+
+#include "ResizeAwareWidget.h"
 
 const int scrollBarMargin = 3;
 const int scrollBarWidth = 5;

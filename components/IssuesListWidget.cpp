@@ -2,12 +2,11 @@
 
 #include "../network/ServiceMediator.h"
 #include "../utilities/DataStore.h"
-#include "IssueWidget.h"
-#include "library/PushButton.h"
-#include "../utilities/NotificationService.h"
-#include "ModalManager.h"
 #include "../utilities/GuiManager.h"
-
+#include "../utilities/NotificationService.h"
+#include "IssueWidget.h"
+#include "ModalManager.h"
+#include "library/PushButton.h"
 
 IssuesListWidget::IssuesListWidget(QWidget * parent) : Frame(parent) {
 

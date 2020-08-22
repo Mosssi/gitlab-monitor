@@ -1,13 +1,13 @@
 #ifndef GITLAB_DESKTOP_MONITOR_APPLICATIONWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_APPLICATIONWIDGET_H
 
-#include <functional>
 #include <QtWidgets/QStackedWidget>
+#include <functional>
 
-#include "library/Frame.h"
+#include "ConfigurationWindow.h"
 #include "ContextMenu.h"
 #include "SystemTrayIcon.h"
-#include "ConfigurationWindow.h"
+#include "library/Frame.h"
 
 class ApplicationWidget : public Frame {
 public:

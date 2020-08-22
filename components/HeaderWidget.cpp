@@ -5,11 +5,9 @@
 #include "../network/NetworkManager.h"
 #include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
+#include "ModalManager.h"
 #include "library/Label.h"
 #include "library/PushButton.h"
-#include "library/LineEdit.h"
-#include "ModalManager.h"
-
 
 HeaderWidget::HeaderWidget(QWidget * parent) : Frame(parent) {
 

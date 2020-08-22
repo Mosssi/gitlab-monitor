@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_GUIMANAGER_H
 #define GITLAB_DESKTOP_MONITOR_GUIMANAGER_H
 
-
 #include <QtGui/QFont>
 
 #include "../components/ApplicationWidget.h"

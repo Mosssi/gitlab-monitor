@@ -3,8 +3,8 @@
 #include <QKeyEvent>
 #include <QPainter>
 
-#include "../../utilities/GuiManager.h"
 #include "../../network/NetworkManager.h"
+#include "../../utilities/GuiManager.h"
 
 
 const int CONFIRM_DURATION = 3000;

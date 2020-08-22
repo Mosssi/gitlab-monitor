@@ -1,11 +1,10 @@
 #ifndef GITLAB_DESKTOP_MONITOR_ISSUEINPUTWINDOW_H
 #define GITLAB_DESKTOP_MONITOR_ISSUEINPUTWINDOW_H
 
-
 #include "library/LineEdit.h"
-#include "library/PushButton.h"
 #include "library/Modal.h"
 #include "library/ModalToggle.h"
+#include "library/PushButton.h"
 
 class IssueInputWindow : public Modal {
 Q_OBJECT

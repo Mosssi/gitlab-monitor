@@ -1,13 +1,11 @@
 #ifndef GITLAB_DESKTOP_MONITOR_PROJECTSLISTWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_PROJECTSLISTWIDGET_H
 
-
 #include <QtWidgets/QVBoxLayout>
 
 #include "LoadableContentWidget.h"
 #include "library/Frame.h"
 #include "library/Label.h"
-
 
 class ProjectsListWidget : public Frame {
 Q_OBJECT

@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_LOADINGWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_LOADINGWIDGET_H
 
-
 #include <QtWidgets/QWidget>
 
 class LoadingWidget : public QWidget {

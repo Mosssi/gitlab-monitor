@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_HOVERCLICKFRAME_H
 #define GITLAB_DESKTOP_MONITOR_HOVERCLICKFRAME_H
 
-
 #include "Frame.h"
 
 class HoverClickFrame : public Frame {

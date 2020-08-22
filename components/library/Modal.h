@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_MODAL_H
 #define GITLAB_DESKTOP_MONITOR_MODAL_H
 
-
 #include <QtWidgets/QVBoxLayout>
 
 #include "Frame.h"

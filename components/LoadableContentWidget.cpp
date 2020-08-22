@@ -2,8 +2,8 @@
 
 #include <QtWidgets/QHBoxLayout>
 
-#include "library/LoadingWidget.h"
 #include "library/Label.h"
+#include "library/LoadingWidget.h"
 #include "library/ScrollArea.h"
 
 LoadableContentWidget::LoadableContentWidget(QLayout * contentsLayout, QWidget * parent) : QStackedWidget(parent) {

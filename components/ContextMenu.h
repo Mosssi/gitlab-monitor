@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_CONTEXTMENU_H
 #define GITLAB_DESKTOP_MONITOR_CONTEXTMENU_H
 
-
 #include "library/Frame.h"
 
 class ContextMenu : public Frame {

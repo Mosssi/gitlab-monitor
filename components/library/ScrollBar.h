@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_SCROLLBAR_H
 #define GITLAB_DESKTOP_MONITOR_SCROLLBAR_H
 
-
 #include <QTimer>
 #include <QtWidgets/QWidget>
 

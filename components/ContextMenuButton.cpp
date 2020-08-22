@@ -2,9 +2,8 @@
 
 #include <QtWidgets/QHBoxLayout>
 
-#include "library/Label.h"
 #include "../utilities/GuiManager.h"
-
+#include "library/Label.h"
 
 ContextMenuButton::ContextMenuButton(const QString &text, QWidget * parent) : HoverClickFrame(parent), text(text) {
 

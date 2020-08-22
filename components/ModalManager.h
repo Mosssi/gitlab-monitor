@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_MODALMANAGER_H
 #define GITLAB_DESKTOP_MONITOR_MODALMANAGER_H
 
-
 #include "ConfigurationWindow.h"
 #include "IssueInputWindow.h"
 

@@ -3,8 +3,8 @@
 
 #include <QtCore/QMap>
 
-#include "../models/User.h"
 #include "../models/Project.h"
+#include "../models/User.h"
 #include "../network/ResponseStatus.h"
 
 class DataStore : public QObject {

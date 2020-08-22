@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_STYLEDWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_STYLEDWIDGET_H
 
-
 #include <QtCore/QArgument>
 
 class StyledWidget {

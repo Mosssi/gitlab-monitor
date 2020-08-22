@@ -1,10 +1,9 @@
 #ifndef GITLAB_DESKTOP_MONITOR_PUSHBUTTON_H
 #define GITLAB_DESKTOP_MONITOR_PUSHBUTTON_H
 
-
-#include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QtCore/QPropertyAnimation>
+#include <QtWidgets/QWidget>
 
 #include "IconType.h"
 

@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_SCROLLAREA_H
 #define GITLAB_DESKTOP_MONITOR_SCROLLAREA_H
 
-
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QLayout>
 

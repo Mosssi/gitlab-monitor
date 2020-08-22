@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_ISSUE_H
 #define GITLAB_DESKTOP_MONITOR_ISSUE_H
 
-
 #include <QtCore/QJsonObject>
 
 #include "BaseModel.h"

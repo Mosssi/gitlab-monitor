@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_BASEMODEL_H
 #define GITLAB_DESKTOP_MONITOR_BASEMODEL_H
 
-
 #include <QtCore/QJsonObject>
 
 #define BASE_MODEL_JSON {"id", id}

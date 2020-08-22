@@ -1,9 +1,9 @@
 #ifndef GITLAB_DESKTOP_MONITOR_CONFIGURATION_H
 #define GITLAB_DESKTOP_MONITOR_CONFIGURATION_H
 
-#include <QtCore/QString>
 #include <QtCore/QObject>
 #include <QtCore/QSettings>
+#include <QtCore/QString>
 
 #ifndef __linux
  #define NO_AUTO_START

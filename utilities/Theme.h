@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_THEME_H
 #define GITLAB_DESKTOP_MONITOR_THEME_H
 
-
 #include <QtCore/QString>
 
 class Theme {

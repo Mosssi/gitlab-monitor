@@ -5,6 +5,8 @@
 #include <QKeyEvent>
 #include <QScreen>
 
+#include "../constants.h"
+#include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
 #include "../utilities/LogService.h"
 #include "BodyWidget.h"
@@ -12,14 +14,13 @@
 #include "ModalManager.h"
 #include "SystemTrayIcon.h"
 #include "WelcomeWidget.h"
-#include "../utilities/DataStore.h"
 
 ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
 
     setupTrayIcon();
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setFixedSize(GuiManager::applicationWidth(), GuiManager::applicationHeight());
-    setWindowTitle("GitLab Monitor");
+    setWindowTitle(APP_PRESENTATION);
     ApplicationWidget::updateStyleSheet();
 
     LogService::getInstance().initializeService(true, false);

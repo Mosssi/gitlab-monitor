@@ -1,9 +1,9 @@
 #ifndef GITLAB_DESKTOP_MONITOR_NETWORKMANAGER_H
 #define GITLAB_DESKTOP_MONITOR_NETWORKMANAGER_H
 
-#include <QtNetwork/QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QJsonObject>
+#include <QNetworkReply>
+#include <QtNetwork/QNetworkAccessManager>
 
 #include "ResponseStatus.h"
 

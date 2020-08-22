@@ -4,11 +4,10 @@
 
 #include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
+#include "../utilities/NotificationService.h"
 #include "library/Label.h"
 #include "library/LineEdit.h"
 #include "library/PushButton.h"
-#include "../network/ResponseStatus.h"
-#include "../utilities/NotificationService.h"
 
 WelcomeWidget::WelcomeWidget(QWidget * parent) : Frame(parent) {
 

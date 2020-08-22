@@ -4,11 +4,11 @@
 
 #include "../utilities/Configuration.h"
 #include "../utilities/GuiManager.h"
+#include "library/HoverClickFrame.h"
 #include "library/Label.h"
+#include "library/ModalToggle.h"
 #include "library/PushButton.h"
 #include "library/ToggleSwitch.h"
-#include "library/HoverClickFrame.h"
-#include "library/ModalToggle.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATION", parent) {
 

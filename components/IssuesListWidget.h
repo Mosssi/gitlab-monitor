@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_ISSUESLISTWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_ISSUESLISTWIDGET_H
 
-
 #include <QtWidgets/QVBoxLayout>
 
 #include "IssueInputWindow.h"

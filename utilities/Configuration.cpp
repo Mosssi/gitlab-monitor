@@ -1,17 +1,17 @@
 #include "Configuration.h"
+
+#include <QApplication>
+#include <QtCore/QDir>
+#include <QTextStream>
+
 #include "../constants.h"
 #include "NotificationService.h"
-
-#include <QDebug>
-#include <QtCore/QDir>
-#include <QApplication>
 
 #define SERVER_ADDR_KEY "server-address"
 #define TOKEN_KEY "token"
 #define THEME_KEY "theme"
 #define ASSIGNED_TO_ME_KEY "assigned-to-me"
 #define AUTO_START_KEY "auto-start"
-
 
 Configuration::Configuration() : QObject(nullptr) {
 

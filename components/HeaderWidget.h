@@ -1,9 +1,8 @@
 #ifndef GITLAB_DESKTOP_MONITOR_HEADERWIDGET_H
 #define GITLAB_DESKTOP_MONITOR_HEADERWIDGET_H
 
-
-#include "library/Label.h"
 #include "library/Frame.h"
+#include "library/Label.h"
 
 class HeaderWidget : public Frame {
 public:

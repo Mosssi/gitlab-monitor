@@ -3,8 +3,8 @@
 
 #include <QList>
 
-#include "NotificationWidget.h"
 #include "../network/ResponseStatus.h"
+#include "NotificationWidget.h"
 
 int const margin = 15;
 int const spacing = 1;

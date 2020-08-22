@@ -1,7 +1,6 @@
 #ifndef GITLAB_DESKTOP_MONITOR_FRAME_H
 #define GITLAB_DESKTOP_MONITOR_FRAME_H
 
-
 #include <QtWidgets/QFrame>
 
 #include "StyledWidget.h"
