@@ -8,10 +8,11 @@
 class BodyWidget : public SlidingStackedWidget, StyledWidget {
 public:
     explicit BodyWidget(QWidget * parent = nullptr);
+    void showProjectList();
+    bool isIssuesListVisible();
 
 private:
     void setupUi();
-    void showProjectList();
     void showIssuesList();
     void updateStyleSheet() override;
 

@@ -4,6 +4,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <functional>
 
+#include "BodyWidget.h"
 #include "ConfigurationWindow.h"
 #include "ContextMenu.h"
 #include "SystemTrayIcon.h"
@@ -24,6 +25,7 @@ private:
     std::function<void()> showApplication;
 
     QStackedWidget * stackedWidget = nullptr;
+    BodyWidget * bodyWidget = nullptr;
 
     ContextMenu * contextMenu = nullptr;
     SystemTrayIcon * systemTrayIcon = nullptr;

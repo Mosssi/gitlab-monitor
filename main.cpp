@@ -11,7 +11,6 @@ int main(int argc, char ** argv) {
     QApplication::setOrganizationName(ORGANIZATION_NAME);
     QApplication::setApplicationName(APP_NAME);
     QFontDatabase::addApplicationFont(":/fonts/gitlab-monitoring.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/iran-sans.ttf");
 
     ApplicationWidget widget;
 

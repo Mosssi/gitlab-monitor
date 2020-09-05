@@ -9,7 +9,6 @@
 #include "../utilities/DataStore.h"
 #include "../utilities/GuiManager.h"
 #include "../utilities/LogService.h"
-#include "BodyWidget.h"
 #include "HeaderWidget.h"
 #include "ModalManager.h"
 #include "SystemTrayIcon.h"
@@ -94,7 +93,7 @@ void ApplicationWidget::setupUi() {
     goodbyeLayout->setContentsMargins(0, 0, 0, 0);
     goodbyeLayout->setSpacing(0);
     goodbyeLayout->addWidget(new HeaderWidget());
-    goodbyeLayout->addWidget(new BodyWidget());
+    goodbyeLayout->addWidget(bodyWidget = new BodyWidget());
 
     auto * welcomeWidget = new WelcomeWidget();
     stackedWidget->addWidget(welcomeWidget);
@@ -131,10 +130,17 @@ void ApplicationWidget::closeEvent(QCloseEvent * event) {
 
 void ApplicationWidget::keyPressEvent(QKeyEvent * event) {
 
-    bool modalVisible = ModalManager::getInstance().getConfigurationWindow()->isVisible() || ModalManager::getInstance().getIssueInputWindow()->isVisible();
-    if (event->key() == Qt::Key_Escape && modalVisible) {
+    if (event->key() != Qt::Key_Escape) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    if (ModalManager::getInstance().getConfigurationWindow()->isVisible()) {
         ModalManager::getInstance().hideConfigurationWindow();
+    } else if (ModalManager::getInstance().getIssueInputWindow()->isVisible()) {
         ModalManager::getInstance().hideIssueInputWindow();
+    } else if (bodyWidget->isIssuesListVisible()) {
+        bodyWidget->showProjectList();
     } else {
         QWidget::keyPressEvent(event);
     }
