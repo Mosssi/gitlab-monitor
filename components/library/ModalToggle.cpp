@@ -16,6 +16,7 @@ void ModalToggle::setupUi(const QString &text, bool checked) {
     setGeneralStyle("border-radius: 0");
 
     auto * mainLayout = new QHBoxLayout(this);
+    mainLayout->setContentsMargins(10, 0, 10, 0);
 
     mainLayout->addWidget(new Label(text));
     mainLayout->addStretch();

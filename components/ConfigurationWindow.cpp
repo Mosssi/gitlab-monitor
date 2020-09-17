@@ -7,7 +7,6 @@
 #include "library/HoverClickFrame.h"
 #include "library/Label.h"
 #include "library/ModalToggle.h"
-#include "library/PushButton.h"
 #include "library/ToggleSwitch.h"
 
 ConfigurationWindow::ConfigurationWindow(QWidget * parent) : Modal("CONFIGURATION", parent) {
@@ -31,21 +30,21 @@ void ConfigurationWindow::setupUi() {
     mainLayout->setContentsMargins(0, 5, 0, 5);
 
     themeToggle = new ModalToggle("Dark Theme", Configuration::getInstance().getTheme() == ThemeMode::DARK);
-    connect(themeToggle, &HoverClickFrame::clicked, [this]() {
+    connect(themeToggle, &HoverClickFrame::clicked, []() {
         Configuration::getInstance().setTheme(Configuration::getInstance().getTheme() == ThemeMode::LIGHT ? ThemeMode::DARK : ThemeMode::LIGHT);
     });
     mainLayout->addWidget(themeToggle);
 
 #ifndef NO_AUTO_START
     autoStartToggle = new ModalToggle("Launch on Startup", Configuration::getInstance().getAutoStart());
-    connect(autoStartToggle, &HoverClickFrame::clicked, [this]() {
+    connect(autoStartToggle, &HoverClickFrame::clicked, []() {
         Configuration::getInstance().setAutoStart(!Configuration::getInstance().getAutoStart());
     });
     mainLayout->addWidget(autoStartToggle);
 #endif
 
     filterAssigneeToggle = new ModalToggle("Filter Assigned To Me", Configuration::getInstance().getAssignedToMe());
-    connect(filterAssigneeToggle, &HoverClickFrame::clicked, [this]() {
+    connect(filterAssigneeToggle, &HoverClickFrame::clicked, []() {
         Configuration::getInstance().setAssignedToMe(!Configuration::getInstance().getAssignedToMe());
     });
     mainLayout->addWidget(filterAssigneeToggle);
