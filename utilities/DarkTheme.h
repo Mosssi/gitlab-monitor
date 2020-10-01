@@ -27,7 +27,7 @@ public:
     [[nodiscard]] QString loadingColor() const override { return EVEN_DARKER_LIGHT_COLOR; }
     [[nodiscard]] QString loadingRingColor() const override { return GRAY_COLOR; }
 
-    [[nodiscard]] QString switchOffColor() const override { return GRAY_COLOR; }
+    [[nodiscard]] QString switchOffColor() const override { return L_GRAY_COLOR; }
     [[nodiscard]] QString switchOffBackgroundColor() const override { return LL_GRAY_COLOR; }
     [[nodiscard]] QString switchOnColor() const override { return DARKER_LIGHT_COLOR; }
     [[nodiscard]] QString switchOnBackgroundColor() const override { return LIGHT_ORANGE_COLOR; }

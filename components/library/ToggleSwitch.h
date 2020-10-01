@@ -15,9 +15,13 @@ public:
     void setSwitchPosition(double switchPosition);
     [[nodiscard]] double getSwitchPosition() const { return switchPosition; }
 
+signals:
+    void clicked();
+
 private:
     void paintEvent(QPaintEvent * event) override;
     void updateStyleSheet() override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
 
     bool checked = false;
     double switchPosition = 0;

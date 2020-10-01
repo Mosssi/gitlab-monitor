@@ -105,10 +105,16 @@ void IssuesListWidget::emptyScrollLayout() {
     }
 }
 
-void IssuesListWidget::requestIssueCreation(const QString &issueTitle) {
+void IssuesListWidget::requestIssueCreation(const QString &issueTitle, bool assignedToMe) {
 
     ModalManager::getInstance().getIssueInputWindow()->setLoading(true);
-    ServiceMediator::createIssue(projectId, issueTitle, [this](CALLBACK_SIGNATURE) {
+    Issue issue;
+    issue.projectId = projectId;
+    issue.title = issueTitle;
+    if (assignedToMe) {
+        issue.assigneeId = DataStore::getInstance().getUser().id;
+    }
+    ServiceMediator::createIssue(issue, [this](CALLBACK_SIGNATURE) {
         ModalManager::getInstance().getIssueInputWindow()->setLoading(false);
         if (status == ResponseStatus::SUCCESSFUL) {
             ModalManager::getInstance().hideIssueInputWindow();

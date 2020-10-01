@@ -23,7 +23,7 @@ private:
     void setupUi();
     void updateUi();
     void emptyScrollLayout();
-    void requestIssueCreation(const QString &issueTitle);
+    void requestIssueCreation(const QString &issueTitle, bool assignedToMe);
     void updateStyleSheet() override;
 
     int projectId = 0;

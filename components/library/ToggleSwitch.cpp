@@ -57,3 +57,9 @@ void ToggleSwitch::updateStyleSheet() {
 
     update();
 }
+
+void ToggleSwitch::mouseReleaseEvent(QMouseEvent * event) {
+
+    QWidget::mouseReleaseEvent(event);
+    emit clicked();
+}

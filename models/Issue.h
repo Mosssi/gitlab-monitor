@@ -15,6 +15,8 @@ public:
     int iid = 0;
     QString title = "";
     QString description = "";
+    int projectId = -1;
+    int assigneeId = -1;
 };
 
 

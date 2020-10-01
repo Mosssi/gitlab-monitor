@@ -3,6 +3,7 @@
 
 #include <QtCore/QObject>
 
+#include "../models/Issue.h"
 #include "NetworkManager.h"
 
 class ServiceMediator {
@@ -12,7 +13,7 @@ public:
     static void requestProject(int projectId, const CallbackFunction &callback);
     static void requestProjectOpenIssues(int projectId, const CallbackFunction &callback);
     static void closeIssue(int projectId, int issueId, const CallbackFunction &callback);
-    static void createIssue(int projectId, const QString &title, const CallbackFunction &callback);
+    static void createIssue(const Issue &issue, const CallbackFunction &callback);
 
 private:
     ServiceMediator() = default;

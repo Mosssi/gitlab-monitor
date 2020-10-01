@@ -9,6 +9,10 @@ BodyWidget::BodyWidget(QWidget * parent) : SlidingStackedWidget(parent) {
 
     setupUi();
     BodyWidget::updateStyleSheet();
+
+    connect(&DataStore::getInstance(), &DataStore::userReceiveFailed, [this](ResponseStatus status) {
+        setCurrentIndex(2);
+    });
 }
 
 void BodyWidget::setupUi() {
@@ -33,6 +37,16 @@ void BodyWidget::setupUi() {
     });
 
     DataStore::getInstance().initialize();
+
+    auto * refreshWidget = new QWidget();
+    auto * refreshLayout = new QHBoxLayout(refreshWidget);
+    auto * refreshButton = new PushButton(IconType::RELOAD);
+    refreshLayout->addWidget(refreshButton, 0, Qt::AlignCenter);
+    connect(refreshButton, &PushButton::clicked, [this]() {
+        DataStore::getInstance().initialize();
+        setCurrentIndex(0);
+    });
+    addWidget(refreshWidget);
 }
 
 void BodyWidget::showProjectList() {

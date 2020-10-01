@@ -14,12 +14,15 @@ public:
     void setLoading(bool loading);
 
 signals:
-    void submitted(const QString &issueTitle);
+    void submitted(const QString &issueTitle, bool assignedToMe);
 
 private:
     void setupUi();
+    void keyPressEvent(QKeyEvent * event) override;
+    void submit();
 
     LineEdit * issueTitleInput = nullptr;
+    ToggleSwitch * assignToMe = nullptr;
     PushButton * createButton = nullptr;
 };
 

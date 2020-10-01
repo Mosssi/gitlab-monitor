@@ -69,9 +69,15 @@ void ServiceMediator::closeIssue(int projectId, int issueId, const CallbackFunct
     );
 }
 
-void ServiceMediator::createIssue(int projectId, const QString &title, const CallbackFunction &callback) {
+void ServiceMediator::createIssue(const Issue &issue, const CallbackFunction &callback) {
     NetworkManager::getInstance().post(
-            getUrl(QString("/projects/%1/issues").arg(projectId), {{"title", title}}),
+            getUrl(
+                    QString("/projects/%1/issues").arg(issue.projectId),
+                    {
+                        {"title", issue.title},
+                        {"assignee_ids", QString::number(issue.assigneeId)}
+                    }
+            ),
             {},
             callback
     );

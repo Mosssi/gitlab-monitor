@@ -45,7 +45,7 @@ void WelcomeWidget::setupUi() {
     });
 
     auto * saveServerConfigsButton = new PushButton(IconType::DONE);
-    connect(saveServerConfigsButton, &PushButton::clicked, [this, serverAddressInput, tokenInput, saveServerConfigsButton]() {
+    connect(saveServerConfigsButton, &PushButton::clicked, [serverAddressInput, tokenInput, saveServerConfigsButton]() {
 
         if (serverAddressInput->text().isEmpty()) {
             serverAddressInput->setFocus();
