@@ -21,6 +21,7 @@ private:
     void updateStyleSheet() override;
     void closeEvent(QCloseEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
+    void showContents();
 
     std::function<void()> showApplication;
 

@@ -16,10 +16,7 @@ HeaderWidget::HeaderWidget(QWidget * parent) : Frame(parent) {
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this]() {
         QString username = DataStore::getInstance().getUser().username;
-        QStringList specialNames = {"Bayati", "bayati"};
-        userWelcomeLabel->setText(QString("Welcome, %1%2!")
-                                          .arg(specialNames.contains(username) ? "Agha " : "")
-                                          .arg(username));
+        userWelcomeLabel->setText(QString("Welcome, %1!").arg(username));
     });
 }
 

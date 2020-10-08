@@ -89,7 +89,6 @@ void DataStore::refreshUser() {
             refreshProjects();
             emit userReceived();
         } else {
-            QTimer::singleShot(2000, [this]() { initialize(); });
             emit userReceiveFailed(status);
         }
     });

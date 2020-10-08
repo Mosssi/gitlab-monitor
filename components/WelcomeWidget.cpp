@@ -65,19 +65,24 @@ void WelcomeWidget::setupUi() {
 
         DataStore::getInstance().initialize();
     });
+
     mainLayout->addSpacing(10);
     mainLayout->addWidget(saveServerConfigsButton, 0, Qt::AlignCenter);
 
     connect(&DataStore::getInstance(), &DataStore::userReceived, [this, saveServerConfigsButton]() {
         saveServerConfigsButton->setLoading(false);
+        Configuration::getInstance().setValidConfigs(true);
         emit serverAndTokenValidated();
     });
 
     connect(&DataStore::getInstance(), &DataStore::userReceiveFailed, [saveServerConfigsButton](ResponseStatus status) {
         NotificationService::connectionError(status);
         saveServerConfigsButton->setLoading(false);
-        Configuration::getInstance().setServerAddress("");
-        Configuration::getInstance().setToken("");
+        if (!Configuration::getInstance().getValidConfigs()) {
+            Configuration::getInstance().setServerAddress("");
+            Configuration::getInstance().setToken("");
+            Configuration::getInstance().setValidConfigs(false);
+        }
     });
 
     mainLayout->addStretch(3);

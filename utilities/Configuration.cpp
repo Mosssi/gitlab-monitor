@@ -9,6 +9,7 @@
 
 #define SERVER_ADDR_KEY "server-address"
 #define TOKEN_KEY "token"
+#define VALID_CONFIG_KEY "valid-configs"
 #define THEME_KEY "theme"
 #define ASSIGNED_TO_ME_KEY "assigned-to-me"
 #define AUTO_START_KEY "auto-start"
@@ -22,6 +23,11 @@ Configuration::Configuration() : QObject(nullptr) {
     if (settings.contains(TOKEN_KEY)) {
         token = settings.value(TOKEN_KEY).toString();
     }
+
+    if (settings.contains(VALID_CONFIG_KEY)) {
+        validConfigs = settings.value(VALID_CONFIG_KEY).toBool();
+    }
+
 
     if (settings.contains(THEME_KEY)) {
         theme = enumerateThemeMode(settings.value(THEME_KEY).toString());
@@ -177,6 +183,17 @@ QString Configuration::getDesktopFileContents() {
             .arg(APP_NAME)
             .arg(ICON_NAME)
             .arg(BINARY_NAME);
+}
+
+void Configuration::setValidConfigs(bool validConfigs) {
+
+    settings.setValue(VALID_CONFIG_KEY, validConfigs);
+    this->validConfigs = validConfigs;
+}
+
+bool Configuration::getValidConfigs() const {
+
+    return validConfigs;
 }
 
 QString stringifyThemeMode(const ThemeMode &themeMode) {

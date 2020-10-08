@@ -36,8 +36,6 @@ void BodyWidget::setupUi() {
         }
     });
 
-    DataStore::getInstance().initialize();
-
     auto * refreshWidget = new QWidget();
     auto * refreshLayout = new QHBoxLayout(refreshWidget);
     auto * refreshButton = new PushButton(IconType::RELOAD);

@@ -35,7 +35,7 @@ ApplicationWidget::ApplicationWidget(QWidget * parent) : Frame(parent) {
         showApplication();
     });
 
-    connect(contextMenu, &ContextMenu::exitClicked, [this]() {
+    connect(contextMenu, &ContextMenu::exitClicked, []() {
         QApplication::exit(0);
     });
 }
@@ -88,24 +88,24 @@ void ApplicationWidget::setupUi() {
     stackedWidget = new QStackedWidget();
     mainLayout->addWidget(stackedWidget);
 
-    auto * goodbyeWidget = new QWidget();
-    auto * goodbyeLayout = new QVBoxLayout(goodbyeWidget);
-    goodbyeLayout->setContentsMargins(0, 0, 0, 0);
-    goodbyeLayout->setSpacing(0);
-    goodbyeLayout->addWidget(new HeaderWidget());
-    goodbyeLayout->addWidget(bodyWidget = new BodyWidget());
+    auto * contentWidget = new QWidget();
+    auto * contentLayout = new QVBoxLayout(contentWidget);
+    contentLayout->setContentsMargins(0, 0, 0, 0);
+    contentLayout->setSpacing(0);
+    contentLayout->addWidget(new HeaderWidget());
+    contentLayout->addWidget(bodyWidget = new BodyWidget());
 
     auto * welcomeWidget = new WelcomeWidget();
     stackedWidget->addWidget(welcomeWidget);
-    stackedWidget->addWidget(goodbyeWidget);
+    stackedWidget->addWidget(contentWidget);
 
-    if (!Configuration::getInstance().getServerAddress().isEmpty() && !Configuration::getInstance().getToken().isEmpty()) {
-        stackedWidget->setCurrentWidget(goodbyeWidget);
+    if (!Configuration::getInstance().getServerAddress().isEmpty() &&
+        !Configuration::getInstance().getToken().isEmpty() &&
+        Configuration::getInstance().getValidConfigs()) {
+        showContents();
     }
 
-    connect(welcomeWidget, &WelcomeWidget::serverAndTokenValidated, [this, goodbyeWidget]() {
-        stackedWidget->setCurrentWidget(goodbyeWidget);
-    });
+    connect(welcomeWidget, &WelcomeWidget::serverAndTokenValidated, this, &ApplicationWidget::showContents);
 }
 
 void ApplicationWidget::updateStyleSheet() {
@@ -118,6 +118,7 @@ void ApplicationWidget::logout() {
     DataStore::getInstance().clear();
     Configuration::getInstance().setServerAddress("");
     Configuration::getInstance().setToken("");
+    Configuration::getInstance().setValidConfigs(false);
     stackedWidget->setCurrentIndex(0);
 }
 
@@ -144,4 +145,10 @@ void ApplicationWidget::keyPressEvent(QKeyEvent * event) {
     } else {
         QWidget::keyPressEvent(event);
     }
+}
+
+void ApplicationWidget::showContents() {
+
+    DataStore::getInstance().initialize();
+    stackedWidget->setCurrentIndex(1);
 }
