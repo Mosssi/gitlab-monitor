@@ -28,8 +28,8 @@ public:
     [[nodiscard]] QString getToken() const;
     void setTheme(ThemeMode theme);
     [[nodiscard]] ThemeMode getTheme() const;
-    void setValidConfigs(bool validConfigs);
-    [[nodiscard]] bool getValidConfigs() const;
+    void setValidCredentials(bool validCredentials);
+    [[nodiscard]] bool getValidCredentials() const;
 #ifndef NO_AUTO_START
     void setAutoStart(bool autoStart);
     [[nodiscard]] bool getAutoStart() const;
@@ -50,7 +50,7 @@ private:
 
     QString serverAddress;
     QString token;
-    bool validConfigs;
+    bool validCredentials;
     ThemeMode theme;
     bool autoStart;
     bool assignedToMe;

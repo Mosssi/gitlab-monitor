@@ -2,6 +2,8 @@
 #define GITLAB_DESKTOP_MONITOR_WELCOMEWIDGET_H
 
 #include "library/Frame.h"
+#include "library/LineEdit.h"
+#include "library/PushButton.h"
 
 class WelcomeWidget : public Frame {
 Q_OBJECT
@@ -13,6 +15,12 @@ signals:
 
 private:
     void setupUi();
+    void validateServerAndToken();
+    void keyReleaseEvent(QKeyEvent * event) override;
+
+    LineEdit * serverAddressInput;
+    LineEdit * tokenInput;
+    PushButton * saveServerConfigsButton;
 };
 
 

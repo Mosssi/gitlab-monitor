@@ -9,7 +9,7 @@
 
 #define SERVER_ADDR_KEY "server-address"
 #define TOKEN_KEY "token"
-#define VALID_CONFIG_KEY "valid-configs"
+#define VALID_CREDENTIALS_KEY "valid-credentials"
 #define THEME_KEY "theme"
 #define ASSIGNED_TO_ME_KEY "assigned-to-me"
 #define AUTO_START_KEY "auto-start"
@@ -24,8 +24,8 @@ Configuration::Configuration() : QObject(nullptr) {
         token = settings.value(TOKEN_KEY).toString();
     }
 
-    if (settings.contains(VALID_CONFIG_KEY)) {
-        validConfigs = settings.value(VALID_CONFIG_KEY).toBool();
+    if (settings.contains(VALID_CREDENTIALS_KEY)) {
+        validCredentials = settings.value(VALID_CREDENTIALS_KEY).toBool();
     }
 
 
@@ -185,15 +185,15 @@ QString Configuration::getDesktopFileContents() {
             .arg(BINARY_NAME);
 }
 
-void Configuration::setValidConfigs(bool validConfigs) {
+void Configuration::setValidCredentials(bool validCredentials) {
 
-    settings.setValue(VALID_CONFIG_KEY, validConfigs);
-    this->validConfigs = validConfigs;
+    settings.setValue(VALID_CREDENTIALS_KEY, validCredentials);
+    this->validCredentials = validCredentials;
 }
 
-bool Configuration::getValidConfigs() const {
+bool Configuration::getValidCredentials() const {
 
-    return validConfigs;
+    return validCredentials;
 }
 
 QString stringifyThemeMode(const ThemeMode &themeMode) {

@@ -101,11 +101,14 @@ void ApplicationWidget::setupUi() {
 
     if (!Configuration::getInstance().getServerAddress().isEmpty() &&
         !Configuration::getInstance().getToken().isEmpty() &&
-        Configuration::getInstance().getValidConfigs()) {
-        showContents();
+        Configuration::getInstance().getValidCredentials()) {
+        DataStore::getInstance().initialize();
+        stackedWidget->setCurrentWidget(contentWidget);
     }
 
-    connect(welcomeWidget, &WelcomeWidget::serverAndTokenValidated, this, &ApplicationWidget::showContents);
+    connect(welcomeWidget, &WelcomeWidget::serverAndTokenValidated, [this, contentWidget]() {
+        stackedWidget->setCurrentWidget(contentWidget);
+    });
 }
 
 void ApplicationWidget::updateStyleSheet() {
@@ -116,9 +119,9 @@ void ApplicationWidget::updateStyleSheet() {
 void ApplicationWidget::logout() {
 
     DataStore::getInstance().clear();
-    Configuration::getInstance().setServerAddress("");
     Configuration::getInstance().setToken("");
-    Configuration::getInstance().setValidConfigs(false);
+    Configuration::getInstance().setValidCredentials(false);
+    // TODO: Update token input text
     stackedWidget->setCurrentIndex(0);
 }
 
@@ -145,10 +148,4 @@ void ApplicationWidget::keyPressEvent(QKeyEvent * event) {
     } else {
         QWidget::keyPressEvent(event);
     }
-}
-
-void ApplicationWidget::showContents() {
-
-    DataStore::getInstance().initialize();
-    stackedWidget->setCurrentIndex(1);
 }
